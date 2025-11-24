@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs
+/Application/obj
+/Database/obj
+/Domain/obj
+/Presentation/obj
+/Services/obj
+/Tests/obj
