@@ -1,0 +1,108 @@
+{
+  "Korisnici": [
+    {
+      "Id": "faf099de-e0ca-4102-9c67-17532098d567",
+      "KorisnickoIme": "admin",
+      "Lozinka": "admin123",
+      "ImePrezime": "Bogdan Pecanac",
+      "Uloga": 0
+    },
+    {
+      "Id": "f379d050-1f3d-4d9f-85ae-566964f5e310",
+      "KorisnickoIme": "prodavac",
+      "Lozinka": "1234567",
+      "ImePrezime": "Petar Petrovic",
+      "Uloga": 1
+    },
+    {
+      "Id": "837274e6-c55a-4994-aee9-a0910c9eb96e",
+      "KorisnickoIme": "admin",
+      "Lozinka": "admin123",
+      "ImePrezime": "Bogdan Pecanac",
+      "Uloga": 0
+    },
+    {
+      "Id": "9f97cab2-451b-4b26-9899-be7dc09ace8d",
+      "KorisnickoIme": "prodavac",
+      "Lozinka": "1234567",
+      "ImePrezime": "Petar Petrovic",
+      "Uloga": 1
+    },
+    {
+      "Id": "9a23e8dc-8b4a-42be-9e71-4bf9cc202792",
+      "KorisnickoIme": "admin",
+      "Lozinka": "admin123",
+      "ImePrezime": "Bogdan Pecanac",
+      "Uloga": 0
+    },
+    {
+      "Id": "cd7c9dee-0c15-4e50-9b0e-2c3d63bc8245",
+      "KorisnickoIme": "prodavac",
+      "Lozinka": "1234567",
+      "ImePrezime": "Petar Petrovic",
+      "Uloga": 1
+    },
+    {
+      "Id": "556d1ab3-e2a1-49ad-8cb7-1bba8f9ef39f",
+      "KorisnickoIme": "admin",
+      "Lozinka": "admin123",
+      "ImePrezime": "Bogdan Pecanac",
+      "Uloga": 0
+    },
+    {
+      "Id": "62dfc9b4-b4b0-45a6-a1b1-aec1877c19ae",
+      "KorisnickoIme": "prodavac",
+      "Lozinka": "1234567",
+      "ImePrezime": "Petar Petrovic",
+      "Uloga": 1
+    },
+    {
+      "Id": "6eb9374a-166d-4c7d-851c-ba82a5c793a8",
+      "KorisnickoIme": "admin",
+      "Lozinka": "admin123",
+      "ImePrezime": "Bogdan Pecanac",
+      "Uloga": 0
+    },
+    {
+      "Id": "3bcddfcb-d435-44fc-bf4f-cf8912399945",
+      "KorisnickoIme": "prodavac",
+      "Lozinka": "1234567",
+      "ImePrezime": "Petar Petrovic",
+      "Uloga": 1
+    }
+  ],
+  "Biljke": [
+    {
+      "Id": "31b381be-4ce8-402b-a1d8-a28b40f65263",
+      "Naziv": "Lavanda",
+      "JacinaAromaticnihUlja": -92.1,
+      "LatinskiNaziv": "Lavandula angustifolia",
+      "ZemljaPorekla": "Francuska",
+      "Stanje": 0
+    },
+    {
+      "Id": "a657c9b5-db7c-49bb-9e83-abdab0102ff6",
+      "Naziv": "Lavanda",
+      "JacinaAromaticnihUlja": 0.41,
+      "LatinskiNaziv": "Lavandula angustifolia",
+      "ZemljaPorekla": "Francuska",
+      "Stanje": 0
+    },
+    {
+      "Id": "935c33d0-de63-4b39-a69c-8b973718bafb",
+      "Naziv": "Lavanda",
+      "JacinaAromaticnihUlja": 1.32,
+      "LatinskiNaziv": "Lavandula angustifolia",
+      "ZemljaPorekla": "Francuska",
+      "Stanje": 0
+    },
+    {
+      "Id": "10190ab6-59d3-41ab-84cf-3f22333e208a",
+      "Naziv": "Lavanda",
+      "JacinaAromaticnihUlja": 1.22,
+      "LatinskiNaziv": "Lavandula angustifolia",
+      "ZemljaPorekla": "Francuska",
+      "Stanje": 0
+    }
+  ]
+}

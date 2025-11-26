@@ -45,11 +45,11 @@ namespace Services.Implementacije
 
             if(jacinaPreradjeneBiljke > 4.00)
             {
-                // Računamo za koliko procenata treba da smanjimo
-                double procenat = jacinaPreradjeneBiljke - 4.00; // npr. 4.65 → 0.65 → 65%
-                double faktor = 1 - (procenat / 1.00);            // 1 - 0.65 = 0.35 → smanji na 35%
+                double odstupanje = jacinaPreradjeneBiljke - 4.00; // npr: 4.65 → 0.65
+                double procenatSmanjenja = odstupanje * 100.0;     // npr: 0.65 * 100 = 65%
+                double noviProcenat = 100.0 - procenatSmanjenja;   // 100 - 65 = 35%
 
-                biljka.JacinaAromaticnihUlja = Math.Round(biljka.JacinaAromaticnihUlja * faktor, 2);
+                biljka.JacinaAromaticnihUlja = Math.Round(biljka.JacinaAromaticnihUlja * (noviProcenat/100.0), 2);
                 _baza.SacuvajPromene();
             }
             else

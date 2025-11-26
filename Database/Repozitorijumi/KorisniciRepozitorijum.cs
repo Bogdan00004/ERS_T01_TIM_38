@@ -23,8 +23,8 @@ namespace Database.Repozitorijumi
                 // Ako korisnik sa tim korisničkim imenom već postoji, ne dodaje se
                 if (postoji.KorisnickoIme == string.Empty)
                 {
-                    // Jedinstveni ID se generiše na osnovu trenutnog vremena
-                    korisnik.Id = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                    // Jedinstveni ID se generiše na osnovu GUID-a
+                    korisnik.Id = Guid.NewGuid();
 
                     // Ne postoji korisnik sa datim korisničkim imenom - dodati
                     bazaPodataka.Tabele.Korisnici.Add(korisnik);
