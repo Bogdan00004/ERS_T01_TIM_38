@@ -4,7 +4,7 @@ namespace Domain.BazaPodataka
 {
     public class TabeleBazaPodataka
     {
-        public List<Korisnik> Korisnici { get; set; } = [];
+        public List<Korisnik> Korisnici { get; set; } = new List<Korisnik>();
         // TODO: Add other database tables as needed
          
         
@@ -19,12 +19,12 @@ namespace Domain.BazaPodataka
                     tipKorisnika: Enumeracije.TipKorisnika.MenadzerProdaje
                     ),
                 new Korisnik(
-                        korisnickoIme: "prodavac"
+                        korisnickoIme: "prodavac",
                         lozinka: "1234567",
                         imePrezime: "Petar Petrovic",
                         tipKorisnika: Enumeracije.TipKorisnika.Prodavac
                     )
-            }
+            };
             
         }
     }

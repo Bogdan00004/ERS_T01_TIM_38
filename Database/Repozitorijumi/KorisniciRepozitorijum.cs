@@ -74,7 +74,7 @@ namespace Database.Repozitorijumi
             }
             catch
             {
-                return [];
+                return new List<Korisnik>();
             }
         }
     }

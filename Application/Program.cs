@@ -5,7 +5,7 @@ using Domain.Repozitorijumi;
 using Domain.Servisi;
 using Presentation.Authentifikacija;
 using Presentation.Meni;
-using Services.AutenftikacioniServisi;
+using Services.AutentifikacioniServisi;
 
 namespace Loger_Bloger
 {
