@@ -28,10 +28,25 @@ namespace Loger_Bloger
             // TODO: Add other necessary services
 
             // Ako nema nijednog korisnika u sistemu, dodati dva nova
-            /*if (korisniciRepozitorijum.SviKorisnici().Count() == 0)
+            if (korisniciRepozitorijum.SviKorisnici().Count() == 0)
             {
                 // TODO: Add initial users to the system
-               
+                korisniciRepozitorijum.DodajKorisnika(new Korisnik
+                {
+                    KorisnickoIme = "Bogdan",
+                    Lozinka = "123",
+                    ImePrezime = "Bogdan Pecanac",
+                    Uloga = TipKorisnika.MenadzerProdaje
+                });
+
+                korisniciRepozitorijum.DodajKorisnika(new Korisnik
+                {
+                    KorisnickoIme = "Petar",
+                    Lozinka = "321",
+                    ImePrezime = "Petar Petrovic",
+                    Uloga = TipKorisnika.Prodavac
+                });
+
             }
 
             // Prezentacioni sloj
@@ -47,27 +62,9 @@ namespace Loger_Bloger
             Console.WriteLine($"Uspešno ste prijavljeni kao: {prijavljen.ImePrezime} ({prijavljen.Uloga})");
 
             OpcijeMeni meni = new OpcijeMeni(); // TODO: Pass necessary dependencies
-            meni.PrikaziMeni();*/
+            meni.PrikaziMeni();
 
-            // --- TESTIRANJE SERVISA PROIZVODNJE ---
-
-            IProizvodnjaServis proizvodnjaServis = new ProizvodnjaServis(bazaPodataka);
-
-            // 1. Simuliramo da je neka prethodna prerađena biljka imala jačinu od 4.65
-            double preradjenaJacina = 4.65;
-
-            // 2. Sadimo novu biljku
-            proizvodnjaServis.PosadiNovuBiljku("Lavanda", "Lavandula angustifolia", "Francuska");
-            Console.WriteLine(" Zasađena nova biljka!");
-
-            // 3. Uzimamo poslednju biljku iz baze (pretpostavljamo da je ta poslednja posle sadnje)
-            var poslednja = bazaPodataka.Tabele.Biljke.Last();
-            Console.WriteLine($"Nova biljka ima početnu jačinu: {poslednja.JacinaAromaticnihUlja}");
-            // 4. Smanjujemo jačinu ako je potrebno
-            proizvodnjaServis.PromeniJacinuUlja(poslednja.Id, preradjenaJacina);
-            // 5. Prikazujemo novu vrednst
-            var azurirana = bazaPodataka.Tabele.Biljke.FirstOrDefault(b => b.Id == poslednja.Id);
-            Console.WriteLine($" Nakon smanjenja, nova jačina je: {azurirana?.JacinaAromaticnihUlja}");
+            
             
         }
     }
