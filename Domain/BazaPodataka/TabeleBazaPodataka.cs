@@ -6,7 +6,7 @@ namespace Domain.BazaPodataka
     {
         public List<Korisnik> Korisnici { get; set; } = new List<Korisnik>();
         // TODO: Add other database tables as needed
-         
+        public List<Biljka> Biljke { get; set; } = new List<Biljka> (); 
         
 
         public TabeleBazaPodataka() {
@@ -25,7 +25,7 @@ namespace Domain.BazaPodataka
                         tipKorisnika: Enumeracije.TipKorisnika.Prodavac
                     )
             };
-            
+            Biljke = new List<Biljka> ();
         }
     }
 }
