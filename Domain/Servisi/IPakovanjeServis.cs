@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Domain.Enumeracije;
+
+namespace Domain.Servisi
+{
+    public interface IPakovanjeServis
+    {
+        void SpakujParfeme(string nazivParfema, int brojBocica, double zapreminaPoBocici, Guid skladisteId);
+        void PosaljiAmbalazuUSkladiste(Guid skladisteId);
+    }
+}
