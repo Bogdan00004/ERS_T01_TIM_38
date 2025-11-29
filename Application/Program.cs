@@ -28,7 +28,7 @@ namespace Loger_Bloger
             // TODO: Add other necessary services
 
             // Ako nema nijednog korisnika u sistemu, dodati dva nova
-            if (korisniciRepozitorijum.SviKorisnici().Count() == 0)
+            /*if (korisniciRepozitorijum.SviKorisnici().Count() == 0)
             {
                 // TODO: Add initial users to the system
                 korisniciRepozitorijum.DodajKorisnika(new Korisnik
@@ -63,9 +63,40 @@ namespace Loger_Bloger
 
             OpcijeMeni meni = new OpcijeMeni(); // TODO: Pass necessary dependencies
             meni.PrikaziMeni();
+            */
+            /*---Test primer za PreradaServis---*/
+            var baza = new JsonBazaPodataka();
+            var biljkeRepo = new BiljkeRepozitorijum(baza);
+            var parfemiRepo = new ParfemiRepozitorijum(baza);
+            var preradaServis = new PreradaServis(biljkeRepo, parfemiRepo);
 
-            
-            
+            // 1. Zasadimo i oberemo biljke (da budu spremne za preradu)
+            for (int i = 0; i < 5; i++)
+            {
+                var biljka = new Biljka
+                {
+                    Id = Guid.NewGuid(),
+                    Naziv = $"Lavanda-{i + 1}",
+                    JacinaAromaticnihUlja = 7,
+                    Stanje = StanjeBiljke.Ubrana
+                };
+                biljkeRepo.Dodaj(biljka);
+            }
+
+            // 2. Prerada biljaka u parfeme (npr. 3 bočice po 150ml)
+            var parfemi = preradaServis.PreradiBiljke("Savignon","Unisex", 3, 150);
+
+            Console.WriteLine("Parfemi uspešno napravljeni:\n");
+            foreach (var p in parfemi)
+            {
+                Console.WriteLine($"Naziv: {p.Naziv}, Tip: {p.Tip}, Zapremina: {p.NetoKolicina}ml, Serijski broj: {p.SerijskiBroj}");
+            }
+
+            Console.WriteLine("\nStanja biljaka nakon prerade:");
+            foreach (var b in biljkeRepo.SveBiljke())
+            {
+                Console.WriteLine($"Biljka: {b.Naziv}, Stanje: {b.Stanje}");
+            }
         }
     }
 }

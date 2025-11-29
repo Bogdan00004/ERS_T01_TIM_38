@@ -40,5 +40,6 @@ namespace Database.Implementacije
                 return false;
             }
         }
+        
     }
 }

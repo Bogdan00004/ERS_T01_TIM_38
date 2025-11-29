@@ -8,5 +8,6 @@ namespace Domain.BazaPodataka
         public TabeleBazaPodataka Tabele { get; set; }
 
         public bool SacuvajPromene();
+        
     }
 }
