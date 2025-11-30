@@ -68,7 +68,7 @@ namespace Loger_Bloger.Servisi
                 throw new Exception("Skladiste je popunjeno.");
 
 
-            var ambalaza = dostupneAmbalaze.FirstOrDefault(a => a.Status == StatusAmbalaze.Spakovana);
+            var ambalaza = dostupneAmbalaze.FirstOrDefault(a => a.Status == StatusAmbalaze.Spakovana && a.SkladisteId==skladisteId);
 
             if (ambalaza == null)
                 throw new Exception("Nema dostupnih spakovanih ambalaza.");
@@ -76,6 +76,7 @@ namespace Loger_Bloger.Servisi
 
             ambalaza.Status = StatusAmbalaze.Poslata;
             skladiste.TrenutniKapacitet++;
+            skladiste.AmbalazeId.Add(ambalaza.Id); 
 
 
             _ambalazaRepozitorijum.SacuvajPromene();

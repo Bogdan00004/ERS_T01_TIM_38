@@ -15,9 +15,7 @@ namespace Loger_Bloger.Servisi.Skladistenje
         private readonly ISkladistaRepozitorijum _skladistaRepozitorijum;
         private readonly IAmbalazaRepozitorijum _ambalazaRepozitorijum;
 
-        public DistribucioniCentarServis(
-            ISkladistaRepozitorijum skladistaRepozitorijum,
-            IAmbalazaRepozitorijum ambalazaRepozitorijum)
+        public DistribucioniCentarServis(ISkladistaRepozitorijum skladistaRepozitorijum, IAmbalazaRepozitorijum ambalazaRepozitorijum)
         {
             _skladistaRepozitorijum = skladistaRepozitorijum;
             _ambalazaRepozitorijum = ambalazaRepozitorijum;
