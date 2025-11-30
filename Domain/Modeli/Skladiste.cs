@@ -12,11 +12,13 @@ namespace Domain.Modeli
         public string Naziv { get; set; }
         public int MaxKapacitet { get; set; }
         public int TrenutniKapacitet { get; set; }
+        public List<Guid> AmbalazeId { get; set; }
 
         public Skladiste()
         {
             Id = Guid.NewGuid();
             TrenutniKapacitet = 0;
+            AmbalazeId = new List<Guid>();
         }
     }
 }
