@@ -12,10 +12,11 @@ namespace Presentation.Meni
     public class AutentifikacioniMeni
     {
         private readonly IAutentifikacijaServis _autentifikacijaServis;
-
-        public AutentifikacioniMeni(IAutentifikacijaServis autentifikacijaServis)
+        private readonly ISkladistenjeServisUloge _ulogeServis;
+        public AutentifikacioniMeni(IAutentifikacijaServis autentifikacijaServis, ISkladistenjeServisUloge ulogeServis)
         {
             _autentifikacijaServis = autentifikacijaServis;
+            _ulogeServis = ulogeServis;
         }
 
         public void Pokreni()
@@ -84,8 +85,9 @@ namespace Presentation.Meni
                     Console.WriteLine("Nepoznata opcija.");
                 }
             }
-            
-            var meni = new OpcijeMeni();
+            var skladistenjeServis = _ulogeServis.KreirajServis(ulogovaniKorisnik.Uloga);
+
+            var meni = new OpcijeMeni(skladistenjeServis);
             meni.PrikaziMeni();
         }
     }
