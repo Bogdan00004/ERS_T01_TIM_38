@@ -61,13 +61,12 @@ namespace Loger_Bloger
 
             // Prezentacioni sloj
             Presentation.Authentifikacija.AutentifikacioniMeni am = new Presentation.Authentifikacija.AutentifikacioniMeni(autentifikacijaServis);
-            Korisnik prijavljen = new Korisnik();
-            ISkladistenjeServis skladistenjeServis = uloga.KreirajServis(prijavljen.Uloga);
+            Korisnik prijavljen = new Korisnik(); 
             while (am.TryLogin(out prijavljen) == false)
             {
                 Console.WriteLine("Pogrešno korisničko ime ili lozinka. Pokušajte ponovo.");
             }
-
+            ISkladistenjeServis skladistenjeServis = uloga.KreirajServis(prijavljen.Uloga);
             Console.Clear();
             Console.WriteLine($"Uspešno ste prijavljeni kao: {prijavljen.ImePrezime} ({prijavljen.Uloga})");
 
