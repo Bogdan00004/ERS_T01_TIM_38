@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Domain.Enumeracije;
 namespace Domain.Modeli;
 
-public enum TipProdaje { Maloprodaja, Veleprodaja }
-public enum NacinPlacanja { Gotovina, UplataNaRacun, Kartica }
+
 
 public class FiskalnaStavka
 {

@@ -13,6 +13,7 @@ namespace Domain.Modeli
         public string Tip {  get; set; }
         public int NetoKolicina {  get; set; }
         public string SerijskiBroj {  get; set; }
+        public decimal Cena { get; set; }
         public Guid BiljkaId {  get; set; }
         public DateTime RokTrajanja { get; set; }
     }
