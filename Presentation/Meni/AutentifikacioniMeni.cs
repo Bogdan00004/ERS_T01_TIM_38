@@ -13,11 +13,15 @@ namespace Presentation.Meni
     {
         private readonly IAutentifikacijaServis _autentifikacijaServis;
         private readonly ISkladistenjeServisUloge _ulogeServis;
-        public AutentifikacioniMeni(IAutentifikacijaServis autentifikacijaServis, ISkladistenjeServisUloge ulogeServis)
+        private readonly Func<TipKorisnika, IProdajaServis> _prodajaServisFactory;
+
+        public AutentifikacioniMeni(IAutentifikacijaServis autentifikacijaServis, ISkladistenjeServisUloge ulogeServis,Func<TipKorisnika, IProdajaServis> prodajaServisFactory)
         {
             _autentifikacijaServis = autentifikacijaServis;
             _ulogeServis = ulogeServis;
+            _prodajaServisFactory = prodajaServisFactory;
         }
+
 
         public void Pokreni()
         {
@@ -85,10 +89,12 @@ namespace Presentation.Meni
                     Console.WriteLine("Nepoznata opcija.");
                 }
             }
-            var skladistenjeServis = _ulogeServis.KreirajServis(ulogovaniKorisnik.Uloga);
 
-            var meni = new OpcijeMeni(skladistenjeServis);
+            var prodajaServis = _prodajaServisFactory(ulogovaniKorisnik.Uloga);
+
+            var meni = new OpcijeMeni(ulogovaniKorisnik, prodajaServis);
             meni.PrikaziMeni();
+
         }
     }
 }
