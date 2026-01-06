@@ -10,6 +10,7 @@ namespace Domain.BazaPodataka
         public List<Parfem> Parfemi { get; set; }= new List<Parfem>();
         public List<Ambalaza> Ambalaze { get; set; } = new List<Ambalaza>();
         public List<Skladiste> Skladista { get; set; }=new List<Skladiste>();
+        public List<FiskalniRacun> FiskalniRacuni { get; set; } = new List<FiskalniRacun>();
 
         public TabeleBazaPodataka() {
             Korisnici = new List<Korisnik>
