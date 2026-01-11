@@ -31,7 +31,7 @@ namespace Loger_Bloger.Servisi
             _preradaServis = preradaServis;
         }
 
-        public void SpakujParfeme(string nazivParfema, int brojBocica, double zapreminaPoBocici, Guid skladisteId)
+        public void SpakujParfeme(string nazivParfema, int brojBocica, int zapreminaPoBocici, Guid skladisteId)
         {
             var parfemi = _preradaServis.PreradiBiljke(nazivParfema, brojBocica, zapreminaPoBocici);
 

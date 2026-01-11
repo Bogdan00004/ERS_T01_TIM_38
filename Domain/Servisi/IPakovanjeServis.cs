@@ -10,7 +10,7 @@ namespace Domain.Servisi
 {
     public interface IPakovanjeServis
     {
-        void SpakujParfeme(string nazivParfema, int brojBocica, double zapreminaPoBocici, Guid skladisteId);
+        void SpakujParfeme(string nazivParfema, int brojBocica, int zapreminaPoBocici, Guid skladisteId);
         void PosaljiAmbalazuUSkladiste(Guid skladisteId);
     }
 }
