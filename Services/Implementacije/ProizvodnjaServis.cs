@@ -29,7 +29,7 @@ namespace Services.Implementacije
                 LatinskiNaziv = latinskiNaziv,
                 ZemljaPorekla = zemljaPorekla,
                 Stanje = StanjeBiljke.Posadjena,
-                JacinaAromaticnihUlja = Math.Round(new Random().NextDouble() * 5.0, 2) 
+                JacinaAromaticnihUlja = Math.Round(1.0 + new Random().NextDouble() * 4.0, 2)
             };
 
             _baza.Tabele.Biljke.Add(novaBiljka);
@@ -48,11 +48,14 @@ namespace Services.Implementacije
             if(jacinaPreradjeneBiljke > 4.00)
             {
                 double odstupanje = jacinaPreradjeneBiljke - 4.00; // npr: 4.65 → 0.65
-                double procenatSmanjenja = odstupanje * 100.0;     // npr: 0.65 * 100 = 65%
-                double noviProcenat = 100.0 - procenatSmanjenja;   // 100 - 65 = 35%
+                double faktor = odstupanje;
+                if (faktor < 0.0) faktor = 0.0;
+                if (faktor > 1.0) faktor = 1.0;
 
-                biljka.JacinaAromaticnihUlja = Math.Round(biljka.JacinaAromaticnihUlja * (noviProcenat/100.0), 2);
+                biljka.JacinaAromaticnihUlja = Math.Round(biljka.JacinaAromaticnihUlja * faktor, 2);
                 _baza.SacuvajPromene();
+
+                _logger.LogInfo($"Smanjena jačina ulja za biljku '{biljka.Naziv}' faktor={Math.Round(faktor * 100, 0)}%, nova={biljka.JacinaAromaticnihUlja}");
             }
             else
             {

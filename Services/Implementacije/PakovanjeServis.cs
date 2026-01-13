@@ -17,23 +17,29 @@ namespace Loger_Bloger.Servisi
         private readonly IAmbalazaRepozitorijum _ambalazaRepozitorijum;
         private readonly ISkladistaRepozitorijum _skladistaRepozitorijum;
         private readonly IPreradaServis _preradaServis;
+        private readonly ILoggerServis _logger;
+
 
 
         public PakovanjeServis(
         IParfemRepozitorijum parfemiRepozitorijum,
         IAmbalazaRepozitorijum ambalazaRepozitorijum,
         ISkladistaRepozitorijum skladistaRepozitorijum,
-        IPreradaServis preradaServis)
+        IPreradaServis preradaServis,
+        ILoggerServis logger)
         {
             _parfemiRepozitorijum = parfemiRepozitorijum;
             _ambalazaRepozitorijum = ambalazaRepozitorijum;
             _skladistaRepozitorijum = skladistaRepozitorijum;
             _preradaServis = preradaServis;
+            _logger = logger;
         }
 
         public void SpakujParfeme(string nazivParfema, int brojBocica, int zapreminaPoBocici, Guid skladisteId)
         {
+            _logger.LogInfo($"Pakovanje: naziv={nazivParfema}, brojBocica={brojBocica}, zapremina={zapreminaPoBocici}, skladisteId={skladisteId}");
             var parfemi = _preradaServis.PreradiBiljke(nazivParfema, brojBocica, zapreminaPoBocici);
+            _logger.LogInfo($"Pakovanje: dobijeno parfema={parfemi.Count}");
 
             foreach (var parfem in parfemi)
             {
@@ -81,6 +87,8 @@ namespace Loger_Bloger.Servisi
 
             _ambalazaRepozitorijum.SacuvajPromene();
             _skladistaRepozitorijum.SacuvajPromene();
+            _logger.LogInfo($"Pakovanje završeno: ambalazaId={ambalaza.Id}, parfemaUAmbalazi={ambalaza.ParfemiId.Count}");
+
         }
     }
 }
