@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Modeli;
 
-namespace Services.Interfaces
+namespace Domain.Servisi
 {
     public interface IProizvodnjaServis
     {

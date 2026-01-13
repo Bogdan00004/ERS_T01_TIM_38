@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.BazaPodataka;
 using Domain.Modeli;
-using Services.Interfaces;
+using Domain.Servisi;
 
 
 namespace Services.Implementacije
