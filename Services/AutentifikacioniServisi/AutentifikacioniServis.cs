@@ -9,10 +9,12 @@ namespace Services.AutentifikacioniServisi
         // TODO: Add necessary dependencies (e.g., user repository) via dependency injection
 
         private readonly IKorisniciRepozitorijum korisnici;
+        private readonly ILoggerServis _logger;
 
-        public AutentifikacioniServis(IKorisniciRepozitorijum korisniciRepozitorijum)
+        public AutentifikacioniServis(IKorisniciRepozitorijum korisniciRepozitorijum, ILoggerServis logger)
         {
             korisnici = korisniciRepozitorijum;
+            _logger = logger;
         }
 
         public (bool, Korisnik) Prijava(string korisnickoIme, string lozinka)
@@ -20,20 +22,28 @@ namespace Services.AutentifikacioniServisi
             // TODO: Implement login method
             var korisnik = korisnici.PronadjiKorisnikaPoKorisnickomImenu(korisnickoIme);
 
-            if(korisnik != null && korisnik.Lozinka == lozinka)
-                return(true, korisnik);
-          
-            return(false, new Korisnik());  
+            if (korisnik != null && korisnik.Lozinka == lozinka)
+            {
+                _logger.LogInfo($"Prijava uspešna: {korisnickoIme}");
+                return (true, korisnik);
+            }
+            _logger.LogWarning($"Neuspešna prijava: {korisnickoIme}");
+            return (false, new Korisnik());  
         }
         public (bool,Korisnik) Registracija(Korisnik noviKorisnik)
         {
+            _logger.LogInfo($"Pokušaj registracije: {noviKorisnik.KorisnickoIme}");
             var postoji = korisnici.PronadjiKorisnikaPoKorisnickomImenu(noviKorisnik.KorisnickoIme);
 
             if (postoji != null && postoji.KorisnickoIme != string.Empty)
+            {
+                _logger.LogWarning($"Registracija odbijena (zauzeto): {noviKorisnik.KorisnickoIme}");
                 return (false, new Korisnik());
+            }
 
             korisnici.DodajKorisnika(noviKorisnik);
-            return(true, new Korisnik());
+            _logger.LogInfo($"Registracija uspešna: {noviKorisnik.KorisnickoIme}");
+            return (true, new Korisnik());
         }
     }
 }

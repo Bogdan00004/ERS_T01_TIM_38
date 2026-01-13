@@ -13,10 +13,12 @@ namespace Services.Implementacije
     public class ProizvodnjaServis:IProizvodnjaServis
     {
         private readonly IBazaPodataka _baza;
+        private readonly ILoggerServis _logger;
 
-        public ProizvodnjaServis(IBazaPodataka baza)
+        public ProizvodnjaServis(IBazaPodataka baza, ILoggerServis logger)
         {
             _baza = baza;
+            _logger = logger;
         }
         public void PosadiNovuBiljku(string naziv, string latinskiNaziv, string zemljaPorekla)
         {
@@ -39,7 +41,7 @@ namespace Services.Implementacije
 
             if(biljka == null)
             {
-                Console.WriteLine("Greška: Biljka nije pronađena.");
+                _logger.LogError("Greška: Biljka nije pronađena.");
                 return;
             }
 
@@ -53,8 +55,8 @@ namespace Services.Implementacije
                 _baza.SacuvajPromene();
             }
             else
-            {               
-                Console.WriteLine("Nema potrebe za smanjenjem jačine – vrednost nije preko 4.00.");
+            {
+                _logger.LogInfo("Nema potrebe za smanjenjem jačine – vrednost nije preko 4.00.");
             }
         }
         public List<Biljka> UberiBiljke(string naziv, int kolicina)
@@ -69,16 +71,16 @@ namespace Services.Implementacije
         }
         public void TestirajSadnjuISmanjenje()
         {
-            Console.WriteLine("Sadimo biljku...");
+            _logger.LogInfo("Sadimo biljku...");
             PosadiNovuBiljku("Lavanda", "Lavandula", "Francuska");
 
             var nova = _baza.Tabele.Biljke.Last();
-            Console.WriteLine($"Pre smanjenja: {nova.JacinaAromaticnihUlja}");
+            _logger.LogInfo($"Pre smanjenja: {nova.JacinaAromaticnihUlja}");
 
             // Simulacija: preradjena biljka imala 4.65
             PromeniJacinuUlja(nova.Id, 4.65);
 
-            Console.WriteLine($"Posle smanjenja: {nova.JacinaAromaticnihUlja}");
+            _logger.LogInfo($"Posle smanjenja: {nova.JacinaAromaticnihUlja}");
         }
     }
 }

@@ -8,6 +8,7 @@ using Domain.Servisi;
 using Loger_Bloger.Servisi.Skladistenje;
 using Presentation.Meni;
 using Services.AutentifikacioniServisi;
+using Services.LoggerServisi;
 
 namespace Loger_Bloger
 {
@@ -26,12 +27,13 @@ namespace Loger_Bloger
             // DODATO: parfemi + racuni
             IParfemRepozitorijum parfemRepozitorijum = new ParfemiRepozitorijum(bazaPodataka);
             IFiskalniRacunRepozitorijum fiskalniRacunRepozitorijum = new FiskalniRacuniRepozitorijum(bazaPodataka);
+            ILoggerServis logger = new TekstualniLoggerServis("log.txt");
 
             // Servisi
-            IAutentifikacijaServis autentifikacijaServis = new AutentifikacioniServis(korisniciRepozitorijum);
+            IAutentifikacijaServis autentifikacijaServis = new AutentifikacioniServis(korisniciRepozitorijum,logger);
 
-            var magacinskiServis = new MagacinskiCentarServis(skladistaRepozitorijum, ambalazaRepozitorijum);
-            var distribucioniServis = new DistribucioniCentarServis(skladistaRepozitorijum, ambalazaRepozitorijum);
+            var magacinskiServis = new MagacinskiCentarServis(skladistaRepozitorijum, ambalazaRepozitorijum,logger);
+            var distribucioniServis = new DistribucioniCentarServis(skladistaRepozitorijum, ambalazaRepozitorijum, logger);
             ISkladistenjeServisUloge uloga = new SkladistenjeServisUloge(magacinskiServis, distribucioniServis);
 
             // Seed korisnika
@@ -71,7 +73,7 @@ namespace Loger_Bloger
                 parfemRepozitorijum,
                 ambalazaRepozitorijum,
                 fiskalniRacunRepozitorijum,
-                skladistenjeServis);
+                skladistenjeServis,logger);
 
             Console.Clear();
             Console.WriteLine($"Uspešno ste prijavljeni kao: {prijavljen.ImePrezime} ({prijavljen.Uloga})");

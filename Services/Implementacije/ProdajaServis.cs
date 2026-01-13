@@ -15,17 +15,21 @@ namespace Loger_Bloger.Servisi.Prodaja
         private readonly IAmbalazaRepozitorijum _ambalazeRepo;
         private readonly IFiskalniRacunRepozitorijum _racuniRepo;
         private readonly ISkladistenjeServis _skladistenjeServis;
+        private readonly ILoggerServis _logger;
+
 
         public ProdajaServis(
             IParfemRepozitorijum parfemiRepo,
             IAmbalazaRepozitorijum ambalazeRepo,
             IFiskalniRacunRepozitorijum racuniRepo,
-            ISkladistenjeServis skladistenjeServis)
+            ISkladistenjeServis skladistenjeServis,
+            ILoggerServis logger)
         {
             _parfemiRepo = parfemiRepo;
             _ambalazeRepo = ambalazeRepo;
             _racuniRepo = racuniRepo;
             _skladistenjeServis = skladistenjeServis;
+            _logger = logger;
         }
 
         // ERS-31: katalog dostupnih parfema
@@ -64,18 +68,29 @@ namespace Loger_Bloger.Servisi.Prodaja
         // ERS-33: prodaja -> traži skladište -> raspakuje -> doda u račun
         public async Task<FiskalniRacun> Prodaj(Guid parfemId, int kolicinaBocica, TipProdaje tipProdaje, NacinPlacanja nacinPlacanja)
         {
+            _logger.LogInfo($"[Prodaja] Početak prodaje: parfemId={parfemId}, kolicina={kolicinaBocica}, tip={tipProdaje}, nacin={nacinPlacanja}");
+
             if (kolicinaBocica <= 0)
+            {
+                _logger.LogWarning($"[Prodaja] Neispravna količina: {kolicinaBocica}");
                 throw new ArgumentException("Količina bočica mora biti veća od 0.");
+            }
 
             var parfem = _parfemiRepo.NadjiPoId(parfemId);
             if (parfem == null)
+            {
+                _logger.LogError($"[Prodaja] Parfem ne postoji: parfemId={parfemId}");
                 throw new Exception("Izabrani parfem ne postoji.");
+            }
 
             var katalog = VratiKatalogDostupnihParfema();
             var stavkaKataloga = katalog.FirstOrDefault(k => k.ParfemId == parfemId);
 
             if (stavkaKataloga == null || stavkaKataloga.Raspolozivo < kolicinaBocica)
+            {
+                _logger.LogWarning($"[Prodaja] Nema dovoljno na stanju: parfemId={parfemId}, trazeno={kolicinaBocica}, raspolozivo={(stavkaKataloga == null ? 0 : stavkaKataloga.Raspolozivo)}");
                 throw new Exception("Nema dovoljno parfema na stanju.");
+            }
 
             var preuzeteAmbalaze = new List<Ambalaza>();
             int skupljenoBocica = 0;
@@ -85,12 +100,18 @@ namespace Loger_Bloger.Servisi.Prodaja
             {
                 pokusaji++;
                 if (pokusaji > 50)
+                {
+                    _logger.LogError($"[Prodaja] Previše pokušaja preuzimanja ambalaža (parfemId={parfemId}).");
                     throw new Exception("Neuspeh pri preuzimanju ambalaža (previše pokušaja).");
+                }
 
                 var nove = await _skladistenjeServis.PosaljiAmbalazeProdaji(1);
 
                 if (nove == null || nove.Count == 0)
+                {
+                    _logger.LogWarning($"[Prodaja] Skladište nema dostupnih spakovanih ambalaža (parfemId={parfemId}).");
                     throw new Exception("Skladište nema dostupnih spakovanih ambalaža.");
+                }
 
                 preuzeteAmbalaze.AddRange(nove);
 
@@ -115,6 +136,7 @@ namespace Loger_Bloger.Servisi.Prodaja
 
             _racuniRepo.Dodaj(racun);
             _racuniRepo.SacuvajPromene();
+            _logger.LogInfo($"[Prodaja] Prodaja uspešna: parfem={parfem.Naziv}, kolicina={kolicinaBocica}, iznos={racun.IznosZaNaplatu}");
 
             return racun;
         }

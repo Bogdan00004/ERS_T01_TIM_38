@@ -14,11 +14,13 @@ namespace Loger_Bloger.Servisi.Skladistenje
     {
         private readonly ISkladistaRepozitorijum _skladistaRepozitorijum;
         private readonly IAmbalazaRepozitorijum _ambalazaRepozitorijum;
+        private readonly ILoggerServis _logger;
 
-        public MagacinskiCentarServis(ISkladistaRepozitorijum skladistaRepozitorijum, IAmbalazaRepozitorijum ambalazaRepozitorijum)
+        public MagacinskiCentarServis(ISkladistaRepozitorijum skladistaRepozitorijum, IAmbalazaRepozitorijum ambalazaRepozitorijum, ILoggerServis logger)
         {
             _skladistaRepozitorijum = skladistaRepozitorijum;
             _ambalazaRepozitorijum = ambalazaRepozitorijum;
+            _logger = logger;
         }
 
         public async Task<List<Ambalaza>> PosaljiAmbalazeProdaji(int brojZaSlanje)
@@ -26,10 +28,16 @@ namespace Loger_Bloger.Servisi.Skladistenje
             var sveAmbalaze = _ambalazaRepozitorijum.VratiSve();
             var poslateAmbalaze = new List<Ambalaza>();
 
+            _logger.LogInfo($"[Magacinski] Slanje ambalaža: traženo={brojZaSlanje}.");
+
             // Magacinski centar šalje po 1 ambalažu
             int brojZaistaZaSlanje = Math.Min(brojZaSlanje, 1);
 
             var dostupne = sveAmbalaze.Where(a => a.Status == StatusAmbalaze.Spakovana).Take(brojZaistaZaSlanje).ToList();
+            if (dostupne.Count == 0)
+            {
+                _logger.LogWarning($"[Magacinski] Nema dostupnih spakovanih ambalaža (traženo={brojZaSlanje}).");
+            }
 
             foreach (var ambalaza in dostupne)
             {
@@ -39,6 +47,7 @@ namespace Loger_Bloger.Servisi.Skladistenje
             }
 
             _ambalazaRepozitorijum.SacuvajPromene();
+            _logger.LogInfo($"[Magacinski] Poslato ambalaža: {poslateAmbalaze.Count}.");
             return poslateAmbalaze;
         }
     }
