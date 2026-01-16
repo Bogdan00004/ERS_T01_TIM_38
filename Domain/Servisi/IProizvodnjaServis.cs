@@ -9,7 +9,7 @@ namespace Domain.Servisi
 {
     public interface IProizvodnjaServis
     {
-        void PosadiNovuBiljku(string naziv, string latinskiNaziv, string zemljaPorekla);
+        Biljka PosadiNovuBiljku(string naziv, string latinskiNaziv, string zemljaPorekla);
         void PromeniJacinuUlja(Guid idBiljke, double procenat);
         List<Biljka> UberiBiljke(string naziv, int kolicina);
     }

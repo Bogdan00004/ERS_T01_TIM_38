@@ -41,9 +41,9 @@ namespace Services.AutentifikacioniServisi
                 return (false, new Korisnik());
             }
 
-            korisnici.DodajKorisnika(noviKorisnik);
+            var dodati = korisnici.DodajKorisnika(noviKorisnik);
             _logger.LogInfo($"Registracija uspešna: {noviKorisnik.KorisnickoIme}");
-            return (true, new Korisnik());
+            return (true, dodati);
         }
     }
 }

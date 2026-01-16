@@ -15,6 +15,8 @@ namespace Loger_Bloger.Servisi.Prodaja
         private readonly IAmbalazaRepozitorijum _ambalazeRepo;
         private readonly IFiskalniRacunRepozitorijum _racuniRepo;
         private readonly ISkladistenjeServis _skladistenjeServis;
+        private readonly IPakovanjeServis _pakovanjeServis;
+        private readonly ISkladistaRepozitorijum _skladistaRepo;
         private readonly ILoggerServis _logger;
 
 
@@ -23,13 +25,24 @@ namespace Loger_Bloger.Servisi.Prodaja
             IAmbalazaRepozitorijum ambalazeRepo,
             IFiskalniRacunRepozitorijum racuniRepo,
             ISkladistenjeServis skladistenjeServis,
+            IPakovanjeServis pakovanjeServis,
+            ISkladistaRepozitorijum skladistaRepo,
             ILoggerServis logger)
         {
             _parfemiRepo = parfemiRepo;
             _ambalazeRepo = ambalazeRepo;
             _racuniRepo = racuniRepo;
             _skladistenjeServis = skladistenjeServis;
+            _pakovanjeServis = pakovanjeServis;
+            _skladistaRepo = skladistaRepo;
             _logger = logger;
+        }
+
+        private static string NapraviKljuc(Parfem p)
+        {
+            var cenaNorm = decimal.Round(p.Cena, 2);
+            return $"{p.Naziv}|{p.Tip}|{p.NetoKolicina}|{cenaNorm:0.##}";
+
         }
 
         // ERS-31: katalog dostupnih parfema
@@ -37,33 +50,52 @@ namespace Loger_Bloger.Servisi.Prodaja
         {
             var spakovaneAmbalaze = _ambalazeRepo.VratiSpakovaneAmbalaze();
 
-            var kolicinePoParfemu = spakovaneAmbalaze
-                .SelectMany(a => a.ParfemiId)
-                .GroupBy(id => id)
-                .ToDictionary(g => g.Key, g => g.Count());
-
+            // mapa ID->parfem da bismo mogli iz ambalaze (koja cuva samo ID) da izvucemo detalje
             var sviParfemi = _parfemiRepo.SviParfemi();
+            var mapa = sviParfemi.ToDictionary(p => p.Id, p => p);
+
+            // brojimo raspolozive bocice po "proizvodu" (naziv+tip+zapremina+cena)
+            var kolicine = new Dictionary<string, int>();
+            var predstavnik = new Dictionary<string, Parfem>();
+
+            foreach (var amb in spakovaneAmbalaze)
+            {
+                foreach (var parfemId in amb.ParfemiId)
+                {
+                    if (!mapa.ContainsKey(parfemId)) continue;
+
+                    var p = mapa[parfemId];
+                    var key = NapraviKljuc(p);
+
+                    if (!kolicine.ContainsKey(key)) kolicine[key] = 0;
+                    kolicine[key]++;
+
+                    if (!predstavnik.ContainsKey(key)) predstavnik[key] = p;
+                }
+            }
 
             var katalog = new List<KatalogStavka>();
-
-            foreach (var p in sviParfemi)
+            foreach (var kv in kolicine)
             {
-                var raspolozivo = kolicinePoParfemu.ContainsKey(p.Id) ? kolicinePoParfemu[p.Id] : 0;
-                if (raspolozivo <= 0) continue;
-
+                var p = predstavnik[kv.Key];
                 katalog.Add(new KatalogStavka
                 {
-                    ParfemId = p.Id,
+                    ParfemId = p.Id,               
                     Naziv = p.Naziv,
                     Tip = p.Tip,
                     NetoKolicina = p.NetoKolicina,
                     Cena = p.Cena,
-                    Raspolozivo = raspolozivo
+                    Raspolozivo = kv.Value
                 });
             }
 
-            return katalog;
+            return katalog
+                .OrderBy(k => k.Naziv)
+                .ThenBy(k => k.Tip)
+                .ThenBy(k => k.NetoKolicina)
+                .ToList();
         }
+
 
         // ERS-33: prodaja -> traži skladište -> raspakuje -> doda u račun
         public async Task<FiskalniRacun> Prodaj(Guid parfemId, int kolicinaBocica, TipProdaje tipProdaje, NacinPlacanja nacinPlacanja)
@@ -76,25 +108,71 @@ namespace Loger_Bloger.Servisi.Prodaja
                 throw new ArgumentException("Količina bočica mora biti veća od 0.");
             }
 
-            var parfem = _parfemiRepo.NadjiPoId(parfemId);
-            if (parfem == null)
+            var izabrani = _parfemiRepo.NadjiPoId(parfemId);
+            if (izabrani == null)
             {
                 _logger.LogError($"[Prodaja] Parfem ne postoji: parfemId={parfemId}");
                 throw new Exception("Izabrani parfem ne postoji.");
             }
 
             var katalog = VratiKatalogDostupnihParfema();
-            var stavkaKataloga = katalog.FirstOrDefault(k => k.ParfemId == parfemId);
+            var stavkaKataloga = katalog.FirstOrDefault(k =>
+                k.Naziv == izabrani.Naziv &&
+                k.Tip == izabrani.Tip &&
+                k.NetoKolicina == izabrani.NetoKolicina &&
+                k.Cena == izabrani.Cena
+            );
 
-            if (stavkaKataloga == null || stavkaKataloga.Raspolozivo < kolicinaBocica)
+            int raspolozivo = (stavkaKataloga == null) ? 0 : stavkaKataloga.Raspolozivo;
+
+            if (raspolozivo < kolicinaBocica)
             {
-                _logger.LogWarning($"[Prodaja] Nema dovoljno na stanju: parfemId={parfemId}, trazeno={kolicinaBocica}, raspolozivo={(stavkaKataloga == null ? 0 : stavkaKataloga.Raspolozivo)}");
-                throw new Exception("Nema dovoljno parfema na stanju.");
+                int nedostaje = kolicinaBocica - raspolozivo;
+
+                _logger.LogWarning($"[Prodaja] Nema dovoljno na stanju. Raspolozivo={raspolozivo}, trazeno={kolicinaBocica}, nedostaje={nedostaje}. Pokrecem pakovanje...");
+
+                // izaberi skladiste koje ima kapacitet
+                var skladista = _skladistaRepo.VratiSva();
+                var ciljnoSkladiste = skladista
+                    .Where(s => s.TrenutniKapacitet < s.MaxKapacitet)
+                    .OrderByDescending(s => (s.MaxKapacitet - s.TrenutniKapacitet))
+                    .FirstOrDefault();
+
+                if (ciljnoSkladiste == null)
+                    throw new Exception("Nema skladišta sa slobodnim kapacitetom.");
+
+                // Obezbedi ambalazu u skladistu: ako nema -> spakuj -> ubaci
+                _pakovanjeServis.ObezbediAmbalazuUSkladistu(
+                    nazivParfema: izabrani.Naziv,
+                    tip: izabrani.Tip,
+                    cena: izabrani.Cena,
+                    brojBocica: nedostaje,
+                    zapreminaPoBocici: izabrani.NetoKolicina,
+                    skladisteId: ciljnoSkladiste.Id
+                ); 
+
+                // osvezi katalog posle pakovanja
+                katalog = VratiKatalogDostupnihParfema();
+                stavkaKataloga = katalog.FirstOrDefault(k =>
+                    k.Naziv == izabrani.Naziv &&
+                    k.Tip == izabrani.Tip &&
+                    k.NetoKolicina == izabrani.NetoKolicina &&
+                    k.Cena == izabrani.Cena
+                );
+
+                if (stavkaKataloga == null || stavkaKataloga.Raspolozivo < kolicinaBocica)
+                    throw new Exception("Nije moguće obezbediti dovoljno parfema ni nakon pakovanja.");
             }
+
 
             var preuzeteAmbalaze = new List<Ambalaza>();
             int skupljenoBocica = 0;
             int pokusaji = 0;
+
+            var sviParfemi = _parfemiRepo.SviParfemi();
+            var mapa = sviParfemi.ToDictionary(p => p.Id, p => p);
+
+            string trazeniKey = NapraviKljuc(izabrani);
 
             while (skupljenoBocica < kolicinaBocica)
             {
@@ -117,8 +195,60 @@ namespace Loger_Bloger.Servisi.Prodaja
 
                 skupljenoBocica = preuzeteAmbalaze
                     .SelectMany(a => a.ParfemiId)
-                    .Count(id => id == parfemId);
+                    .Where(id => mapa.ContainsKey(id))
+                    .Select(id => mapa[id])
+                    .Count(p => NapraviKljuc(p) == trazeniKey);
             }
+            int preostaloZaSkidanje = kolicinaBocica;
+            foreach (var amb in preuzeteAmbalaze)
+            {
+                if (preostaloZaSkidanje <= 0) break;
+
+                var odgovarajuci = amb.ParfemiId
+                    .Where(id => mapa.ContainsKey(id) && NapraviKljuc(mapa[id]) == trazeniKey)
+                    .Take(preostaloZaSkidanje)
+                    .ToList();
+
+                foreach (var id in odgovarajuci)
+                    amb.ParfemiId.Remove(id);
+
+                preostaloZaSkidanje -= odgovarajuci.Count;
+            }
+
+            _ambalazeRepo.SacuvajPromene();
+
+            foreach (var amb in preuzeteAmbalaze)
+            {
+                // Ako ima jos parfema u ambalazi -> vrati je u skladiste kao SPAKOVANU
+                if (amb.ParfemiId.Count > 0)
+                {
+                    var skladiste = _skladistaRepo.NadjiPoId(amb.SkladisteId);
+                    if (skladiste != null)
+                    {
+                        // vracamo je nazad u skladiste (posto je ranije skinuta pri slanju prodaji)
+                        if (!skladiste.AmbalazeId.Contains(amb.Id))
+                        {
+                            if (skladiste.TrenutniKapacitet < skladiste.MaxKapacitet)
+                            {
+                                skladiste.AmbalazeId.Add(amb.Id);
+                                skladiste.TrenutniKapacitet++;
+                            }
+                            else
+                            {
+                                _logger.LogWarning($"[Prodaja] Ne mogu da vratim ambalazu u skladiste (popunjeno). ambalazaId={amb.Id}, skladisteId={skladiste.Id}");
+                            }
+                        }
+                    }
+
+                    // vracamo status na Spakovana da bi je katalog opet video
+                    amb.Status = StatusAmbalaze.Spakovana;
+
+                    _logger.LogInfo($"[Prodaja] Ambalaza vracena u skladiste (ima ostatak parfema). ambalazaId={amb.Id}, preostaloParfema={amb.ParfemiId.Count}");
+                }
+            }
+
+            _ambalazeRepo.SacuvajPromene();
+            _skladistaRepo.SacuvajPromene();
 
             var racun = new FiskalniRacun
             {
@@ -128,15 +258,15 @@ namespace Loger_Bloger.Servisi.Prodaja
 
             racun.Stavke.Add(new FiskalnaStavka
             {
-                ParfemId = parfem.Id,
-                NazivParfema = parfem.Naziv,
+                ParfemId = izabrani.Id,
+                NazivParfema = $"{izabrani.Naziv} ({izabrani.Tip}, {izabrani.NetoKolicina}ml)",
                 Kolicina = kolicinaBocica,
-                CenaPoKomadu = parfem.Cena
+                CenaPoKomadu = izabrani.Cena
             });
 
             _racuniRepo.Dodaj(racun);
             _racuniRepo.SacuvajPromene();
-            _logger.LogInfo($"[Prodaja] Prodaja uspešna: parfem={parfem.Naziv}, kolicina={kolicinaBocica}, iznos={racun.IznosZaNaplatu}");
+            _logger.LogInfo($"[Prodaja] Prodaja uspešna: parfem={izabrani.Naziv}, kolicina={kolicinaBocica}, iznos={racun.IznosZaNaplatu}");
 
             return racun;
         }

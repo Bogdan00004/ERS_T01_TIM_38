@@ -22,6 +22,7 @@ namespace Tests.Services
     {
         private Mock<IBiljkeRepozitorijum> _biljkeRepoMock = null!;
         private Mock<IParfemRepozitorijum> _parfemiRepoMock = null!;
+        private Mock<IProizvodnjaServis> _proizvodnjaMock = null!;
         private Mock<ILoggerServis> _loggerMock = null!;
         private PreradaServis _sut = null!;
 
@@ -32,38 +33,60 @@ namespace Tests.Services
             _parfemiRepoMock = new Mock<IParfemRepozitorijum>(MockBehavior.Loose);
             _loggerMock = new Mock<ILoggerServis>(MockBehavior.Loose);
 
-
-            _sut = new PreradaServis(_biljkeRepoMock.Object, _parfemiRepoMock.Object, _loggerMock.Object);
+            _proizvodnjaMock = new Mock<IProizvodnjaServis>(MockBehavior.Loose);
+            _sut = new PreradaServis(_biljkeRepoMock.Object, _parfemiRepoMock.Object, _proizvodnjaMock.Object, _loggerMock.Object);
 
         }
 
         [Test]
         public void PreradiBiljke_NepodrzanaZapremina_BacaArgumentException()
         {
-            Assert.Throws<ArgumentException>(() => _sut.PreradiBiljke("Rose", 1, 100));
+            Assert.Throws<ArgumentException>(() => _sut.PreradiBiljke("Rose", "Parfem",120m, 1, 100));
         }
 
         [Test]
-        public void PreradiBiljke_NemaDovoljnoUbranihBiljaka_BacaInvalidOperationException()
+        public void PreradiBiljke_KadNemaDovoljnoUbranihBiljaka_PozivaProizvodnjuI_NeBaca()
         {
             
             var biljke = new List<Biljka>
-            {
-                new Biljka { Id = Guid.NewGuid(), Stanje = StanjeBiljke.Ubrana },
-                new Biljka { Id = Guid.NewGuid(), Stanje = StanjeBiljke.Ubrana },
-            };
+             {
+                new Biljka { Id = Guid.NewGuid(), Naziv="Rose", Stanje = StanjeBiljke.Ubrana }
+                  };
 
-            _biljkeRepoMock.Setup(r => r.SveBiljke()).Returns(biljke);
+            
+            _biljkeRepoMock.Setup(r => r.SveBiljke()).Returns(() => biljke);
 
-            Assert.Throws<InvalidOperationException>(() => _sut.PreradiBiljke("Rose", 1, 150));
+            _proizvodnjaMock
+                .Setup(p => p.PosadiNovuBiljku(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Callback(() =>
+                {
+                    biljke.Add(new Biljka { Id = Guid.NewGuid(), Naziv = "Rose", Stanje = StanjeBiljke.Posadjena });
+                    biljke.Add(new Biljka { Id = Guid.NewGuid(), Naziv = "Rose", Stanje = StanjeBiljke.Posadjena });
+                })
+                .Returns(() => new Biljka { Id = Guid.NewGuid(), Naziv = "Rose", Stanje = StanjeBiljke.Posadjena });
+
+            _proizvodnjaMock
+                .Setup(p => p.UberiBiljke("Rose", It.IsAny<int>()))
+                .Callback(() =>
+                {
+                   
+                    foreach (var b in biljke.Where(x => x.Naziv == "Rose" && x.Stanje == StanjeBiljke.Posadjena))
+                        b.Stanje = StanjeBiljke.Ubrana;
+                })
+                .Returns(() => biljke.Where(x => x.Naziv == "Rose" && x.Stanje == StanjeBiljke.Ubrana).ToList());
+
+            Assert.DoesNotThrow(() => _sut.PreradiBiljke("Rose", "Parfem",120m,1, 150));
+            _proizvodnjaMock.Verify(p => p.PosadiNovuBiljku(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.AtLeastOnce);
+            _proizvodnjaMock.Verify(p => p.UberiBiljke("Rose", It.IsAny<int>()), Times.AtLeastOnce);
         }
+
 
         [Test]
         public void PreradiBiljke_DovoljnoUbranihBiljaka_KreiraParfeme_IzmeniStanjeBiljaka()
         {
            
             var biljke = Enumerable.Range(0, 6)
-                .Select(_ => new Biljka { Id = Guid.NewGuid(), Stanje = StanjeBiljke.Ubrana })
+                .Select(_ => new Biljka { Id = Guid.NewGuid(), Naziv = "Rose", Stanje = StanjeBiljke.Ubrana })
                 .ToList();
 
             _biljkeRepoMock.Setup(r => r.SveBiljke()).Returns(biljke);
@@ -79,7 +102,7 @@ namespace Tests.Services
                 .Callback<Parfem>(p => dodatiParfemi.Add(p));
 
             
-            var parfemi = _sut.PreradiBiljke("Rose", 2, 150);
+            var parfemi = _sut.PreradiBiljke("Rose","Parfem",120m, 2, 150);
 
             
             Assert.That(parfemi.Count, Is.EqualTo(2));

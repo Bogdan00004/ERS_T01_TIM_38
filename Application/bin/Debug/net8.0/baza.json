@@ -1,70 +1,14 @@
 {
   "Korisnici": [
     {
-      "Id": "faf099de-e0ca-4102-9c67-17532098d567",
+      "Id": "ce569c5a-a9b7-404b-b5b8-c434b0bb6e31",
       "KorisnickoIme": "admin",
       "Lozinka": "admin123",
       "ImePrezime": "Bogdan Pecanac",
       "Uloga": 0
     },
     {
-      "Id": "f379d050-1f3d-4d9f-85ae-566964f5e310",
-      "KorisnickoIme": "prodavac",
-      "Lozinka": "1234567",
-      "ImePrezime": "Petar Petrovic",
-      "Uloga": 1
-    },
-    {
-      "Id": "837274e6-c55a-4994-aee9-a0910c9eb96e",
-      "KorisnickoIme": "admin",
-      "Lozinka": "admin123",
-      "ImePrezime": "Bogdan Pecanac",
-      "Uloga": 0
-    },
-    {
-      "Id": "9f97cab2-451b-4b26-9899-be7dc09ace8d",
-      "KorisnickoIme": "prodavac",
-      "Lozinka": "1234567",
-      "ImePrezime": "Petar Petrovic",
-      "Uloga": 1
-    },
-    {
-      "Id": "9a23e8dc-8b4a-42be-9e71-4bf9cc202792",
-      "KorisnickoIme": "admin",
-      "Lozinka": "admin123",
-      "ImePrezime": "Bogdan Pecanac",
-      "Uloga": 0
-    },
-    {
-      "Id": "cd7c9dee-0c15-4e50-9b0e-2c3d63bc8245",
-      "KorisnickoIme": "prodavac",
-      "Lozinka": "1234567",
-      "ImePrezime": "Petar Petrovic",
-      "Uloga": 1
-    },
-    {
-      "Id": "556d1ab3-e2a1-49ad-8cb7-1bba8f9ef39f",
-      "KorisnickoIme": "admin",
-      "Lozinka": "admin123",
-      "ImePrezime": "Bogdan Pecanac",
-      "Uloga": 0
-    },
-    {
-      "Id": "62dfc9b4-b4b0-45a6-a1b1-aec1877c19ae",
-      "KorisnickoIme": "prodavac",
-      "Lozinka": "1234567",
-      "ImePrezime": "Petar Petrovic",
-      "Uloga": 1
-    },
-    {
-      "Id": "6eb9374a-166d-4c7d-851c-ba82a5c793a8",
-      "KorisnickoIme": "admin",
-      "Lozinka": "admin123",
-      "ImePrezime": "Bogdan Pecanac",
-      "Uloga": 0
-    },
-    {
-      "Id": "3bcddfcb-d435-44fc-bf4f-cf8912399945",
+      "Id": "0a79c4d5-880a-40d8-9cc6-3a83dd1bf40c",
       "KorisnickoIme": "prodavac",
       "Lozinka": "1234567",
       "ImePrezime": "Petar Petrovic",
@@ -73,36 +17,142 @@
   ],
   "Biljke": [
     {
-      "Id": "31b381be-4ce8-402b-a1d8-a28b40f65263",
+      "Id": "8c0cd69d-b5b1-44c2-8ae3-b695bd15f973",
       "Naziv": "Lavanda",
-      "JacinaAromaticnihUlja": -92.1,
+      "JacinaAromaticnihUlja": 3.2,
       "LatinskiNaziv": "Lavandula angustifolia",
       "ZemljaPorekla": "Francuska",
+      "Stanje": 1
+    },
+    {
+      "Id": "826f6b83-3cb8-499f-9d2c-47dfdcc22ff9",
+      "Naziv": "Ruža",
+      "JacinaAromaticnihUlja": 4.1,
+      "LatinskiNaziv": "Rosa damascena",
+      "ZemljaPorekla": "Bugarska",
+      "Stanje": 1
+    },
+    {
+      "Id": "64d270a6-24b2-465d-9f0b-8f368fa394d0",
+      "Naziv": "Jasmin",
+      "JacinaAromaticnihUlja": 2.85,
+      "LatinskiNaziv": "Jasminum grandiflorum",
+      "ZemljaPorekla": "Indija",
       "Stanje": 0
     },
     {
-      "Id": "a657c9b5-db7c-49bb-9e83-abdab0102ff6",
-      "Naziv": "Lavanda",
-      "JacinaAromaticnihUlja": 0.41,
-      "LatinskiNaziv": "Lavandula angustifolia",
-      "ZemljaPorekla": "Francuska",
-      "Stanje": 0
+      "Id": "9620a825-e129-4490-bca6-c93505f5fd19",
+      "Naziv": "Bergamot",
+      "JacinaAromaticnihUlja": 3.95,
+      "LatinskiNaziv": "Citrus bergamia",
+      "ZemljaPorekla": "Italija",
+      "Stanje": 1
+    }
+  ],
+  "Parfemi": [
+    {
+      "Id": "cbed4b10-b0af-4dfb-940a-237658430fe6",
+      "Naziv": "Lavande Royale",
+      "Tip": "Parfem",
+      "NetoKolicina": 150,
+      "SerijskiBroj": "PP-2025-cbed4b10-b0af-4dfb-940a-237658430fe6",
+      "Cena": 120.0,
+      "BiljkaId": "8c0cd69d-b5b1-44c2-8ae3-b695bd15f973",
+      "RokTrajanja": "2028-01-16T02:29:30.8721031+01:00"
     },
     {
-      "Id": "935c33d0-de63-4b39-a69c-8b973718bafb",
-      "Naziv": "Lavanda",
-      "JacinaAromaticnihUlja": 1.32,
-      "LatinskiNaziv": "Lavandula angustifolia",
-      "ZemljaPorekla": "Francuska",
-      "Stanje": 0
+      "Id": "e2e2e70c-4f05-46fd-bcfc-fa22bf07a055",
+      "Naziv": "Lavande Royale",
+      "Tip": "Parfem",
+      "NetoKolicina": 150,
+      "SerijskiBroj": "PP-2025-e2e2e70c-4f05-46fd-bcfc-fa22bf07a055",
+      "Cena": 120.0,
+      "BiljkaId": "8c0cd69d-b5b1-44c2-8ae3-b695bd15f973",
+      "RokTrajanja": "2028-01-16T02:29:30.8761558+01:00"
     },
     {
-      "Id": "10190ab6-59d3-41ab-84cf-3f22333e208a",
-      "Naziv": "Lavanda",
-      "JacinaAromaticnihUlja": 1.22,
-      "LatinskiNaziv": "Lavandula angustifolia",
-      "ZemljaPorekla": "Francuska",
-      "Stanje": 0
+      "Id": "bfd8da71-1c4f-4dea-9104-e12628d4efe6",
+      "Naziv": "Rose Élégante",
+      "Tip": "Kolonjska voda",
+      "NetoKolicina": 250,
+      "SerijskiBroj": "PP-2025-bfd8da71-1c4f-4dea-9104-e12628d4efe6",
+      "Cena": 95.0,
+      "BiljkaId": "826f6b83-3cb8-499f-9d2c-47dfdcc22ff9",
+      "RokTrajanja": "2028-01-16T02:29:30.8761598+01:00"
+    }
+  ],
+  "Ambalaze": [
+    {
+      "Id": "0203e76a-8097-4b07-81ef-6a8116b03ed8",
+      "Naziv": "Ambalaza-001",
+      "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
+      "SkladisteId": "675f1ee6-3567-446c-b002-bb8b32c7f70c",
+      "ParfemiId": [],
+      "Status": 1
+    },
+    {
+      "Id": "78fb5280-a2c8-4664-94ae-b2143d0f8233",
+      "Naziv": "Ambalaza-002",
+      "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
+      "SkladisteId": "5dda07f7-ad76-490b-8b3a-ebe05e82f55a",
+      "ParfemiId": [
+        "bfd8da71-1c4f-4dea-9104-e12628d4efe6"
+      ],
+      "Status": 0
+    }
+  ],
+  "Skladista": [
+    {
+      "Id": "675f1ee6-3567-446c-b002-bb8b32c7f70c",
+      "Naziv": "Skladiste - Centar",
+      "Lokacija": "Paris (1er)",
+      "MaxKapacitet": 10,
+      "TrenutniKapacitet": 0,
+      "AmbalazeId": []
+    },
+    {
+      "Id": "5dda07f7-ad76-490b-8b3a-ebe05e82f55a",
+      "Naziv": "Skladiste - Magacin",
+      "Lokacija": "Paris (19e)",
+      "MaxKapacitet": 6,
+      "TrenutniKapacitet": 1,
+      "AmbalazeId": [
+        "78fb5280-a2c8-4664-94ae-b2143d0f8233"
+      ]
+    }
+  ],
+  "FiskalniRacuni": [
+    {
+      "Id": "240cee5d-4fbf-425b-b157-9901af9ad701",
+      "DatumVreme": "2026-01-16T02:30:11.3321814+01:00",
+      "TipProdaje": 0,
+      "NacinPlacanja": 0,
+      "Stavke": [
+        {
+          "ParfemId": "cbed4b10-b0af-4dfb-940a-237658430fe6",
+          "NazivParfema": "Lavande Royale (Parfem, 150ml)",
+          "Kolicina": 1,
+          "CenaPoKomadu": 120.0,
+          "Ukupno": 120.0
+        }
+      ],
+      "IznosZaNaplatu": 120.0
+    },
+    {
+      "Id": "5120bc4b-23a3-4c8b-b629-e3cdb6d7a96d",
+      "DatumVreme": "2026-01-16T02:30:43.1145694+01:00",
+      "TipProdaje": 0,
+      "NacinPlacanja": 0,
+      "Stavke": [
+        {
+          "ParfemId": "e2e2e70c-4f05-46fd-bcfc-fa22bf07a055",
+          "NazivParfema": "Lavande Royale (Parfem, 150ml)",
+          "Kolicina": 1,
+          "CenaPoKomadu": 120.0,
+          "Ukupno": 120.0
+        }
+      ],
+      "IznosZaNaplatu": 120.0
     }
   ]
 }

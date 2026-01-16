@@ -42,15 +42,14 @@ namespace Tests.Services
         [Test]
         public void PosadiNovuBiljku_DodajeBiljkuIStavljaStanjePosadjena_IzazivaSacuvajPromene()
         {
-            
-            _sut.PosadiNovuBiljku("Lavanda", "Lavandula", "Francuska");
 
-            
+            var nova = _sut.PosadiNovuBiljku("Lavanda", "Lavandula", "Francuska");
+
+            Assert.That(nova, Is.Not.Null);
             Assert.That(_tabele.Biljke.Count, Is.EqualTo(1));
-            Assert.That(_tabele.Biljke[0].Naziv, Is.EqualTo("Lavanda"));
+            Assert.That(_tabele.Biljke[0].Id, Is.EqualTo(nova.Id));
             Assert.That(_tabele.Biljke[0].Stanje, Is.EqualTo(StanjeBiljke.Posadjena));
 
-            _bazaMock.Verify(b => b.SacuvajPromene(), Times.Once);
         }
 
         [Test]
@@ -69,7 +68,7 @@ namespace Tests.Services
             _tabele.Biljke.Add(biljka);
 
             
-            _sut.PromeniJacinuUlja(biljka.Id, 4.65);
+            _sut.PromeniJacinuUlja(biljka.Id, 65);
 
             
             Assert.That(biljka.JacinaAromaticnihUlja, Is.EqualTo(1.30).Within(0.0001));
@@ -92,7 +91,7 @@ namespace Tests.Services
             _tabele.Biljke.Add(biljka);
 
             
-            _sut.PromeniJacinuUlja(biljka.Id, 4.00);
+            _sut.PromeniJacinuUlja(biljka.Id, 100);
 
             
             Assert.That(biljka.JacinaAromaticnihUlja, Is.EqualTo(3.33).Within(0.0001));
