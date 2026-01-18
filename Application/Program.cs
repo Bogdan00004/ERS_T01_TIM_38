@@ -1,4 +1,4 @@
-﻿using Database.Implementacije;
+﻿using Database.BazaPodataka;
 using Database.Repozitorijumi;
 using Domain.BazaPodataka;
 using Domain.Enumeracije;
@@ -43,40 +43,32 @@ namespace Loger_Bloger
             var distribucioniServis = new DistribucioniCentarServis(skladistaRepozitorijum, ambalazaRepozitorijum, logger);
             ISkladistenjeServisUloge uloga = new SkladistenjeServisUloge(magacinskiServis, distribucioniServis);
 
-            
+
 
             // Login
-            var am = new Presentation.Authentifikacija.AutentifikacioniMeni(autentifikacijaServis);
-            Korisnik prijavljen = new Korisnik();
-
-            while (am.TryLogin(out prijavljen) == false)
+            Func<TipKorisnika, IProdajaServis> prodajaServisFactory = (tipKorisnika) =>
             {
-                Console.WriteLine("Pogrešno korisničko ime ili lozinka. Pokušajte ponovo.");
-            }
+                ISkladistenjeServis skladistenjeServis = uloga.KreirajServis(tipKorisnika);
 
-            // Kreiraj skladistenje servis po ulozi
-            ISkladistenjeServis skladistenjeServis = uloga.KreirajServis(prijavljen.Uloga);
+                return new Loger_Bloger.Servisi.Prodaja.ProdajaServis(
+                    parfemRepozitorijum,
+                    ambalazaRepozitorijum,
+                    fiskalniRacunRepozitorijum,
+                    skladistenjeServis,
+                    pakovanjeServis,
+                    skladistaRepozitorijum,
+                    logger);
+            };
 
-            
-            IProdajaServis prodajaServis = new Loger_Bloger.Servisi.Prodaja.ProdajaServis(
-                parfemRepozitorijum,
-                ambalazaRepozitorijum,
-                fiskalniRacunRepozitorijum,
-                skladistenjeServis,
-                pakovanjeServis,
-                skladistaRepozitorijum,
-                logger);
+            // Koristi autentifikacioni meni iz Presentation/Autentifikacija
+            var autentifikacioniMeni = new Presentation.Authentifikacija.AutentifikacioniMeni(
+                autentifikacijaServis,
+                uloga,
+                prodajaServisFactory
+            );
 
-            
+            autentifikacioniMeni.Pokreni();
 
-
-            Console.Clear();
-            Console.WriteLine($"Uspešno ste prijavljeni kao: {prijavljen.ImePrezime} ({prijavljen.Uloga})");
-
-            
-            OpcijeMeni meni = new OpcijeMeni(prijavljen, prodajaServis);
-            meni.PrikaziMeni();
-            
         }
     }
 }

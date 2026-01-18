@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Domain.BazaPodataka;
 using Newtonsoft.Json;
 
-namespace Database.Implementacije
+namespace Database.BazaPodataka
 {
     public class JsonBazaPodataka:IBazaPodataka
     {
@@ -20,12 +20,28 @@ namespace Database.Implementacije
             {
                 string json = File.ReadAllText(putanja);
                 Tabele = JsonConvert.DeserializeObject<TabeleBazaPodataka>(json) ?? new TabeleBazaPodataka();
+                if(DaLiJeBazaPrazna())
+                {
+                    Tabele.Seed();
+                    SacuvajPromene();
+                }
             }
             else
             {
                 Tabele = new TabeleBazaPodataka();
+                Tabele.Seed();
                 SacuvajPromene(); 
             }
+        }
+        private bool DaLiJeBazaPrazna()
+        {
+            return Tabele.Korisnici.Count == 0 &&
+                   Tabele.Biljke.Count == 0 &&
+                   Tabele.Parfemi.Count == 0 &&
+                   Tabele.FiskalniRacuni.Count == 0 &&
+                   Tabele.Skladista.Count == 0 &&
+                   Tabele.Ambalaze.Count == 0;
+
         }
         public bool SacuvajPromene()
         {

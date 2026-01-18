@@ -45,7 +45,7 @@ namespace Database.Repozitorijumi
             _baza.SacuvajPromene();
         }
 
-        public Biljka NadjiPoId(Guid id)
+        public Biljka? NadjiPoId(Guid id)
         {
             return _baza.Tabele.Biljke.FirstOrDefault(b => b.Id == id);
         }

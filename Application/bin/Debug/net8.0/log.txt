@@ -1,10 +1,6 @@
-INFO | 2026-01-16 02:30:04 | Prijava uspešna: admin
-INFO | 2026-01-16 02:30:10 | [Prodaja] Početak prodaje: parfemId=cbed4b10-b0af-4dfb-940a-237658430fe6, kolicina=1, tip=Maloprodaja, nacin=Gotovina
-INFO | 2026-01-16 02:30:10 | [Distribucioni] Slanje ambalaža prodaji: traženo=1 (limit=3, delay=0.5s).
-INFO | 2026-01-16 02:30:11 | [Distribucioni] Poslato ambalaža: 1.
-INFO | 2026-01-16 02:30:11 | [Prodaja] Ambalaza vracena u skladiste (ima ostatak parfema). ambalazaId=0203e76a-8097-4b07-81ef-6a8116b03ed8, preostaloParfema=1
-INFO | 2026-01-16 02:30:11 | [Prodaja] Prodaja uspešna: parfem=Lavande Royale, kolicina=1, iznos=120
-INFO | 2026-01-16 02:30:42 | [Prodaja] Početak prodaje: parfemId=e2e2e70c-4f05-46fd-bcfc-fa22bf07a055, kolicina=1, tip=Maloprodaja, nacin=Gotovina
-INFO | 2026-01-16 02:30:42 | [Distribucioni] Slanje ambalaža prodaji: traženo=1 (limit=3, delay=0.5s).
-INFO | 2026-01-16 02:30:43 | [Distribucioni] Poslato ambalaža: 1.
-INFO | 2026-01-16 02:30:43 | [Prodaja] Prodaja uspešna: parfem=Lavande Royale, kolicina=1, iznos=120
+INFO | 2026-01-18 03:14:40 | Prijava uspešna: admin
+INFO | 2026-01-18 03:14:47 | [Prodaja] Početak prodaje: parfemId=e18c272a-7e46-4058-a578-0b16a43290e7, kolicina=1, tip=Maloprodaja, nacin=Gotovina
+INFO | 2026-01-18 03:14:47 | [Distribucioni] Slanje ambalaža prodaji: traženo=1 (limit=3, delay=0.5s).
+INFO | 2026-01-18 03:14:48 | [Distribucioni] Poslato ambalaža: 1.
+INFO | 2026-01-18 03:14:48 | [Prodaja] Ambalaza vracena u skladiste (ima ostatak parfema). ambalazaId=619d0570-1cdd-4591-bab6-89b78b1e037f, preostaloParfema=1
+INFO | 2026-01-18 03:14:48 | [Prodaja] Prodaja uspešna: parfem=Lavande Royale, kolicina=1, iznos=120

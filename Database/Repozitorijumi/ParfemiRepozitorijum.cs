@@ -26,7 +26,7 @@ namespace Database.Repozitorijumi
         {
             return _baza.Tabele.Parfemi.ToList();
         }
-        public Parfem NadjiPoId(Guid id)
+        public Parfem? NadjiPoId(Guid id)
         {
             return _baza.Tabele.Parfemi.FirstOrDefault(p => p.Id == id);
         }

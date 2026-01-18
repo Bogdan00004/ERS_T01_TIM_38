@@ -11,6 +11,6 @@ namespace Domain.Repozitorijumi
     {
         void Dodaj(Parfem parfem);
         List<Parfem> SviParfemi();
-        Parfem NadjiPoId(Guid id);
+        Parfem? NadjiPoId(Guid id);
     }
 }

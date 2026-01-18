@@ -13,7 +13,8 @@ namespace Domain.BazaPodataka
         public List<Skladiste> Skladista { get; set; }=new List<Skladiste>();
         public List<FiskalniRacun> FiskalniRacuni { get; set; } = new List<FiskalniRacun>();
 
-        public TabeleBazaPodataka() {
+        public TabeleBazaPodataka() { }
+        public void Seed() {
             Korisnici = new List<Korisnik>
             {
                 new Korisnik(

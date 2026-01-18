@@ -11,5 +11,6 @@ namespace Domain.Servisi
         List<KatalogStavka> VratiKatalogDostupnihParfema();
         Task<FiskalniRacun> Prodaj(Guid parfemId, int kolicinaBocica, TipProdaje tipProdaje, NacinPlacanja nacinPlacanja);
         List<FiskalniRacun> VratiSveRacune();
+     
     }
 }

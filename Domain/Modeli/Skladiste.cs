@@ -9,8 +9,8 @@ namespace Domain.Modeli
     public class Skladiste
     {
         public Guid Id { get; set; }
-        public string Naziv { get; set; }
-        public string Lokacija { get; set; }
+        public string Naziv { get; set; } = "";
+        public string Lokacija { get; set; } = "";
         public int MaxKapacitet { get; set; }
         public int TrenutniKapacitet { get; set; }
         public List<Guid> AmbalazeId { get; set; }

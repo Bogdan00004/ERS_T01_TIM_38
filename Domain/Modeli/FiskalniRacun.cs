@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using Domain.Enumeracije;
 namespace Domain.Modeli;
 
-
-
 public class FiskalnaStavka
 {
     public Guid ParfemId { get; set; }

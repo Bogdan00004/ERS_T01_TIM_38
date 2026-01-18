@@ -59,6 +59,8 @@ namespace Loger_Bloger.Servisi.Skladistenje
             }
 
             _ambalazaRepozitorijum.SacuvajPromene();
+            _skladistaRepozitorijum.SacuvajPromene();
+
             _logger.LogInfo($"[Magacinski] Poslato ambalaža: {poslateAmbalaze.Count}.");
             return poslateAmbalaze;
         }

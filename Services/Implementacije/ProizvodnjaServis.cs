@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Domain.BazaPodataka;
 using Domain.Modeli;
 using Domain.Servisi;
+using Domain.PomocneMetode.Biljke;
 
 
 namespace Services.Implementacije
@@ -14,7 +15,7 @@ namespace Services.Implementacije
     {
         private readonly IBazaPodataka _baza;
         private readonly ILoggerServis _logger;
-        private static readonly Random _rng = new Random();
+        
 
         public ProizvodnjaServis(IBazaPodataka baza, ILoggerServis logger)
         {
@@ -23,7 +24,8 @@ namespace Services.Implementacije
         }
         public Biljka PosadiNovuBiljku(string naziv, string latinskiNaziv, string zemljaPorekla)
         {
-            double jacina = 1.0 + _rng.NextDouble() * 4.0;
+            double jacina = BiljkaGenerator.GenerisiJacinuUlja();
+
             var novaBiljka = new Biljka
             {
                 Id = Guid.NewGuid(),
@@ -31,7 +33,7 @@ namespace Services.Implementacije
                 LatinskiNaziv = latinskiNaziv,
                 ZemljaPorekla = zemljaPorekla,
                 Stanje = StanjeBiljke.Posadjena,
-                JacinaAromaticnihUlja = Math.Round(jacina, 2)
+                JacinaAromaticnihUlja = jacina
             };
 
             _baza.Tabele.Biljke.Add(novaBiljka);

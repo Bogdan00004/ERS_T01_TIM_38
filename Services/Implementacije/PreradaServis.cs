@@ -6,6 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Modeli;
 using Domain.Repozitorijumi;
+using Domain.Konstante;
+using Domain.PomocneMetode.Biljke;
+using Domain.PomocneMetode.Parfemi;
+
 
 namespace Services.Implementacije
 {
@@ -15,7 +19,6 @@ namespace Services.Implementacije
         private readonly IParfemRepozitorijum _parfemiRepozitorijum;
         private readonly IProizvodnjaServis _proizvodnjaServis;
         private readonly ILoggerServis _logger;
-        private static readonly Random _rng = new Random();
 
         public PreradaServis(IBiljkeRepozitorijum biljkeRepozitorijum, IParfemRepozitorijum parfemiRepozitorijum, IProizvodnjaServis proizvodnjaServis, ILoggerServis logger)
         {
@@ -27,6 +30,9 @@ namespace Services.Implementacije
 
         public List<Parfem> PreradiBiljke(string naziv, string tip, decimal cena, int brojBocica, int zapreminaPoBocici)
         {
+            if (string.IsNullOrWhiteSpace(naziv))
+                throw new ArgumentException("Naziv parfema ne sme biti prazan.");
+
             if (string.IsNullOrWhiteSpace(tip))
                 throw new ArgumentException("Tip parfema ne sme biti prazan.");
 
@@ -35,14 +41,17 @@ namespace Services.Implementacije
             if (brojBocica <= 0)
                 throw new ArgumentException("Broj bočica mora biti veći od 0.");
 
-            if (zapreminaPoBocici != 150 && zapreminaPoBocici != 250)
+            try
+            {
+                ParfemValidacija.ValidirajZapreminu(zapreminaPoBocici);
+            }
+            catch (ArgumentException)
             {
                 _logger.LogWarning($"Prerada odbijena: nepodržana zapremina {zapreminaPoBocici}");
-                throw new ArgumentException("Podržane su samo zapremine od 150 ml ili 250 ml.");
+                throw;
             }
 
-            int ukupnaKolicina = brojBocica * zapreminaPoBocici;
-            int brojPotrebnihBiljaka = (int)Math.Ceiling((double)ukupnaKolicina / 50.0); // zaokruzujemo broj potrebnih biljaka za izradu parfemo na sledeci veci broj(za svaki slucaj)
+            int brojPotrebnihBiljaka = BiljkaRacunanje.IzracunajPotrebneBiljke(brojBocica, zapreminaPoBocici);
 
             var ubrane = _biljkeRepozitorijum.SveBiljke()
                 .Where(b => b.Naziv == naziv && b.Stanje == StanjeBiljke.Ubrana)
@@ -63,23 +72,20 @@ namespace Services.Implementacije
                     _proizvodnjaServis.PosadiNovuBiljku(naziv, lat, zemlja);
 
                     int trebaJos = brojPotrebnihBiljaka - ubrane.Count;
-                    var noveUbrane = _proizvodnjaServis.UberiBiljke(naziv, trebaJos);
-
-                    
+                    _proizvodnjaServis.UberiBiljke(naziv, trebaJos);
                     ubrane = _biljkeRepozitorijum.SveBiljke().Where(b => b.Naziv == naziv && b.Stanje == StanjeBiljke.Ubrana).Take(brojPotrebnihBiljaka).ToList();
                 }
             }
 
             foreach (var biljka in ubrane)
             {
-                double dodatak = _rng.NextDouble(); 
+                double dodatak = BiljkaGenerator.GenerisiDodatakZaJacinu();
                 biljka.JacinaAromaticnihUlja = Math.Round(biljka.JacinaAromaticnihUlja + dodatak, 2);
 
-                if (biljka.JacinaAromaticnihUlja > 4.00)
+                if (biljka.JacinaAromaticnihUlja > PreradaKonstante.GRANICA_BALANS_ULJA)
                 {
                    
-                    double odstupanje = biljka.JacinaAromaticnihUlja - 4.00;  // npr 0.65
-                    double procenat = Math.Round(odstupanje * 100.0, 2);       // 65%
+                    double procenat = Math.Round((PreradaKonstante.GRANICA_BALANS_ULJA / biljka.JacinaAromaticnihUlja) * 100.0, 2);  
 
                     _logger.LogWarning($"[Prerada] Biljka prešla 4.00: id={biljka.Id}, jacina={biljka.JacinaAromaticnihUlja}. Balans procenat={procenat}%");
 

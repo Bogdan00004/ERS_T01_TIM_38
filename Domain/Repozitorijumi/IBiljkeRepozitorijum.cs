@@ -12,7 +12,7 @@ namespace Domain.Repozitorijumi
         List<Biljka> SveBiljke();
         void Dodaj(Biljka biljka);
         void Izmeni(Biljka biljka);
-        Biljka NadjiPoId(Guid id);
+        Biljka? NadjiPoId(Guid id);
         void Obrisi(Guid id);
     }
 }

@@ -1,14 +1,14 @@
 {
   "Korisnici": [
     {
-      "Id": "ce569c5a-a9b7-404b-b5b8-c434b0bb6e31",
+      "Id": "58d50b6a-8784-47ac-8da5-5f74e19b0749",
       "KorisnickoIme": "admin",
       "Lozinka": "admin123",
       "ImePrezime": "Bogdan Pecanac",
       "Uloga": 0
     },
     {
-      "Id": "0a79c4d5-880a-40d8-9cc6-3a83dd1bf40c",
+      "Id": "5efc28b0-18a3-437a-bc20-b75fa2edfb48",
       "KorisnickoIme": "prodavac",
       "Lozinka": "1234567",
       "ImePrezime": "Petar Petrovic",
@@ -17,7 +17,7 @@
   ],
   "Biljke": [
     {
-      "Id": "8c0cd69d-b5b1-44c2-8ae3-b695bd15f973",
+      "Id": "f809a695-d79b-43d2-8ee3-ea278d9cd7ad",
       "Naziv": "Lavanda",
       "JacinaAromaticnihUlja": 3.2,
       "LatinskiNaziv": "Lavandula angustifolia",
@@ -25,7 +25,7 @@
       "Stanje": 1
     },
     {
-      "Id": "826f6b83-3cb8-499f-9d2c-47dfdcc22ff9",
+      "Id": "cdb0e914-aef8-4a83-8d01-f646f6bbdc3b",
       "Naziv": "Ruža",
       "JacinaAromaticnihUlja": 4.1,
       "LatinskiNaziv": "Rosa damascena",
@@ -33,7 +33,7 @@
       "Stanje": 1
     },
     {
-      "Id": "64d270a6-24b2-465d-9f0b-8f368fa394d0",
+      "Id": "086b020c-20d1-41ad-a2c1-42d93633d6e0",
       "Naziv": "Jasmin",
       "JacinaAromaticnihUlja": 2.85,
       "LatinskiNaziv": "Jasminum grandiflorum",
@@ -41,7 +41,7 @@
       "Stanje": 0
     },
     {
-      "Id": "9620a825-e129-4490-bca6-c93505f5fd19",
+      "Id": "814b881d-4238-46d3-8b94-4c1f4a0bcf8f",
       "Naziv": "Bergamot",
       "JacinaAromaticnihUlja": 3.95,
       "LatinskiNaziv": "Citrus bergamia",
@@ -51,101 +51,89 @@
   ],
   "Parfemi": [
     {
-      "Id": "cbed4b10-b0af-4dfb-940a-237658430fe6",
+      "Id": "e18c272a-7e46-4058-a578-0b16a43290e7",
       "Naziv": "Lavande Royale",
       "Tip": "Parfem",
       "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-cbed4b10-b0af-4dfb-940a-237658430fe6",
+      "SerijskiBroj": "PP-2025-e18c272a-7e46-4058-a578-0b16a43290e7",
       "Cena": 120.0,
-      "BiljkaId": "8c0cd69d-b5b1-44c2-8ae3-b695bd15f973",
-      "RokTrajanja": "2028-01-16T02:29:30.8721031+01:00"
+      "BiljkaId": "f809a695-d79b-43d2-8ee3-ea278d9cd7ad",
+      "RokTrajanja": "2028-01-18T03:14:35.5458519+01:00"
     },
     {
-      "Id": "e2e2e70c-4f05-46fd-bcfc-fa22bf07a055",
+      "Id": "7af3efad-0535-4070-a852-82b80d7158c5",
       "Naziv": "Lavande Royale",
       "Tip": "Parfem",
       "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-e2e2e70c-4f05-46fd-bcfc-fa22bf07a055",
+      "SerijskiBroj": "PP-2025-7af3efad-0535-4070-a852-82b80d7158c5",
       "Cena": 120.0,
-      "BiljkaId": "8c0cd69d-b5b1-44c2-8ae3-b695bd15f973",
-      "RokTrajanja": "2028-01-16T02:29:30.8761558+01:00"
+      "BiljkaId": "f809a695-d79b-43d2-8ee3-ea278d9cd7ad",
+      "RokTrajanja": "2028-01-18T03:14:35.550154+01:00"
     },
     {
-      "Id": "bfd8da71-1c4f-4dea-9104-e12628d4efe6",
+      "Id": "27309b71-7fc7-4f2d-bcff-ae0705c2b953",
       "Naziv": "Rose Élégante",
       "Tip": "Kolonjska voda",
       "NetoKolicina": 250,
-      "SerijskiBroj": "PP-2025-bfd8da71-1c4f-4dea-9104-e12628d4efe6",
+      "SerijskiBroj": "PP-2025-27309b71-7fc7-4f2d-bcff-ae0705c2b953",
       "Cena": 95.0,
-      "BiljkaId": "826f6b83-3cb8-499f-9d2c-47dfdcc22ff9",
-      "RokTrajanja": "2028-01-16T02:29:30.8761598+01:00"
+      "BiljkaId": "cdb0e914-aef8-4a83-8d01-f646f6bbdc3b",
+      "RokTrajanja": "2028-01-18T03:14:35.5501574+01:00"
     }
   ],
   "Ambalaze": [
     {
-      "Id": "0203e76a-8097-4b07-81ef-6a8116b03ed8",
+      "Id": "619d0570-1cdd-4591-bab6-89b78b1e037f",
       "Naziv": "Ambalaza-001",
       "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
-      "SkladisteId": "675f1ee6-3567-446c-b002-bb8b32c7f70c",
-      "ParfemiId": [],
-      "Status": 1
+      "SkladisteId": "e08ffa24-dad8-494d-ab3f-5c249885daa2",
+      "ParfemiId": [
+        "7af3efad-0535-4070-a852-82b80d7158c5"
+      ],
+      "Status": 0
     },
     {
-      "Id": "78fb5280-a2c8-4664-94ae-b2143d0f8233",
+      "Id": "3549b57d-ef6e-4ac3-af26-476bc9c18bc7",
       "Naziv": "Ambalaza-002",
       "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
-      "SkladisteId": "5dda07f7-ad76-490b-8b3a-ebe05e82f55a",
+      "SkladisteId": "627839e9-3afd-4ee8-983a-45a25b0e4333",
       "ParfemiId": [
-        "bfd8da71-1c4f-4dea-9104-e12628d4efe6"
+        "27309b71-7fc7-4f2d-bcff-ae0705c2b953"
       ],
       "Status": 0
     }
   ],
   "Skladista": [
     {
-      "Id": "675f1ee6-3567-446c-b002-bb8b32c7f70c",
+      "Id": "e08ffa24-dad8-494d-ab3f-5c249885daa2",
       "Naziv": "Skladiste - Centar",
       "Lokacija": "Paris (1er)",
       "MaxKapacitet": 10,
-      "TrenutniKapacitet": 0,
-      "AmbalazeId": []
+      "TrenutniKapacitet": 1,
+      "AmbalazeId": [
+        "619d0570-1cdd-4591-bab6-89b78b1e037f"
+      ]
     },
     {
-      "Id": "5dda07f7-ad76-490b-8b3a-ebe05e82f55a",
+      "Id": "627839e9-3afd-4ee8-983a-45a25b0e4333",
       "Naziv": "Skladiste - Magacin",
       "Lokacija": "Paris (19e)",
       "MaxKapacitet": 6,
       "TrenutniKapacitet": 1,
       "AmbalazeId": [
-        "78fb5280-a2c8-4664-94ae-b2143d0f8233"
+        "3549b57d-ef6e-4ac3-af26-476bc9c18bc7"
       ]
     }
   ],
   "FiskalniRacuni": [
     {
-      "Id": "240cee5d-4fbf-425b-b157-9901af9ad701",
-      "DatumVreme": "2026-01-16T02:30:11.3321814+01:00",
+      "Id": "f57a48e1-2b98-40e9-b8ac-ba59f78a47a2",
+      "DatumVreme": "2026-01-18T03:14:48.1839085+01:00",
       "TipProdaje": 0,
       "NacinPlacanja": 0,
       "Stavke": [
         {
-          "ParfemId": "cbed4b10-b0af-4dfb-940a-237658430fe6",
-          "NazivParfema": "Lavande Royale (Parfem, 150ml)",
-          "Kolicina": 1,
-          "CenaPoKomadu": 120.0,
-          "Ukupno": 120.0
-        }
-      ],
-      "IznosZaNaplatu": 120.0
-    },
-    {
-      "Id": "5120bc4b-23a3-4c8b-b629-e3cdb6d7a96d",
-      "DatumVreme": "2026-01-16T02:30:43.1145694+01:00",
-      "TipProdaje": 0,
-      "NacinPlacanja": 0,
-      "Stavke": [
-        {
-          "ParfemId": "e2e2e70c-4f05-46fd-bcfc-fa22bf07a055",
+          "ParfemId": "e18c272a-7e46-4058-a578-0b16a43290e7",
           "NazivParfema": "Lavande Royale (Parfem, 150ml)",
           "Kolicina": 1,
           "CenaPoKomadu": 120.0,

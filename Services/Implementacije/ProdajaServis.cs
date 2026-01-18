@@ -2,10 +2,7 @@
 using Domain.Modeli;
 using Domain.Repozitorijumi;
 using Domain.Servisi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Domain.PomocneMetode.Prodaja;
 
 namespace Loger_Bloger.Servisi.Prodaja
 {
@@ -20,14 +17,7 @@ namespace Loger_Bloger.Servisi.Prodaja
         private readonly ILoggerServis _logger;
 
 
-        public ProdajaServis(
-            IParfemRepozitorijum parfemiRepo,
-            IAmbalazaRepozitorijum ambalazeRepo,
-            IFiskalniRacunRepozitorijum racuniRepo,
-            ISkladistenjeServis skladistenjeServis,
-            IPakovanjeServis pakovanjeServis,
-            ISkladistaRepozitorijum skladistaRepo,
-            ILoggerServis logger)
+        public ProdajaServis(IParfemRepozitorijum parfemiRepo, IAmbalazaRepozitorijum ambalazeRepo, IFiskalniRacunRepozitorijum racuniRepo, ISkladistenjeServis skladistenjeServis, IPakovanjeServis pakovanjeServis, ISkladistaRepozitorijum skladistaRepo, ILoggerServis logger)
         {
             _parfemiRepo = parfemiRepo;
             _ambalazeRepo = ambalazeRepo;
@@ -45,10 +35,14 @@ namespace Loger_Bloger.Servisi.Prodaja
 
         }
 
-        // ERS-31: katalog dostupnih parfema
+        //katalog dostupnih parfema
         public List<KatalogStavka> VratiKatalogDostupnihParfema()
         {
-            var spakovaneAmbalaze = _ambalazeRepo.VratiSpakovaneAmbalaze();
+            // Uzimamo sva skladišta i pravimo skup ambalaža koje su fizički u skladištu
+            var skladista = _skladistaRepo.VratiSva();
+
+            // Katalog računa samo spakovane ambalaže koje su u skladištu
+            var spakovaneAmbalaze = _ambalazeRepo.VratiSpakovaneAmbalaze().Where(a => skladista.Any(s => s.AmbalazeId.Contains(a.Id))).ToList();
 
             // mapa ID->parfem da bismo mogli iz ambalaze (koja cuva samo ID) da izvucemo detalje
             var sviParfemi = _parfemiRepo.SviParfemi();
@@ -89,11 +83,7 @@ namespace Loger_Bloger.Servisi.Prodaja
                 });
             }
 
-            return katalog
-                .OrderBy(k => k.Naziv)
-                .ThenBy(k => k.Tip)
-                .ThenBy(k => k.NetoKolicina)
-                .ToList();
+            return katalog.OrderBy(k => k.Naziv).ThenBy(k => k.Tip).ThenBy(k => k.NetoKolicina).ToList();
         }
 
 
@@ -116,14 +106,8 @@ namespace Loger_Bloger.Servisi.Prodaja
             }
 
             var katalog = VratiKatalogDostupnihParfema();
-            var stavkaKataloga = katalog.FirstOrDefault(k =>
-                k.Naziv == izabrani.Naziv &&
-                k.Tip == izabrani.Tip &&
-                k.NetoKolicina == izabrani.NetoKolicina &&
-                k.Cena == izabrani.Cena
-            );
-
-            int raspolozivo = (stavkaKataloga == null) ? 0 : stavkaKataloga.Raspolozivo;
+            var stavkaKataloga = KatalogHelper.NadjiStavku(katalog, izabrani);
+            int raspolozivo = stavkaKataloga?.Raspolozivo ?? 0;
 
             if (raspolozivo < kolicinaBocica)
             {
@@ -149,16 +133,11 @@ namespace Loger_Bloger.Servisi.Prodaja
                     brojBocica: nedostaje,
                     zapreminaPoBocici: izabrani.NetoKolicina,
                     skladisteId: ciljnoSkladiste.Id
-                ); 
+                );
 
                 // osvezi katalog posle pakovanja
                 katalog = VratiKatalogDostupnihParfema();
-                stavkaKataloga = katalog.FirstOrDefault(k =>
-                    k.Naziv == izabrani.Naziv &&
-                    k.Tip == izabrani.Tip &&
-                    k.NetoKolicina == izabrani.NetoKolicina &&
-                    k.Cena == izabrani.Cena
-                );
+                stavkaKataloga = KatalogHelper.NadjiStavku(katalog, izabrani);
 
                 if (stavkaKataloga == null || stavkaKataloga.Raspolozivo < kolicinaBocica)
                     throw new Exception("Nije moguće obezbediti dovoljno parfema ni nakon pakovanja.");
@@ -183,7 +162,9 @@ namespace Loger_Bloger.Servisi.Prodaja
                     throw new Exception("Neuspeh pri preuzimanju ambalaža (previše pokušaja).");
                 }
 
-                var nove = await _skladistenjeServis.PosaljiAmbalazeProdaji(1);
+                int josTreba = kolicinaBocica - skupljenoBocica;
+                int trazeneAmbalaze = Math.Min(josTreba, 3);
+                var nove = await _skladistenjeServis.PosaljiAmbalazeProdaji(trazeneAmbalaze);
 
                 if (nove == null || nove.Count == 0)
                 {
@@ -214,7 +195,6 @@ namespace Loger_Bloger.Servisi.Prodaja
 
                 preostaloZaSkidanje -= odgovarajuci.Count;
             }
-
             _ambalazeRepo.SacuvajPromene();
 
             foreach (var amb in preuzeteAmbalaze)
@@ -242,8 +222,11 @@ namespace Loger_Bloger.Servisi.Prodaja
 
                     // vracamo status na Spakovana da bi je katalog opet video
                     amb.Status = StatusAmbalaze.Spakovana;
-
                     _logger.LogInfo($"[Prodaja] Ambalaza vracena u skladiste (ima ostatak parfema). ambalazaId={amb.Id}, preostaloParfema={amb.ParfemiId.Count}");
+                }
+                else
+                {
+                    amb.Status = StatusAmbalaze.Poslata;
                 }
             }
 

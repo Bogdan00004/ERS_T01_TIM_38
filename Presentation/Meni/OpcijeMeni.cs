@@ -1,6 +1,6 @@
-﻿using Domain.Modeli;
+﻿using Domain.Enumeracije;
+using Domain.Modeli;
 using Domain.Servisi;
-using Domain.Enumeracije;
 
 namespace Presentation.Meni
 {
@@ -12,7 +12,7 @@ namespace Presentation.Meni
         public OpcijeMeni(Korisnik ulogovanKorisnik, IProdajaServis prodajaServis)
         {
             _ulogovanKorisnik = ulogovanKorisnik;
-            _prodajaServis = prodajaServis;
+            _prodajaServis = prodajaServis;           
         }
 
         public void PrikaziMeni()
@@ -23,11 +23,10 @@ namespace Presentation.Meni
             while (!kraj)
             {
                 Console.WriteLine("\n1) Prodaja");
-
                 
                 if (_ulogovanKorisnik.Uloga == TipKorisnika.MenadzerProdaje)
                     Console.WriteLine("2) Pregled svih fiskalnih računa");
-
+            
                 Console.WriteLine("0) Izlaz");
                 Console.Write("Izbor: ");
 
@@ -44,8 +43,7 @@ namespace Presentation.Meni
                             PrikaziSveRacune();
                         else
                             Console.WriteLine("Nemate prava pristupa ovoj opciji.");
-                        break;
-
+                        break;                 
                     case "0":
                         kraj = true;
                         break;
