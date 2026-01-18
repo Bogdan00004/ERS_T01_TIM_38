@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.BazaPodataka;
 using Domain.Modeli;
-using Domain.BazaPodataka;
 using Domain.Repozitorijumi;
 
 namespace Database.Repozitorijumi
 {
-    public class ParfemiRepozitorijum:IParfemRepozitorijum
+    public class ParfemiRepozitorijum : IParfemRepozitorijum
     {
         private readonly IBazaPodataka _baza;
 

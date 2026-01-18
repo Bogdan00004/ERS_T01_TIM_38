@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Modeli
+﻿namespace Domain.Modeli
 {
     public class Skladiste
     {
@@ -18,6 +12,15 @@ namespace Domain.Modeli
         public Skladiste()
         {
             Id = Guid.NewGuid();
+            TrenutniKapacitet = 0;
+            AmbalazeId = new List<Guid>();
+        }
+        public Skladiste(string naziv, string lokacija, int maxKapacitet)
+        {
+            Id = Guid.NewGuid();
+            Naziv = naziv;
+            Lokacija = lokacija;
+            MaxKapacitet = maxKapacitet;
             TrenutniKapacitet = 0;
             AmbalazeId = new List<Guid>();
         }

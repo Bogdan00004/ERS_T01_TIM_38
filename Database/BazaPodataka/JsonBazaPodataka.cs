@@ -1,15 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.BazaPodataka;
+﻿using Domain.BazaPodataka;
 using Newtonsoft.Json;
 
 namespace Database.BazaPodataka
 {
-    public class JsonBazaPodataka:IBazaPodataka
+    public class JsonBazaPodataka : IBazaPodataka
     {
         private readonly string putanja = "baza.json";
         public TabeleBazaPodataka Tabele { get; set; }
@@ -20,7 +14,7 @@ namespace Database.BazaPodataka
             {
                 string json = File.ReadAllText(putanja);
                 Tabele = JsonConvert.DeserializeObject<TabeleBazaPodataka>(json) ?? new TabeleBazaPodataka();
-                if(DaLiJeBazaPrazna())
+                if (DaLiJeBazaPrazna())
                 {
                     Tabele.Seed();
                     SacuvajPromene();
@@ -30,7 +24,7 @@ namespace Database.BazaPodataka
             {
                 Tabele = new TabeleBazaPodataka();
                 Tabele.Seed();
-                SacuvajPromene(); 
+                SacuvajPromene();
             }
         }
         private bool DaLiJeBazaPrazna()

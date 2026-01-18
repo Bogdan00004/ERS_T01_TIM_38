@@ -4,3 +4,53 @@ INFO | 2026-01-18 03:14:47 | [Distribucioni] Slanje ambalaža prodaji: traženo=
 INFO | 2026-01-18 03:14:48 | [Distribucioni] Poslato ambalaža: 1.
 INFO | 2026-01-18 03:14:48 | [Prodaja] Ambalaza vracena u skladiste (ima ostatak parfema). ambalazaId=619d0570-1cdd-4591-bab6-89b78b1e037f, preostaloParfema=1
 INFO | 2026-01-18 03:14:48 | [Prodaja] Prodaja uspešna: parfem=Lavande Royale, kolicina=1, iznos=120
+INFO | 2026-01-18 14:34:24 | Prijava uspešna: admin
+INFO | 2026-01-18 14:34:31 | [Prodaja] Početak prodaje: parfemId=7af3efad-0535-4070-a852-82b80d7158c5, kolicina=5, tip=Veleprodaja, nacin=KarticnoPlacanje
+WARNING | 2026-01-18 14:34:31 | [Prodaja] Nema dovoljno na stanju. Raspolozivo=1, trazeno=5, nedostaje=4. Pokrecem pakovanje...
+INFO | 2026-01-18 14:34:31 | [Pakovanje] ObezbediAmbalazuUSkladistu: naziv=Lavande Royale, brojBocica=4, zapremina=150, skladisteId=e08ffa24-dad8-494d-ab3f-5c249885daa2
+WARNING | 2026-01-18 14:34:31 | [Pakovanje] Nema dostupne spakovane ambalaze - pokrecem pakovanje.
+INFO | 2026-01-18 14:34:31 | Pakovanje: naziv=Lavande Royale, brojBocica=4, zapremina=150, skladisteId=e08ffa24-dad8-494d-ab3f-5c249885daa2
+INFO | 2026-01-18 14:34:31 | Prerada: naziv=Lavande Royale, brojBocica=4, zapremina=150
+WARNING | 2026-01-18 14:34:31 | [Prerada] Nema dovoljno ubranih biljaka. Treba=12, ima=0. Pokrećem proizvodnju...
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=1,01, id=b6b30bb8-7992-4396-b6ad-b3e484f0ff45
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Ubrano: naziv=Lavande Royale, kolicina=1
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=3,11, id=4e52045f-dabe-410b-974f-ca1bab53376d
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Ubrano: naziv=Lavande Royale, kolicina=1
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=3,17, id=85ba88ee-1b17-4100-b0e3-4d5d47e68589
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Ubrano: naziv=Lavande Royale, kolicina=1
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=3,74, id=70bb9323-dc25-443f-b59e-7e7384c80658
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Ubrano: naziv=Lavande Royale, kolicina=1
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=2,65, id=27bb7256-9a5d-46cb-86ff-7a1c87adf3f3
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Ubrano: naziv=Lavande Royale, kolicina=1
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=1,22, id=06bcc9b4-682f-4552-8042-338445fa6780
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Ubrano: naziv=Lavande Royale, kolicina=1
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=1,93, id=4b4a4623-2354-4a07-a440-8df567047857
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Ubrano: naziv=Lavande Royale, kolicina=1
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=2,73, id=8488b712-c4bc-4432-928c-3a6cbd9e67d0
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Ubrano: naziv=Lavande Royale, kolicina=1
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=1,16, id=10f9fa30-7619-4367-b671-94c72210f778
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Ubrano: naziv=Lavande Royale, kolicina=1
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=4,59, id=2ccd811a-6081-4dc6-b3b8-f6a65c87831f
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Ubrano: naziv=Lavande Royale, kolicina=1
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=2,05, id=e8b4af1b-882a-4419-ac9b-7b8156f67e76
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Ubrano: naziv=Lavande Royale, kolicina=1
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=4,63, id=8147406c-9a08-46d4-8fc8-870e11bd512d
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Ubrano: naziv=Lavande Royale, kolicina=1
+WARNING | 2026-01-18 14:34:31 | [Prerada] Biljka prešla 4.00: id=4e52045f-dabe-410b-974f-ca1bab53376d, jacina=4,04. Balans procenat=99,01%
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=4,49, id=a03a2d07-81a0-434a-9caf-88839f1e6434
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Promenjena jačina ulja: id=a03a2d07-81a0-434a-9caf-88839f1e6434, 4,49 -> 4,45 (procenat=99,01%)
+WARNING | 2026-01-18 14:34:31 | [Prerada] Biljka prešla 4.00: id=70bb9323-dc25-443f-b59e-7e7384c80658, jacina=4,27. Balans procenat=93,68%
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=3,63, id=8ba2700e-6d3c-4905-99ee-bef5986c3bb2
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Promenjena jačina ulja: id=8ba2700e-6d3c-4905-99ee-bef5986c3bb2, 3,63 -> 3,4 (procenat=93,68%)
+WARNING | 2026-01-18 14:34:31 | [Prerada] Biljka prešla 4.00: id=2ccd811a-6081-4dc6-b3b8-f6a65c87831f, jacina=5,27. Balans procenat=75,9%
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=2,83, id=5f456621-4a1f-4239-8237-4a4f45d07fe3
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Promenjena jačina ulja: id=5f456621-4a1f-4239-8237-4a4f45d07fe3, 2,83 -> 2,15 (procenat=75,9%)
+WARNING | 2026-01-18 14:34:31 | [Prerada] Biljka prešla 4.00: id=8147406c-9a08-46d4-8fc8-870e11bd512d, jacina=4,89. Balans procenat=81,8%
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Posađena biljka: Lavande Royale, ulja=4,77, id=7cfddaf6-fb85-456e-baa7-439c61f26852
+INFO | 2026-01-18 14:34:31 | [Proizvodnja] Promenjena jačina ulja: id=7cfddaf6-fb85-456e-baa7-439c61f26852, 4,77 -> 3,9 (procenat=81,8%)
+INFO | 2026-01-18 14:34:31 | [Prerada] Uspešno: parfema=4, utrošeno biljaka=12
+INFO | 2026-01-18 14:34:31 | [Pakovanje] Ambalaza obezbedjena u skladistu: ambalazaId=9830c1a8-77b4-4210-91a0-99fa6d9b35a6, kapacitet=2/10
+INFO | 2026-01-18 14:34:31 | [Distribucioni] Slanje ambalaža prodaji: traženo=3 (limit=3, delay=0.5s).
+INFO | 2026-01-18 14:34:33 | [Distribucioni] Poslato ambalaža: 3.
+INFO | 2026-01-18 14:34:33 | [Prodaja] Ambalaza vracena u skladiste (ima ostatak parfema). ambalazaId=3549b57d-ef6e-4ac3-af26-476bc9c18bc7, preostaloParfema=1
+INFO | 2026-01-18 14:34:33 | [Prodaja] Prodaja uspešna: parfem=Lavande Royale, kolicina=5, iznos=600,0

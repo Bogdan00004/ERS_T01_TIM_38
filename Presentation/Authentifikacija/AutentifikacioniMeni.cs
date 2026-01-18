@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Enumeracije;
 using Domain.Modeli;
-using Domain.Enumeracije;
 using Domain.Servisi;
 using Presentation.Meni;
 
@@ -16,7 +11,7 @@ namespace Presentation.Authentifikacija
         private readonly ISkladistenjeServisUloge _ulogeServis;
         private readonly Func<TipKorisnika, IProdajaServis> _prodajaServisFactory;
 
-        public AutentifikacioniMeni(IAutentifikacijaServis autentifikacijaServis, ISkladistenjeServisUloge ulogeServis,Func<TipKorisnika, IProdajaServis> prodajaServisFactory)
+        public AutentifikacioniMeni(IAutentifikacijaServis autentifikacijaServis, ISkladistenjeServisUloge ulogeServis, Func<TipKorisnika, IProdajaServis> prodajaServisFactory)
         {
             _autentifikacijaServis = autentifikacijaServis;
             _ulogeServis = ulogeServis;

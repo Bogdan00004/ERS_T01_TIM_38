@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Modeli;
 using NUnit.Framework;
-using Domain.Modeli;
 using System.Text.Json;
 
 namespace Tests.Domain
@@ -21,9 +16,9 @@ namespace Tests.Domain
             {
                 Id = id,
                 Naziv = "Noir Rose",
-                Tip = "Parfem",                 
-                NetoKolicina = 150,             
-                SerijskiBroj = $"PP-2025-{id}", 
+                Tip = "Parfem",
+                NetoKolicina = 150,
+                SerijskiBroj = $"PP-2025-{id}",
                 Cena = 99.99m,
                 BiljkaId = Guid.NewGuid(),
                 RokTrajanja = new DateTime(2027, 1, 1, 12, 0, 0, DateTimeKind.Utc)

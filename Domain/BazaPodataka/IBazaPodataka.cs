@@ -1,7 +1,4 @@
-﻿using Domain.Modeli;
-using System.Collections.Generic;
-
-namespace Domain.BazaPodataka
+﻿namespace Domain.BazaPodataka
 {
     public interface IBazaPodataka
     {

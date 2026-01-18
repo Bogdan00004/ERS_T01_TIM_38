@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Domain.Modeli;
+﻿using Domain.Modeli;
 using Domain.Repozitorijumi;
+using Domain.Servisi;
 using Moq;
 using NUnit.Framework;
 using Services.Implementacije;
-using Domain.Servisi;
 
 
 
@@ -41,19 +33,19 @@ namespace Tests.Services
         [Test]
         public void PreradiBiljke_NepodrzanaZapremina_BacaArgumentException()
         {
-            Assert.Throws<ArgumentException>(() => _sut.PreradiBiljke("Rose", "Parfem",120m, 1, 100));
+            Assert.Throws<ArgumentException>(() => _sut.PreradiBiljke("Rose", "Parfem", 120m, 1, 100));
         }
 
         [Test]
         public void PreradiBiljke_KadNemaDovoljnoUbranihBiljaka_PozivaProizvodnjuI_NeBaca()
         {
-            
+
             var biljke = new List<Biljka>
              {
                 new Biljka { Id = Guid.NewGuid(), Naziv="Rose", Stanje = StanjeBiljke.Ubrana }
                   };
 
-            
+
             _biljkeRepoMock.Setup(r => r.SveBiljke()).Returns(() => biljke);
 
             _proizvodnjaMock
@@ -69,13 +61,13 @@ namespace Tests.Services
                 .Setup(p => p.UberiBiljke("Rose", It.IsAny<int>()))
                 .Callback(() =>
                 {
-                   
+
                     foreach (var b in biljke.Where(x => x.Naziv == "Rose" && x.Stanje == StanjeBiljke.Posadjena))
                         b.Stanje = StanjeBiljke.Ubrana;
                 })
                 .Returns(() => biljke.Where(x => x.Naziv == "Rose" && x.Stanje == StanjeBiljke.Ubrana).ToList());
 
-            Assert.DoesNotThrow(() => _sut.PreradiBiljke("Rose", "Parfem",120m,1, 150));
+            Assert.DoesNotThrow(() => _sut.PreradiBiljke("Rose", "Parfem", 120m, 1, 150));
             _proizvodnjaMock.Verify(p => p.PosadiNovuBiljku(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.AtLeastOnce);
             _proizvodnjaMock.Verify(p => p.UberiBiljke("Rose", It.IsAny<int>()), Times.AtLeastOnce);
         }
@@ -84,7 +76,7 @@ namespace Tests.Services
         [Test]
         public void PreradiBiljke_DovoljnoUbranihBiljaka_KreiraParfeme_IzmeniStanjeBiljaka()
         {
-           
+
             var biljke = Enumerable.Range(0, 6)
                 .Select(_ => new Biljka { Id = Guid.NewGuid(), Naziv = "Rose", Stanje = StanjeBiljke.Ubrana })
                 .ToList();
@@ -101,10 +93,10 @@ namespace Tests.Services
                 .Setup(r => r.Dodaj(It.IsAny<Parfem>()))
                 .Callback<Parfem>(p => dodatiParfemi.Add(p));
 
-            
-            var parfemi = _sut.PreradiBiljke("Rose","Parfem",120m, 2, 150);
 
-            
+            var parfemi = _sut.PreradiBiljke("Rose", "Parfem", 120m, 2, 150);
+
+
             Assert.That(parfemi.Count, Is.EqualTo(2));
             Assert.That(parfemi.All(p => p.Naziv == "Rose"), Is.True);
             Assert.That(parfemi.All(p => p.NetoKolicina == 150), Is.True);
@@ -113,7 +105,7 @@ namespace Tests.Services
             _parfemiRepoMock.Verify(r => r.Dodaj(It.IsAny<Parfem>()), Times.Exactly(2));
             Assert.That(dodatiParfemi.Count, Is.EqualTo(2));
 
-            
+
             _biljkeRepoMock.Verify(r => r.Izmeni(It.IsAny<Biljka>()), Times.Exactly(6));
             Assert.That(izmenjeneBiljke.Count, Is.EqualTo(6));
             Assert.That(izmenjeneBiljke.All(b => b.Stanje == StanjeBiljke.Preradjena), Is.True);

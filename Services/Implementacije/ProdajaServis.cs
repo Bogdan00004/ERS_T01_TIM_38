@@ -1,8 +1,8 @@
 ﻿using Domain.Enumeracije;
 using Domain.Modeli;
+using Domain.PomocneMetode.Prodaja;
 using Domain.Repozitorijumi;
 using Domain.Servisi;
-using Domain.PomocneMetode.Prodaja;
 
 namespace Loger_Bloger.Servisi.Prodaja
 {
@@ -72,15 +72,7 @@ namespace Loger_Bloger.Servisi.Prodaja
             foreach (var kv in kolicine)
             {
                 var p = predstavnik[kv.Key];
-                katalog.Add(new KatalogStavka
-                {
-                    ParfemId = p.Id,               
-                    Naziv = p.Naziv,
-                    Tip = p.Tip,
-                    NetoKolicina = p.NetoKolicina,
-                    Cena = p.Cena,
-                    Raspolozivo = kv.Value
-                });
+                katalog.Add(new KatalogStavka(p.Id, p.Naziv, p.Tip, p.NetoKolicina, p.Cena, kv.Value));
             }
 
             return katalog.OrderBy(k => k.Naziv).ThenBy(k => k.Tip).ThenBy(k => k.NetoKolicina).ToList();
@@ -233,19 +225,9 @@ namespace Loger_Bloger.Servisi.Prodaja
             _ambalazeRepo.SacuvajPromene();
             _skladistaRepo.SacuvajPromene();
 
-            var racun = new FiskalniRacun
-            {
-                TipProdaje = tipProdaje,
-                NacinPlacanja = nacinPlacanja
-            };
+            var racun = new FiskalniRacun(tipProdaje, nacinPlacanja);
 
-            racun.Stavke.Add(new FiskalnaStavka
-            {
-                ParfemId = izabrani.Id,
-                NazivParfema = $"{izabrani.Naziv} ({izabrani.Tip}, {izabrani.NetoKolicina}ml)",
-                Kolicina = kolicinaBocica,
-                CenaPoKomadu = izabrani.Cena
-            });
+            racun.Stavke.Add(new FiskalnaStavka(izabrani.Id, $"{izabrani.Naziv} ({izabrani.Tip}, {izabrani.NetoKolicina}ml)", kolicinaBocica, izabrani.Cena));
 
             _racuniRepo.Dodaj(racun);
             _racuniRepo.SacuvajPromene();

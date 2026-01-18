@@ -3,11 +3,6 @@ using Domain.Enumeracije;
 using Domain.Modeli;
 using Domain.Repozitorijumi;
 using Domain.Servisi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Loger_Bloger.Servisi
 {
@@ -48,14 +43,7 @@ namespace Loger_Bloger.Servisi
                 throw new Exception("Skladiste ne postoji.");
 
 
-            var ambalaza = new Ambalaza
-            {
-                Naziv = $"Ambalaza-{DateTime.Now:yyyyMMdd-HHmmss}",
-                AdresaPosiljaoca = "O'Sinjel De Or, Paris",
-                SkladisteId = skladisteId,
-                Status = StatusAmbalaze.Spakovana
-            };
-
+            var ambalaza = new Ambalaza(naziv: $"Ambalaza-{DateTime.Now:yyyyMMdd-HHmmss}", adresaPosiljaoca: "O'Sinjel De Or, Paris", skladisteId: skladisteId, status: StatusAmbalaze.Spakovana);
 
             foreach (var parfem in parfemi)
             {

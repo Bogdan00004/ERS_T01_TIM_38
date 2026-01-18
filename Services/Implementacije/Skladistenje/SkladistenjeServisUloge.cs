@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Enumeracije;
 using Domain.Servisi;
-using Domain.Repozitorijumi;
-using Domain.Enumeracije;
-using Domain.Modeli;
 
 namespace Loger_Bloger.Servisi.Skladistenje
 {
@@ -25,9 +18,9 @@ namespace Loger_Bloger.Servisi.Skladistenje
         {
             return uloga switch
             {
-               TipKorisnika.Prodavac => _magacinskiServis,
+                TipKorisnika.Prodavac => _magacinskiServis,
                 TipKorisnika.MenadzerProdaje => _distribucioniServis,
-                _=> throw new ArgumentException("Nepoznata uloga korisnika.")
+                _ => throw new ArgumentException("Nepoznata uloga korisnika.")
             };
         }
     }

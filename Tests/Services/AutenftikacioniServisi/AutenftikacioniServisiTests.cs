@@ -1,9 +1,9 @@
-﻿using NUnit.Framework;
-using Domain.Enumeracije;
+﻿using Domain.Enumeracije;
 using Domain.Modeli;
 using Domain.Repozitorijumi;
 using Domain.Servisi;
 using Moq;
+using NUnit.Framework;
 using Services.AutentifikacioniServisi;
 
 namespace Tests.Services.AutenftikacioniServisi
@@ -27,16 +27,16 @@ namespace Tests.Services.AutenftikacioniServisi
         [Test]
         public void Prijava_TacnaLozinka_VracaTrueIVracaKorisnika_LogujeInfo()
         {
-            
+
             var k = new Korisnik("admin", "pass", "Admin Admin", TipKorisnika.MenadzerProdaje);
             _korisniciRepoMock
                 .Setup(r => r.PronadjiKorisnikaPoKorisnickomImenu("admin"))
                 .Returns(k);
 
-           
+
             var (ok, korisnik) = _sut.Prijava("admin", "pass");
 
-            
+
             Assert.That(ok, Is.True);
             Assert.That(korisnik, Is.SameAs(k));
 
@@ -49,16 +49,16 @@ namespace Tests.Services.AutenftikacioniServisi
         [Test]
         public void Prijava_PogresnaLozinka_VracaFalse_LogujeWarning()
         {
-            
+
             var k = new Korisnik("admin", "pass", "Admin Admin", TipKorisnika.MenadzerProdaje);
             _korisniciRepoMock
                 .Setup(r => r.PronadjiKorisnikaPoKorisnickomImenu("admin"))
                 .Returns(k);
 
-            
+
             var (ok, korisnik) = _sut.Prijava("admin", "WRONG");
 
-            
+
             Assert.That(ok, Is.False);
             Assert.That(korisnik, Is.Not.Null);
 
@@ -70,7 +70,7 @@ namespace Tests.Services.AutenftikacioniServisi
         [Test]
         public void Registracija_NoviKorisnik_DodajeKorisnika_LogujeUspeh()
         {
-            
+
             var novi = new Korisnik("novo", "123", "Novi Novi", TipKorisnika.Prodavac);
 
             _korisniciRepoMock
@@ -81,10 +81,10 @@ namespace Tests.Services.AutenftikacioniServisi
                 .Setup(r => r.DodajKorisnika(It.IsAny<Korisnik>()))
                 .Returns(novi);
 
-            
+
             var (ok, _) = _sut.Registracija(novi);
 
-            
+
             Assert.That(ok, Is.True);
             _korisniciRepoMock.Verify(r => r.DodajKorisnika(It.Is<Korisnik>(x => x.KorisnickoIme == "novo")), Times.Once);
 
@@ -98,7 +98,7 @@ namespace Tests.Services.AutenftikacioniServisi
         [Test]
         public void Registracija_ZauzetoKorisnickoIme_NeDodajeKorisnika_LogujeWarning()
         {
-            
+
             var novi = new Korisnik("admin", "123", "Novi Novi", TipKorisnika.Prodavac);
             var postojeci = new Korisnik("admin", "pass", "Admin Admin", TipKorisnika.MenadzerProdaje);
 
@@ -106,10 +106,10 @@ namespace Tests.Services.AutenftikacioniServisi
                 .Setup(r => r.PronadjiKorisnikaPoKorisnickomImenu("admin"))
                 .Returns(postojeci);
 
-            
+
             var (ok, _) = _sut.Registracija(novi);
 
-            
+
             Assert.That(ok, Is.False);
 
             _korisniciRepoMock.Verify(r => r.DodajKorisnika(It.IsAny<Korisnik>()), Times.Never);

@@ -1,6 +1,6 @@
 ﻿using Domain.Modeli;
-using Domain.Servisi;
 using Domain.Repozitorijumi;
+using Domain.Servisi;
 
 namespace Services.AutentifikacioniServisi
 {
@@ -28,9 +28,9 @@ namespace Services.AutentifikacioniServisi
                 return (true, korisnik);
             }
             _logger.LogWarning($"Neuspešna prijava: {korisnickoIme}");
-            return (false, new Korisnik());  
+            return (false, new Korisnik());
         }
-        public (bool,Korisnik) Registracija(Korisnik noviKorisnik)
+        public (bool, Korisnik) Registracija(Korisnik noviKorisnik)
         {
             _logger.LogInfo($"Pokušaj registracije: {noviKorisnik.KorisnickoIme}");
             var postoji = korisnici.PronadjiKorisnikaPoKorisnickomImenu(noviKorisnik.KorisnickoIme);

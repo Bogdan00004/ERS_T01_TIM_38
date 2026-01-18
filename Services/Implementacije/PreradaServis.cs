@@ -1,14 +1,9 @@
-﻿using Domain.Servisi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Konstante;
 using Domain.Modeli;
-using Domain.Repozitorijumi;
-using Domain.Konstante;
 using Domain.PomocneMetode.Biljke;
 using Domain.PomocneMetode.Parfemi;
+using Domain.Repozitorijumi;
+using Domain.Servisi;
 
 
 namespace Services.Implementacije
@@ -58,7 +53,7 @@ namespace Services.Implementacije
                 .Take(brojPotrebnihBiljaka)
                 .ToList();
 
-            
+
             if (ubrane.Count < brojPotrebnihBiljaka)
             {
                 _logger.LogWarning($"[Prerada] Nema dovoljno ubranih biljaka. Treba={brojPotrebnihBiljaka}, ima={ubrane.Count}. Pokrećem proizvodnju...");
@@ -84,8 +79,8 @@ namespace Services.Implementacije
 
                 if (biljka.JacinaAromaticnihUlja > PreradaKonstante.GRANICA_BALANS_ULJA)
                 {
-                   
-                    double procenat = Math.Round((PreradaKonstante.GRANICA_BALANS_ULJA / biljka.JacinaAromaticnihUlja) * 100.0, 2);  
+
+                    double procenat = Math.Round((PreradaKonstante.GRANICA_BALANS_ULJA / biljka.JacinaAromaticnihUlja) * 100.0, 2);
 
                     _logger.LogWarning($"[Prerada] Biljka prešla 4.00: id={biljka.Id}, jacina={biljka.JacinaAromaticnihUlja}. Balans procenat={procenat}%");
 
@@ -105,16 +100,7 @@ namespace Services.Implementacije
             {
                 var biljka = ubrane[i % ubrane.Count];
 
-                var parfem = new Parfem
-                {
-                    Id = Guid.NewGuid(),
-                    Naziv = naziv,
-                    Tip = tip,
-                    NetoKolicina = zapreminaPoBocici,
-                    BiljkaId = biljka.Id,
-                    RokTrajanja = DateTime.Now.AddYears(2),
-                    Cena = cena
-                };
+                var parfem = new Parfem(naziv, tip, zapreminaPoBocici, "", cena, biljka.Id, DateTime.Now.AddYears(2));
 
                 parfem.SerijskiBroj = $"PP-2025-{parfem.Id}";
 

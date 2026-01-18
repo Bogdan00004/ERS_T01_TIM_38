@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Modeli;
+﻿using Domain.Modeli;
 
 namespace Domain.Repozitorijumi
 {
     public interface IAmbalazaRepozitorijum
     {
-        void Dodaj(Ambalaza ambalaza);
+        bool Dodaj(Ambalaza ambalaza);
         List<Ambalaza> VratiSve();
-        Ambalaza? NadjiPoId(Guid id);
-        void Obrisi(Guid id);
-        void SacuvajPromene();
+        Ambalaza NadjiPoId(Guid id);
+        bool Obrisi(Guid id);
+        bool SacuvajPromene();
         List<Ambalaza> VratiSpakovaneAmbalaze();
     }
 }

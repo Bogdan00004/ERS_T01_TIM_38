@@ -12,7 +12,7 @@ namespace Presentation.Meni
         public OpcijeMeni(Korisnik ulogovanKorisnik, IProdajaServis prodajaServis)
         {
             _ulogovanKorisnik = ulogovanKorisnik;
-            _prodajaServis = prodajaServis;           
+            _prodajaServis = prodajaServis;
         }
 
         public void PrikaziMeni()
@@ -23,10 +23,10 @@ namespace Presentation.Meni
             while (!kraj)
             {
                 Console.WriteLine("\n1) Prodaja");
-                
+
                 if (_ulogovanKorisnik.Uloga == TipKorisnika.MenadzerProdaje)
                     Console.WriteLine("2) Pregled svih fiskalnih računa");
-            
+
                 Console.WriteLine("0) Izlaz");
                 Console.Write("Izbor: ");
 
@@ -43,7 +43,7 @@ namespace Presentation.Meni
                             PrikaziSveRacune();
                         else
                             Console.WriteLine("Nemate prava pristupa ovoj opciji.");
-                        break;                 
+                        break;
                     case "0":
                         kraj = true;
                         break;
@@ -110,7 +110,7 @@ namespace Presentation.Meni
 
             try
             {
-                
+
                 var racun = _prodajaServis
                     .Prodaj(izabrano.ParfemId, kolicina, tipProdaje, nacinPlacanja)
                     .GetAwaiter()

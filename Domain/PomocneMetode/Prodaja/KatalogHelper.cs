@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Modeli;
+﻿using Domain.Modeli;
 
 
 namespace Domain.PomocneMetode.Prodaja
@@ -14,7 +9,7 @@ namespace Domain.PomocneMetode.Prodaja
         {
             var cenaNorm = decimal.Round(p.Cena, 2);
 
-            return katalog.FirstOrDefault(k =>k.Naziv == p.Naziv && k.Tip == p.Tip &&k.NetoKolicina == p.NetoKolicina && decimal.Round(k.Cena, 2) == cenaNorm);
+            return katalog.FirstOrDefault(k => k.Naziv == p.Naziv && k.Tip == p.Tip && k.NetoKolicina == p.NetoKolicina && decimal.Round(k.Cena, 2) == cenaNorm);
         }
     }
 }

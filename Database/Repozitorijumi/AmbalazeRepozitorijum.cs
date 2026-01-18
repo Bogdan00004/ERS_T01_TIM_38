@@ -2,15 +2,10 @@
 using Domain.Enumeracije;
 using Domain.Modeli;
 using Domain.Repozitorijumi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Database.Repozitorijumi
 {
-    public class AmbalazeRepozitorijum:IAmbalazaRepozitorijum
+    public class AmbalazeRepozitorijum : IAmbalazaRepozitorijum
     {
         private readonly IBazaPodataka _baza;
 

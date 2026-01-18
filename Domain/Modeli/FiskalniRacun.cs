@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Enumeracije;
+﻿using Domain.Enumeracije;
 namespace Domain.Modeli;
 
 public class FiskalnaStavka
@@ -14,6 +9,17 @@ public class FiskalnaStavka
 
     public decimal CenaPoKomadu { get; set; }
     public decimal Ukupno => CenaPoKomadu * Kolicina;
+    public FiskalnaStavka()
+    {
+    }
+    public FiskalnaStavka(Guid parfemId, string nazivParfema, int kolicina, decimal cenaPoKomadu)
+    {
+        ParfemId = parfemId;
+        NazivParfema = nazivParfema;
+        Kolicina = kolicina;
+        CenaPoKomadu = cenaPoKomadu;
+    }
+
 }
 
 public class FiskalniRacun
@@ -26,4 +32,18 @@ public class FiskalniRacun
 
     public List<FiskalnaStavka> Stavke { get; set; } = new();
     public decimal IznosZaNaplatu => Stavke.Sum(s => s.Ukupno);
+    public FiskalniRacun()
+    {
+        Id = Guid.NewGuid();
+        DatumVreme = DateTime.Now;
+        Stavke = new List<FiskalnaStavka>();
+    }
+    public FiskalniRacun(TipProdaje tipProdaje, NacinPlacanja nacinPlacanja, List<FiskalnaStavka>? stavke = null)
+    {
+        Id = Guid.NewGuid();
+        DatumVreme = DateTime.Now;
+        TipProdaje = tipProdaje;
+        NacinPlacanja = nacinPlacanja;
+        Stavke = stavke ?? new List<FiskalnaStavka>();
+    }
 }

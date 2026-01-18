@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Enumeracije;
+﻿using Domain.Enumeracije;
 using Domain.Modeli;
 using Domain.Repozitorijumi;
 using Domain.Servisi;
 
 namespace Loger_Bloger.Servisi.Skladistenje
 {
-    public class MagacinskiCentarServis:ISkladistenjeServis
+    public class MagacinskiCentarServis : ISkladistenjeServis
     {
         private readonly ISkladistaRepozitorijum _skladistaRepozitorijum;
         private readonly IAmbalazaRepozitorijum _ambalazaRepozitorijum;

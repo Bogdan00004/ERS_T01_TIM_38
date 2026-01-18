@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.BazaPodataka;
+﻿using Domain.BazaPodataka;
 using Domain.Modeli;
-using Domain.Servisi;
 using Domain.PomocneMetode.Biljke;
+using Domain.Servisi;
 
 
 namespace Services.Implementacije
 {
-    public class ProizvodnjaServis:IProizvodnjaServis
+    public class ProizvodnjaServis : IProizvodnjaServis
     {
         private readonly IBazaPodataka _baza;
         private readonly ILoggerServis _logger;
-        
+
 
         public ProizvodnjaServis(IBazaPodataka baza, ILoggerServis logger)
         {
@@ -26,15 +21,8 @@ namespace Services.Implementacije
         {
             double jacina = BiljkaGenerator.GenerisiJacinuUlja();
 
-            var novaBiljka = new Biljka
-            {
-                Id = Guid.NewGuid(),
-                Naziv = naziv,
-                LatinskiNaziv = latinskiNaziv,
-                ZemljaPorekla = zemljaPorekla,
-                Stanje = StanjeBiljke.Posadjena,
-                JacinaAromaticnihUlja = jacina
-            };
+            var novaBiljka = new Biljka(naziv, jacina, latinskiNaziv, zemljaPorekla, StanjeBiljke.Posadjena);
+
 
             _baza.Tabele.Biljke.Add(novaBiljka);
             _baza.SacuvajPromene();
@@ -46,7 +34,7 @@ namespace Services.Implementacije
         {
             var biljka = _baza.Tabele.Biljke.FirstOrDefault(b => b.Id == idBiljke);
 
-            if(biljka == null)
+            if (biljka == null)
             {
                 _logger.LogError("[Proizvodnja] Greška: Biljka nije pronađena.");
                 return;

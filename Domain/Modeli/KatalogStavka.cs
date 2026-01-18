@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System;
-
-namespace Domain.Modeli
+﻿namespace Domain.Modeli
 {
     public class KatalogStavka
     {
@@ -16,5 +8,20 @@ namespace Domain.Modeli
         public int NetoKolicina { get; set; }
         public decimal Cena { get; set; }
         public int Raspolozivo { get; set; }
+
+        public KatalogStavka()
+        {
+
+        }
+
+        public KatalogStavka(Guid parfemId, string naziv, string tip, int netoKolicina, decimal cena, int raspolozivo)
+        {
+            ParfemId = parfemId;
+            Naziv = naziv;
+            Tip = tip;
+            NetoKolicina = netoKolicina;
+            Cena = cena;
+            Raspolozivo = raspolozivo;
+        }
     }
 }

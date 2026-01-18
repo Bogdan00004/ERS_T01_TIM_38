@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using Domain.BazaPodataka;
+﻿using Domain.BazaPodataka;
 using Domain.Modeli;
 using Domain.Servisi;
 using Moq;
@@ -55,7 +48,7 @@ namespace Tests.Services
         [Test]
         public void PromeniJacinuUlja_AkoJeJacinaPreradjeneBiljkeIznad4_SmanjujeNaProcenatOdstupanja_65postoZa465()
         {
-            
+
             var biljka = new Biljka
             {
                 Id = Guid.NewGuid(),
@@ -67,10 +60,10 @@ namespace Tests.Services
             };
             _tabele.Biljke.Add(biljka);
 
-            
+
             _sut.PromeniJacinuUlja(biljka.Id, 65);
 
-            
+
             Assert.That(biljka.JacinaAromaticnihUlja, Is.EqualTo(1.30).Within(0.0001));
             _bazaMock.Verify(b => b.SacuvajPromene(), Times.Once);
         }
@@ -78,7 +71,7 @@ namespace Tests.Services
         [Test]
         public void PromeniJacinuUlja_AkoJeJacinaPreradjeneBiljkeManjaIliJednaka4_NeMenjaJacinu_LogujeInfo()
         {
-            
+
             var biljka = new Biljka
             {
                 Id = Guid.NewGuid(),
@@ -90,10 +83,10 @@ namespace Tests.Services
             };
             _tabele.Biljke.Add(biljka);
 
-            
+
             _sut.PromeniJacinuUlja(biljka.Id, 100);
 
-            
+
             Assert.That(biljka.JacinaAromaticnihUlja, Is.EqualTo(3.33).Within(0.0001));
             _loggerMock.Verify(l => l.LogInfo(It.IsAny<string>()), Times.Once);
         }
@@ -101,10 +94,10 @@ namespace Tests.Services
         [Test]
         public void PromeniJacinuUlja_AkoBiljkaNePostoji_LogujeError_IzlaziBezSacuvajPromene()
         {
-            
+
             _sut.PromeniJacinuUlja(Guid.NewGuid(), 4.65);
 
-            
+
             _loggerMock.Verify(l => l.LogError(It.IsAny<string>()), Times.Once);
             _bazaMock.Verify(b => b.SacuvajPromene(), Times.Never);
         }
@@ -112,15 +105,15 @@ namespace Tests.Services
         [Test]
         public void UberiBiljke_MenjaStanjePosadjenihNaUbrana_VracaTrazeniBroj()
         {
-            
+
             _tabele.Biljke.Add(new Biljka { Naziv = "Lavanda", Stanje = StanjeBiljke.Posadjena });
             _tabele.Biljke.Add(new Biljka { Naziv = "Lavanda", Stanje = StanjeBiljke.Posadjena });
             _tabele.Biljke.Add(new Biljka { Naziv = "Lavanda", Stanje = StanjeBiljke.Posadjena });
 
-            
+
             var ubrane = _sut.UberiBiljke("Lavanda", 2);
 
-            
+
             Assert.That(ubrane.Count, Is.EqualTo(2));
             Assert.That(ubrane.TrueForAll(b => b.Stanje == StanjeBiljke.Ubrana), Is.True);
             _bazaMock.Verify(b => b.SacuvajPromene(), Times.Once);
