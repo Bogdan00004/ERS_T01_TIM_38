@@ -39,7 +39,7 @@ namespace Loger_Bloger.Servisi
                 throw new ArgumentException("Broj bocica mora biti > 0.");
 
             var skladiste = _skladistaRepozitorijum.NadjiPoId(skladisteId);
-            if (skladiste == null)
+            if (skladiste.Id == Guid.Empty)
                 throw new Exception("Skladiste ne postoji.");
 
 
@@ -50,8 +50,8 @@ namespace Loger_Bloger.Servisi
                 ambalaza.ParfemiId.Add(parfem.Id);
             }
 
-            _ambalazaRepozitorijum.Dodaj(ambalaza);
-            _ambalazaRepozitorijum.SacuvajPromene();
+            if (!_ambalazaRepozitorijum.Dodaj(ambalaza))
+                throw new Exception("Neuspešno dodavanje ambalaže.");
         }
 
         public void PosaljiAmbalazuUSkladiste(Guid skladisteId)
@@ -73,14 +73,12 @@ namespace Loger_Bloger.Servisi
             if (ambalaza == null)
                 throw new Exception("Nema dostupnih spakovanih ambalaza.");
 
-
-
             skladiste.TrenutniKapacitet++;
             skladiste.AmbalazeId.Add(ambalaza.Id);
 
+            if(!_skladistaRepozitorijum.Izmeni(skladiste))
+                throw new Exception("Neuspešno čuvanje promena skladišta.");
 
-
-            _skladistaRepozitorijum.SacuvajPromene();
             _logger.LogInfo($"Pakovanje završeno: ambalazaId={ambalaza.Id}, parfemaUAmbalazi={ambalaza.ParfemiId.Count}");
 
         }
@@ -89,7 +87,7 @@ namespace Loger_Bloger.Servisi
             _logger.LogInfo($"[Pakovanje] ObezbediAmbalazuUSkladistu: naziv={nazivParfema}, brojBocica={brojBocica}, zapremina={zapreminaPoBocici}, skladisteId={skladisteId}");
 
             var skladiste = _skladistaRepozitorijum.NadjiPoId(skladisteId);
-            if (skladiste == null)
+            if (skladiste.Id == Guid.Empty)
                 throw new Exception("Skladiste ne postoji.");
 
             if (skladiste.TrenutniKapacitet >= skladiste.MaxKapacitet)
@@ -120,7 +118,8 @@ namespace Loger_Bloger.Servisi
             skladiste.TrenutniKapacitet++;
             skladiste.AmbalazeId.Add(ambalaza.Id);
 
-            _skladistaRepozitorijum.SacuvajPromene();
+            if (!_skladistaRepozitorijum.Izmeni(skladiste))
+                throw new Exception("Neuspešno čuvanje promena skladišta.");
 
             _logger.LogInfo($"[Pakovanje] Ambalaza obezbedjena u skladistu: ambalazaId={ambalaza.Id}, kapacitet={skladiste.TrenutniKapacitet}/{skladiste.MaxKapacitet}");
         }

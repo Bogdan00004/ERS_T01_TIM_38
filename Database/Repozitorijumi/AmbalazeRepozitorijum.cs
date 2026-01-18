@@ -13,10 +13,31 @@ namespace Database.Repozitorijumi
         {
             _baza = baza;
         }
-
-        public void Dodaj(Ambalaza ambalaza)
+        public bool Izmeni(Ambalaza ambalaza)
         {
-            _baza.Tabele.Ambalaze.Add(ambalaza);
+            try
+            {
+                _baza.SacuvajPromene();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Dodaj(Ambalaza ambalaza)
+        {
+            try
+            {
+                _baza.Tabele.Ambalaze.Add(ambalaza);
+                _baza.SacuvajPromene();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public List<Ambalaza> VratiSve()
@@ -24,26 +45,46 @@ namespace Database.Repozitorijumi
             return _baza.Tabele.Ambalaze;
         }
 
-        public Ambalaza? NadjiPoId(Guid id)
+        public Ambalaza NadjiPoId(Guid id)
         {
-            return _baza.Tabele.Ambalaze.FirstOrDefault(a => a.Id == id);
+            var ambalaza = _baza.Tabele.Ambalaze.FirstOrDefault(a => a.Id == id);
+            return ambalaza ?? new Ambalaza(); // nikad null
         }
 
-        public void Obrisi(Guid id)
+        public bool Obrisi(Guid id)
         {
-            var ambalaza = NadjiPoId(id);
-            if (ambalaza != null)
+            try
+            {
+                var ambalaza = _baza.Tabele.Ambalaze.FirstOrDefault(a => a.Id == id);
+                if (ambalaza == null)
+                    return false;
                 _baza.Tabele.Ambalaze.Remove(ambalaza);
-        }
-
-        public void SacuvajPromene()
-        {
-            _baza.SacuvajPromene();
+                _baza.SacuvajPromene(); 
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public List<Ambalaza> VratiSpakovaneAmbalaze()
         {
             return _baza.Tabele.Ambalaze.Where(a => a.Status == StatusAmbalaze.Spakovana).ToList();
+        }
+        public bool OznaciKaoPoslate(List<Guid> ambalazeId)
+        {
+            try
+            {
+                foreach (var id in ambalazeId)
+                {
+                    var a = _baza.Tabele.Ambalaze.FirstOrDefault(x => x.Id == id);
+                    if (a != null) a.Status = StatusAmbalaze.Poslata;
+                }
+                _baza.SacuvajPromene();
+                return true;
+            }
+            catch { return false; }
         }
     }
 }

@@ -10,7 +10,9 @@ namespace Domain.Modeli
         public string ImePrezime { get; set; } = string.Empty;
         public TipKorisnika Uloga { get; set; }
 
-        public Korisnik() { }
+        public Korisnik() {
+            Id = Guid.Empty;
+        }
 
         public Korisnik(string korisnickoIme, string lozinka, string imePrezime, TipKorisnika tipKorisnika)
         {

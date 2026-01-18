@@ -112,12 +112,16 @@ namespace Services.Implementacije
             foreach (var biljka in utrosene)
             {
                 biljka.Stanje = StanjeBiljke.Preradjena;
-                _biljkeRepozitorijum.Izmeni(biljka);
+                if(!_biljkeRepozitorijum.Izmeni(biljka))
+                    throw new Exception($"Neuspešno ažuriranje biljke: id={biljka.Id}");
             }
 
             // Upis parfema u repo
             foreach (var parfem in parfemi)
-                _parfemiRepozitorijum.Dodaj(parfem);
+            {
+                if (!_parfemiRepozitorijum.Dodaj(parfem))
+                    throw new Exception($"Neuspešno dodavanje parfema: id={parfem.Id}");
+            }
 
             _logger.LogInfo($"[Prerada] Uspešno: parfema={parfemi.Count}, utrošeno biljaka={brojPotrebnihBiljaka}");
             return parfemi;

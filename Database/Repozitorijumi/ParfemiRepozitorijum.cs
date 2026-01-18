@@ -12,18 +12,57 @@ namespace Database.Repozitorijumi
         {
             _baza = baza;
         }
-        public void Dodaj(Parfem parfem)
+        public bool Dodaj(Parfem parfem)
         {
-            _baza.Tabele.Parfemi.Add(parfem);
-            _baza.SacuvajPromene();
+            try
+            {
+                _baza.Tabele.Parfemi.Add(parfem);
+                _baza.SacuvajPromene();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public List<Parfem> SviParfemi()
         {
             return _baza.Tabele.Parfemi.ToList();
         }
-        public Parfem? NadjiPoId(Guid id)
+        public Parfem NadjiPoId(Guid id)
         {
-            return _baza.Tabele.Parfemi.FirstOrDefault(p => p.Id == id);
+            var parfem = _baza.Tabele.Parfemi.FirstOrDefault(p => p.Id == id);
+            return parfem ?? new Parfem(); // nikad null
+        }
+        public bool Izmeni(Parfem parfem)
+        {
+            try
+            {
+                var indeks = _baza.Tabele.Parfemi.FindIndex(p => p.Id == parfem.Id);
+                if (indeks == -1)
+                    return false;
+
+                _baza.Tabele.Parfemi[indeks] = parfem;
+                _baza.SacuvajPromene();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Obrisi(Guid id)
+        {
+            try
+            {
+                var p = _baza.Tabele.Parfemi.FirstOrDefault(x => x.Id == id);
+                if (p == null) return false;
+                _baza.Tabele.Parfemi.Remove(p);
+                _baza.SacuvajPromene();
+                return true;
+            }
+            catch { return false; }
         }
     }
 }

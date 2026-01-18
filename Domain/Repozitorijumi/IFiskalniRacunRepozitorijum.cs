@@ -4,9 +4,9 @@ namespace Domain.Repozitorijumi;
 
 public interface IFiskalniRacunRepozitorijum
 {
-    void Dodaj(FiskalniRacun racun);
+    bool Dodaj(FiskalniRacun racun);
     List<FiskalniRacun> VratiSve();
-    FiskalniRacun? NadjiPoId(Guid id);
-    void Obrisi(Guid id);
-    void SacuvajPromene();
+    FiskalniRacun NadjiPoId(Guid id);
+    bool Obrisi(Guid id);
+    bool Izmeni(FiskalniRacun racun);
 }

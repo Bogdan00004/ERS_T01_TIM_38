@@ -13,9 +13,24 @@ namespace Database.Repozitorijumi
             _baza = baza;
         }
 
-        public void Dodaj(FiskalniRacun racun)
+        public bool Dodaj(FiskalniRacun racun)
         {
-            _baza.Tabele.FiskalniRacuni.Add(racun);
+            try
+            {
+                _baza.Tabele.FiskalniRacuni.Add(racun);
+                _baza.SacuvajPromene();
+                return true;
+            }
+            catch { return false; }
+        }
+        public bool Izmeni(FiskalniRacun racun)
+        {
+            try
+            {
+                _baza.SacuvajPromene();
+                return true;
+            }
+            catch { return false; }
         }
 
         public List<FiskalniRacun> VratiSve()
@@ -23,21 +38,28 @@ namespace Database.Repozitorijumi
             return _baza.Tabele.FiskalniRacuni;
         }
 
-        public FiskalniRacun? NadjiPoId(Guid id)
+        public FiskalniRacun NadjiPoId(Guid id)
         {
-            return _baza.Tabele.FiskalniRacuni.FirstOrDefault(r => r.Id == id);
+            var racun = _baza.Tabele.FiskalniRacuni.FirstOrDefault(r => r.Id == id);
+            return racun ?? new FiskalniRacun(); // nikad null
         }
 
-        public void Obrisi(Guid id)
+        public bool Obrisi(Guid id)
         {
-            var racun = NadjiPoId(id);
-            if (racun != null)
+            try
+            {
+                var racun = _baza.Tabele.FiskalniRacuni.FirstOrDefault(r => r.Id == id);
+                if (racun == null)
+                    return false;
+
                 _baza.Tabele.FiskalniRacuni.Remove(racun);
-        }
-
-        public void SacuvajPromene()
-        {
-            _baza.SacuvajPromene();
+                _baza.SacuvajPromene();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Domain.BazaPodataka;
 using Domain.Modeli;
 using Domain.PomocneMetode.Biljke;
+using Domain.Repozitorijumi;
 using Domain.Servisi;
 
 
@@ -8,13 +9,11 @@ namespace Services.Implementacije
 {
     public class ProizvodnjaServis : IProizvodnjaServis
     {
-        private readonly IBazaPodataka _baza;
+        private readonly IBiljkeRepozitorijum _biljkeRepozitorijum;
         private readonly ILoggerServis _logger;
-
-
-        public ProizvodnjaServis(IBazaPodataka baza, ILoggerServis logger)
+        public ProizvodnjaServis(IBiljkeRepozitorijum biljkeRepozitorijum, ILoggerServis logger)
         {
-            _baza = baza;
+            _biljkeRepozitorijum = biljkeRepozitorijum;
             _logger = logger;
         }
         public Biljka PosadiNovuBiljku(string naziv, string latinskiNaziv, string zemljaPorekla)
@@ -23,18 +22,17 @@ namespace Services.Implementacije
 
             var novaBiljka = new Biljka(naziv, jacina, latinskiNaziv, zemljaPorekla, StanjeBiljke.Posadjena);
 
-
-            _baza.Tabele.Biljke.Add(novaBiljka);
-            _baza.SacuvajPromene();
+            if (!_biljkeRepozitorijum.Dodaj(novaBiljka))
+                throw new Exception("[Proizvodnja] Neuspešno dodavanje biljke u bazu.");
 
             _logger.LogInfo($"[Proizvodnja] Posađena biljka: {novaBiljka.Naziv}, ulja={novaBiljka.JacinaAromaticnihUlja}, id={novaBiljka.Id}");
             return novaBiljka;
         }
         public void PromeniJacinuUlja(Guid idBiljke, double procenat)
         {
-            var biljka = _baza.Tabele.Biljke.FirstOrDefault(b => b.Id == idBiljke);
+            var biljka = _biljkeRepozitorijum.NadjiPoId(idBiljke);
 
-            if (biljka == null)
+            if (biljka.Id == Guid.Empty)
             {
                 _logger.LogError("[Proizvodnja] Greška: Biljka nije pronađena.");
                 return;
@@ -47,7 +45,9 @@ namespace Services.Implementacije
             var stara = biljka.JacinaAromaticnihUlja;
             biljka.JacinaAromaticnihUlja = Math.Round(stara * faktor, 2);
 
-            _baza.SacuvajPromene();
+            if (!_biljkeRepozitorijum.Izmeni(biljka))
+                throw new Exception($"[Proizvodnja] Neuspešno čuvanje jačine ulja. id={biljka.Id}");
+
             _logger.LogInfo($"[Proizvodnja] Promenjena jačina ulja: id={biljka.Id}, {stara} -> {biljka.JacinaAromaticnihUlja} (procenat={procenat}%)");
         }
 
@@ -55,17 +55,19 @@ namespace Services.Implementacije
         {
             if (kolicina <= 0) return new List<Biljka>();
 
-            var zaBerbu = _baza.Tabele.Biljke
+            var zaBerbu = _biljkeRepozitorijum.SveBiljke()
                 .Where(b => b.Naziv == naziv && b.Stanje == StanjeBiljke.Posadjena)
                 .Take(kolicina)
                 .ToList();
 
             foreach (var biljka in zaBerbu)
+            {
                 biljka.Stanje = StanjeBiljke.Ubrana;
+                if (!_biljkeRepozitorijum.Izmeni(biljka))
+                    throw new Exception($"[Proizvodnja] Neuspešno ažuriranje biljke. id={biljka.Id}");
+            }
 
-            _baza.SacuvajPromene();
             _logger.LogInfo($"[Proizvodnja] Ubrano: naziv={naziv}, kolicina={zaBerbu.Count}");
-
             return zaBerbu;
         }
     }

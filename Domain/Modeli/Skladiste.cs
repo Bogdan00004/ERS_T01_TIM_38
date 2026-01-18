@@ -11,9 +11,9 @@
 
         public Skladiste()
         {
-            Id = Guid.NewGuid();
             TrenutniKapacitet = 0;
             AmbalazeId = new List<Guid>();
+            Id = Guid.Empty;
         }
         public Skladiste(string naziv, string lokacija, int maxKapacitet)
         {

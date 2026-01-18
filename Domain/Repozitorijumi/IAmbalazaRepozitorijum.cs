@@ -5,10 +5,11 @@ namespace Domain.Repozitorijumi
     public interface IAmbalazaRepozitorijum
     {
         bool Dodaj(Ambalaza ambalaza);
-        List<Ambalaza> VratiSve();
-        Ambalaza NadjiPoId(Guid id);
+        bool Izmeni(Ambalaza ambalaza);
         bool Obrisi(Guid id);
-        bool SacuvajPromene();
+        List<Ambalaza> VratiSve();
+        Ambalaza NadjiPoId(Guid id);      
         List<Ambalaza> VratiSpakovaneAmbalaze();
+        bool OznaciKaoPoslate(List<Guid> ambalazeId);
     }
 }

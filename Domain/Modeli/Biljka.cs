@@ -17,7 +17,7 @@
 
         public Biljka()
         {
-            Id = Guid.NewGuid();
+            Id = Guid.Empty;
         }
         public Biljka(string naziv, double jacinaAromaticnihUlja, string latinskiNaziv, string zemljaPorekla, StanjeBiljke stanje)
         {

@@ -13,7 +13,7 @@ namespace Domain.Modeli
 
         public Ambalaza()
         {
-            Id = Guid.NewGuid();
+            Id = Guid.Empty;
             ParfemiId = new List<Guid>();
             Status = StatusAmbalaze.Spakovana;
         }

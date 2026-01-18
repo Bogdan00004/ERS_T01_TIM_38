@@ -91,7 +91,7 @@ namespace Loger_Bloger.Servisi.Prodaja
             }
 
             var izabrani = _parfemiRepo.NadjiPoId(parfemId);
-            if (izabrani == null)
+            if (izabrani.Id == Guid.Empty)
             {
                 _logger.LogError($"[Prodaja] Parfem ne postoji: parfemId={parfemId}");
                 throw new Exception("Izabrani parfem ne postoji.");
@@ -187,7 +187,11 @@ namespace Loger_Bloger.Servisi.Prodaja
 
                 preostaloZaSkidanje -= odgovarajuci.Count;
             }
-            _ambalazeRepo.SacuvajPromene();
+            foreach (var amb in preuzeteAmbalaze)
+            {
+                if (!_ambalazeRepo.Izmeni(amb))
+                    throw new Exception("Neuspešno čuvanje promena ambalaža (skidanje parfema).");
+            }
 
             foreach (var amb in preuzeteAmbalaze)
             {
@@ -195,7 +199,8 @@ namespace Loger_Bloger.Servisi.Prodaja
                 if (amb.ParfemiId.Count > 0)
                 {
                     var skladiste = _skladistaRepo.NadjiPoId(amb.SkladisteId);
-                    if (skladiste != null)
+
+                    if (skladiste.Id != Guid.Empty)
                     {
                         // vracamo je nazad u skladiste (posto je ranije skinuta pri slanju prodaji)
                         if (!skladiste.AmbalazeId.Contains(amb.Id))
@@ -210,6 +215,9 @@ namespace Loger_Bloger.Servisi.Prodaja
                                 _logger.LogWarning($"[Prodaja] Ne mogu da vratim ambalazu u skladiste (popunjeno). ambalazaId={amb.Id}, skladisteId={skladiste.Id}");
                             }
                         }
+
+                        if (!_skladistaRepo.Izmeni(skladiste))
+                            throw new Exception("Neuspešno čuvanje promena skladišta.");
                     }
 
                     // vracamo status na Spakovana da bi je katalog opet video
@@ -221,16 +229,19 @@ namespace Loger_Bloger.Servisi.Prodaja
                     amb.Status = StatusAmbalaze.Poslata;
                 }
             }
-
-            _ambalazeRepo.SacuvajPromene();
-            _skladistaRepo.SacuvajPromene();
+           
+            foreach (var amb in preuzeteAmbalaze)
+            {
+                if (!_ambalazeRepo.Izmeni(amb))
+                    throw new Exception("Neuspešno čuvanje promena ambalaža (status).");
+            }
 
             var racun = new FiskalniRacun(tipProdaje, nacinPlacanja);
 
             racun.Stavke.Add(new FiskalnaStavka(izabrani.Id, $"{izabrani.Naziv} ({izabrani.Tip}, {izabrani.NetoKolicina}ml)", kolicinaBocica, izabrani.Cena));
 
-            _racuniRepo.Dodaj(racun);
-            _racuniRepo.SacuvajPromene();
+            if (!_racuniRepo.Dodaj(racun))
+                throw new Exception("Neuspešno čuvanje fiskalnog računa.");
             _logger.LogInfo($"[Prodaja] Prodaja uspešna: parfem={izabrani.Naziv}, kolicina={kolicinaBocica}, iznos={racun.IznosZaNaplatu}");
 
             return racun;

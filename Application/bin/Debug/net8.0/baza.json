@@ -175,6 +175,238 @@
       "LatinskiNaziv": "Lavande Royale_LAT",
       "ZemljaPorekla": "Nepoznato",
       "Stanje": 0
+    },
+    {
+      "Id": "3d77aa4d-9876-48e0-a8f8-dd5d31ad0ef3",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 3.79,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "7b96e36c-434b-467a-9fac-ceaf4482dd13",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 2.81,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "55711fa4-3099-4b27-a8a0-fde2a1df14dc",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 5.67,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "f41aff7b-498d-4c9c-bbff-8948091b5f8b",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 3.03,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "7fc7f76b-2104-405a-ab47-c15aede80e17",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 2.72,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "a4988006-4026-477e-a8c3-61b265eb7ea8",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 5.84,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "01e6861c-e290-4118-b9dc-0eb60336c172",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 3.89,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "15afd747-bb44-4c15-88a8-3a6e746656a9",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 1.97,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "7f5a7048-fdb4-4456-a19b-2fa595630641",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 1.48,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "0285ae77-a563-4601-8faf-53ba81729da0",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 4.42,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "7bbee532-a9d8-42be-bedb-c8e959cc15ca",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 5.08,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "b127acb8-0ae3-4713-9ac8-1f27e7a53fbc",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 4.85,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "70b4d012-a9d6-4234-85d1-51798f9ef636",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 4.65,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "8ff53b82-8567-49a2-ac18-ef156cc21a91",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 2.16,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "7fc87b71-0f8b-4ead-9a1a-9a66d32def8e",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 5.21,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "1aef471c-f4b8-4863-8eb6-990d8e0b9c16",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 3.22,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "e51d6e93-aa05-4007-96ad-aae31a7dc4b9",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 2.97,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "5558bcde-eb5d-41a0-a102-a913a5d25963",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 5.16,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "07117379-a0a3-420d-8344-26139e1692b9",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 2.41,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "4a83e88f-9e9f-4640-bb2a-e9e586a0fd13",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 4.85,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 2
+    },
+    {
+      "Id": "6517b114-3eb6-4e5f-9628-a3450e5de531",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 2.11,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 0
+    },
+    {
+      "Id": "2b314bc6-735d-44be-80f2-853782ed07ab",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 3.11,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 0
+    },
+    {
+      "Id": "2bb3ac2e-36c6-47ce-b5c0-7e89c7df7b5b",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 1.32,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 0
+    },
+    {
+      "Id": "687338ad-2b8e-4514-a4c6-7a46eb5c5256",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 3.24,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 0
+    },
+    {
+      "Id": "62f4ee8a-401f-4d52-bdf3-09e43c0b43f3",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 2.37,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 0
+    },
+    {
+      "Id": "25c4de64-6e42-462b-a207-d32b3f620647",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 4.17,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 0
+    },
+    {
+      "Id": "9f6f944d-8221-4aa3-97e8-11fc8be1bff0",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 1.62,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 0
+    },
+    {
+      "Id": "2944adce-fbb0-4e16-af7b-1d7960f0b7af",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 2.3,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 0
+    },
+    {
+      "Id": "585e1c7f-a10b-4f37-99e3-7470f6be3e92",
+      "Naziv": "Rose Élégante",
+      "JacinaAromaticnihUlja": 1.83,
+      "LatinskiNaziv": "Rose Élégante_LAT",
+      "ZemljaPorekla": "Nepoznato",
+      "Stanje": 0
     }
   ],
   "Parfemi": [
@@ -247,6 +479,46 @@
       "Cena": 120.0,
       "BiljkaId": "70bb9323-dc25-443f-b59e-7e7384c80658",
       "RokTrajanja": "2028-01-18T14:34:31.4800117+01:00"
+    },
+    {
+      "Id": "983c6e58-4186-4eeb-b1df-940fc78f00e7",
+      "Naziv": "Rose Élégante",
+      "Tip": "Kolonjska voda",
+      "NetoKolicina": 250,
+      "SerijskiBroj": "PP-2025-983c6e58-4186-4eeb-b1df-940fc78f00e7",
+      "Cena": 95.0,
+      "BiljkaId": "3d77aa4d-9876-48e0-a8f8-dd5d31ad0ef3",
+      "RokTrajanja": "2028-01-18T18:20:09.1092455+01:00"
+    },
+    {
+      "Id": "1b9c0622-d624-480e-b024-7c848f759bc1",
+      "Naziv": "Rose Élégante",
+      "Tip": "Kolonjska voda",
+      "NetoKolicina": 250,
+      "SerijskiBroj": "PP-2025-1b9c0622-d624-480e-b024-7c848f759bc1",
+      "Cena": 95.0,
+      "BiljkaId": "7b96e36c-434b-467a-9fac-ceaf4482dd13",
+      "RokTrajanja": "2028-01-18T18:20:09.1094298+01:00"
+    },
+    {
+      "Id": "e78b960b-c78f-44ff-ba82-8bf4815e76e0",
+      "Naziv": "Rose Élégante",
+      "Tip": "Kolonjska voda",
+      "NetoKolicina": 250,
+      "SerijskiBroj": "PP-2025-e78b960b-c78f-44ff-ba82-8bf4815e76e0",
+      "Cena": 95.0,
+      "BiljkaId": "55711fa4-3099-4b27-a8a0-fde2a1df14dc",
+      "RokTrajanja": "2028-01-18T18:20:09.1094313+01:00"
+    },
+    {
+      "Id": "f76dca4e-17bd-4f31-80d9-012c9a83a26d",
+      "Naziv": "Rose Élégante",
+      "Tip": "Kolonjska voda",
+      "NetoKolicina": 250,
+      "SerijskiBroj": "PP-2025-f76dca4e-17bd-4f31-80d9-012c9a83a26d",
+      "Cena": 95.0,
+      "BiljkaId": "f41aff7b-498d-4c9c-bbff-8948091b5f8b",
+      "RokTrajanja": "2028-01-18T18:20:09.1094321+01:00"
     }
   ],
   "Ambalaze": [
@@ -263,14 +535,20 @@
       "Naziv": "Ambalaza-002",
       "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
       "SkladisteId": "627839e9-3afd-4ee8-983a-45a25b0e4333",
-      "ParfemiId": [
-        "27309b71-7fc7-4f2d-bcff-ae0705c2b953"
-      ],
-      "Status": 0
+      "ParfemiId": [],
+      "Status": 1
     },
     {
       "Id": "9830c1a8-77b4-4210-91a0-99fa6d9b35a6",
       "Naziv": "Ambalaza-20260118-143431",
+      "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
+      "SkladisteId": "e08ffa24-dad8-494d-ab3f-5c249885daa2",
+      "ParfemiId": [],
+      "Status": 1
+    },
+    {
+      "Id": "60cacd4c-87c2-4201-b2be-38def86ebbe7",
+      "Naziv": "Ambalaza-20260118-182009",
       "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
       "SkladisteId": "e08ffa24-dad8-494d-ab3f-5c249885daa2",
       "ParfemiId": [],
@@ -291,10 +569,8 @@
       "Naziv": "Skladiste - Magacin",
       "Lokacija": "Paris (19e)",
       "MaxKapacitet": 6,
-      "TrenutniKapacitet": 1,
-      "AmbalazeId": [
-        "3549b57d-ef6e-4ac3-af26-476bc9c18bc7"
-      ]
+      "TrenutniKapacitet": 0,
+      "AmbalazeId": []
     }
   ],
   "FiskalniRacuni": [
@@ -329,6 +605,22 @@
         }
       ],
       "IznosZaNaplatu": 600.0
+    },
+    {
+      "Id": "70b70dbd-03ba-40c1-8662-74c83dec8345",
+      "DatumVreme": "2026-01-18T18:20:10.1847425+01:00",
+      "TipProdaje": 1,
+      "NacinPlacanja": 1,
+      "Stavke": [
+        {
+          "ParfemId": "27309b71-7fc7-4f2d-bcff-ae0705c2b953",
+          "NazivParfema": "Rose Élégante (Kolonjska voda, 250ml)",
+          "Kolicina": 5,
+          "CenaPoKomadu": 95.0,
+          "Ukupno": 475.0
+        }
+      ],
+      "IznosZaNaplatu": 475.0
     }
   ]
 }

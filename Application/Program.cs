@@ -23,7 +23,6 @@ namespace Loger_Bloger
             IAmbalazaRepozitorijum ambalazaRepozitorijum = new AmbalazeRepozitorijum(bazaPodataka);
             IBiljkeRepozitorijum biljkeRepozitorijum = new BiljkeRepozitorijum(bazaPodataka);
 
-            var biljkeRepo = new BiljkeRepozitorijum(bazaPodataka);
 
             // parfemi + racuni
             IParfemRepozitorijum parfemRepozitorijum = new ParfemiRepozitorijum(bazaPodataka);
@@ -31,7 +30,7 @@ namespace Loger_Bloger
             ILoggerServis logger = new TekstualniLoggerServis("log.txt");
 
             // Servisi
-            IProizvodnjaServis proizvodnjaServis = new Services.Implementacije.ProizvodnjaServis(bazaPodataka, logger);
+            IProizvodnjaServis proizvodnjaServis = new Services.Implementacije.ProizvodnjaServis(biljkeRepozitorijum, logger);
             IPreradaServis preradaServis = new Services.Implementacije.PreradaServis(biljkeRepozitorijum, parfemRepozitorijum, proizvodnjaServis, logger);
             IPakovanjeServis pakovanjeServis = new Loger_Bloger.Servisi.PakovanjeServis(parfemRepozitorijum, ambalazaRepozitorijum, skladistaRepozitorijum, preradaServis, logger);
             IAutentifikacijaServis autentifikacijaServis = new AutentifikacioniServis(korisniciRepozitorijum, logger);

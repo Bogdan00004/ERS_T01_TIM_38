@@ -12,7 +12,7 @@
         public DateTime RokTrajanja { get; set; }
         public Parfem()
         {
-            Id = Guid.NewGuid();
+            Id = Guid.Empty;
         }
 
         public Parfem(string naziv, string tip, int netoKolicina, string serijskiBroj, decimal cena, Guid biljkaId, DateTime rokTrajanja)

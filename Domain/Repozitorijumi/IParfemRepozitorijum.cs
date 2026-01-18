@@ -4,8 +4,10 @@ namespace Domain.Repozitorijumi
 {
     public interface IParfemRepozitorijum
     {
-        void Dodaj(Parfem parfem);
+        bool Dodaj(Parfem parfem);
+        bool Izmeni(Parfem parfem); 
+        bool Obrisi(Guid id);
         List<Parfem> SviParfemi();
-        Parfem? NadjiPoId(Guid id);
+        Parfem NadjiPoId(Guid id);
     }
 }

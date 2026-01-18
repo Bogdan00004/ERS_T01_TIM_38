@@ -4,9 +4,11 @@ namespace Domain.Repozitorijumi
 {
     public interface ISkladistaRepozitorijum
     {
-        void Dodaj(Skladiste skladiste);
-        Skladiste? NadjiPoId(Guid id);
+        bool Dodaj(Skladiste skladiste);
+        bool Obrisi(Guid id);
+        bool Izmeni(Skladiste skladiste);
+        Skladiste NadjiPoId(Guid id);
         List<Skladiste> VratiSva();
-        void SacuvajPromene();
+        
     }
 }

@@ -34,8 +34,7 @@ public class FiskalniRacun
     public decimal IznosZaNaplatu => Stavke.Sum(s => s.Ukupno);
     public FiskalniRacun()
     {
-        Id = Guid.NewGuid();
-        DatumVreme = DateTime.Now;
+        Id = Guid.Empty;
         Stavke = new List<FiskalnaStavka>();
     }
     public FiskalniRacun(TipProdaje tipProdaje, NacinPlacanja nacinPlacanja, List<FiskalnaStavka>? stavke = null)
