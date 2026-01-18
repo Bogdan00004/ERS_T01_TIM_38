@@ -9,5 +9,7 @@ namespace Domain.Repozitorijumi
         bool Izmeni(Biljka biljka);
         Biljka NadjiPoId(Guid id);
         bool Obrisi(Guid id);
+        List<Biljka> VratiPoNazivuIStanji(string naziv, StanjeBiljke stanje, int maxKolicina);
+        Biljka NadjiPrvuPoNazivu(string naziv);
     }
 }

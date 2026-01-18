@@ -1,6 +1,7 @@
 ﻿using Domain.BazaPodataka;
 using Domain.Modeli;
 using Domain.Repozitorijumi;
+using Domain.Enumeracije;
 
 namespace Database.Repozitorijumi
 {
@@ -61,6 +62,35 @@ namespace Database.Repozitorijumi
         {
             var b = _baza.Tabele.Biljke.FirstOrDefault(x => x.Id == id);
             return b ?? new Biljka(); // nikad null
+        }
+        public List<Biljka> VratiPoNazivuIStanji(string naziv, StanjeBiljke stanje, int maxKolicina)
+        {
+            try
+            {
+                if (maxKolicina <= 0) return new List<Biljka>();
+
+                return _baza.Tabele.Biljke
+                    .Where(b => b.Naziv == naziv && b.Stanje == stanje)
+                    .Take(maxKolicina)
+                    .ToList();
+            }
+            catch
+            {
+                return new List<Biljka>();
+            }
+        }
+
+        public Biljka NadjiPrvuPoNazivu(string naziv)
+        {
+            try
+            {
+                var b = _baza.Tabele.Biljke.FirstOrDefault(x => x.Naziv == naziv);
+                return b ?? new Biljka();
+            }
+            catch
+            {
+                return new Biljka();
+            }
         }
     }
 }
