@@ -20,52 +20,58 @@ namespace Loger_Bloger.Servisi.Skladistenje
 
         public async Task<List<Ambalaza>> PosaljiAmbalazeProdaji(int brojZaSlanje)
         {
-            var sveAmbalaze = _ambalazaRepozitorijum.VratiSve();
-            var svaSkladista = _skladistaRepozitorijum.VratiSva();
-            var poslateAmbalaze = new List<Ambalaza>();
+            _logger.LogInfo($"[Magacinski] Slanje ambalaža prodaji: traženo={brojZaSlanje}.");
 
-            _logger.LogInfo($"[Magacinski] Slanje ambalaža: traženo={brojZaSlanje}.");
+            if (brojZaSlanje <= 0)
+                return new List<Ambalaza>();
 
             int brojZaistaZaSlanje = Math.Min(brojZaSlanje, 1);
 
-            var dostupne = sveAmbalaze
-                .Where(a => a.Status == StatusAmbalaze.Spakovana)
-                .Where(a => svaSkladista.Any(s => s.Id == a.SkladisteId && s.AmbalazeId.Contains(a.Id)))
-                .Take(brojZaistaZaSlanje)
-                .ToList();
+            // repo vraća sva skladišta
+            var svaSkladista = _skladistaRepozitorijum.VratiSva();
+
+            // repo vraća spakovane ambalaže koje se ZAISTA nalaze u skladištu
+            var dostupne = _ambalazaRepozitorijum.VratiSpakovaneKojeSuUSkladistu(svaSkladista, brojZaistaZaSlanje);
 
             if (dostupne.Count == 0)
             {
-                _logger.LogWarning($"[Magacinski] Nema dostupnih spakovanih ambalaža (traženo={brojZaSlanje}).");
+                _logger.LogWarning($"[Magacinski] Nema dostupnih spakovanih ambalaža.");
                 return new List<Ambalaza>();
             }
 
-            var diranaSkladistaId = new HashSet<Guid>();
+            var poslateAmbalaze = new List<Ambalaza>();
+            var idsZaOznacavanje = new List<Guid>();
 
             foreach (var ambalaza in dostupne)
             {
                 await Task.Delay(2500);
+
                 ambalaza.Status = StatusAmbalaze.Poslata;
 
-                var skladiste = svaSkladista.FirstOrDefault(s => s.Id == ambalaza.SkladisteId);
-                if (skladiste != null)
+                bool skladisteOk = _skladistaRepozitorijum
+                    .UkloniAmbalazuIzSkladista(ambalaza.SkladisteId, ambalaza.Id);
+
+                if (!skladisteOk)
                 {
-                    skladiste.AmbalazeId.Remove(ambalaza.Id);
-                    if (skladiste.TrenutniKapacitet > 0) skladiste.TrenutniKapacitet--;
-                    diranaSkladistaId.Add(skladiste.Id);
+                    _logger.LogWarning($"[Magacinski] Neuspešno ažuriranje skladišta. skladisteId={ambalaza.SkladisteId}, ambalazaId={ambalaza.Id}");
+                    continue;
                 }
 
                 poslateAmbalaze.Add(ambalaza);
+                idsZaOznacavanje.Add(ambalaza.Id);
             }
 
-            if (!_ambalazaRepozitorijum.OznaciKaoPoslate(poslateAmbalaze.Select(a => a.Id).ToList()))
-                throw new Exception("Neuspešno čuvanje statusa ambalaža.");
-
-            foreach (var sid in diranaSkladistaId)
+            if (idsZaOznacavanje.Count == 0)
             {
-                var s = svaSkladista.FirstOrDefault(x => x.Id == sid);
-                if (s != null && !_skladistaRepozitorijum.Izmeni(s))
-                    throw new Exception("Neuspešno čuvanje promena skladišta.");
+                _logger.LogWarning("[Magacinski] Nijedna ambalaža nije uspešno poslata.");
+                return new List<Ambalaza>();
+            }
+
+            bool okAmbalaze = _ambalazaRepozitorijum.OznaciKaoPoslate(idsZaOznacavanje);
+            if (!okAmbalaze)
+            {
+                _logger.LogError("[Magacinski] Neuspešno čuvanje statusa ambalaža.");
+                return new List<Ambalaza>();
             }
 
             _logger.LogInfo($"[Magacinski] Poslato ambalaža: {poslateAmbalaze.Count}.");
@@ -73,3 +79,4 @@ namespace Loger_Bloger.Servisi.Skladistenje
         }
     }
 }
+

@@ -81,7 +81,17 @@ namespace Presentation.Authentifikacija
                     Console.Write("Opcija: ");
                     var izborTipa = Console.ReadLine();
 
-                    TipKorisnika tipKorisnika = izborTipa == "1" ? TipKorisnika.MenadzerProdaje : TipKorisnika.Prodavac;
+                    TipKorisnika tipKorisnika;
+
+                    if (izborTipa == "1")
+                        tipKorisnika = TipKorisnika.MenadzerProdaje;
+                    else if (izborTipa == "2")
+                        tipKorisnika = TipKorisnika.Prodavac;
+                    else
+                    {
+                        Console.WriteLine("Nepoznata opcija. Molimo izaberite 1 ili 2.");
+                        continue;
+                    }
 
                     var noviKorisnik = new Korisnik(korisnickoIme, lozinka, imePrezime, tipKorisnika);
                     var (uspesno, korisnik) = _autentifikacijaServis.Registracija(noviKorisnik);

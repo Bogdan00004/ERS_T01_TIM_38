@@ -1,6 +1,7 @@
 ﻿using Domain.BazaPodataka;
 using Domain.Enumeracije;
 using Domain.Modeli;
+using Domain.PomocneMetode.Prodaja;
 using Domain.Repozitorijumi;
 
 namespace Database.Repozitorijumi
@@ -17,6 +18,10 @@ namespace Database.Repozitorijumi
         {
             try
             {
+                var indeks = _baza.Tabele.Ambalaze.FindIndex(a => a.Id == ambalaza.Id);
+                if (indeks == -1) return false;
+
+                _baza.Tabele.Ambalaze[indeks] = ambalaza;
                 _baza.SacuvajPromene();
                 return true;
             }
@@ -59,7 +64,7 @@ namespace Database.Repozitorijumi
                 if (ambalaza == null)
                     return false;
                 _baza.Tabele.Ambalaze.Remove(ambalaza);
-                _baza.SacuvajPromene(); 
+                _baza.SacuvajPromene();
                 return true;
             }
             catch
@@ -85,6 +90,42 @@ namespace Database.Repozitorijumi
                 return true;
             }
             catch { return false; }
+        }
+        public List<Ambalaza> VratiSpakovaneKojeSuUSkladistu(List<Skladiste> skladista, int maxBroj)
+        {
+            var rezultat = new List<Ambalaza>();
+            if (maxBroj <= 0) return rezultat;
+
+            foreach (var a in _baza.Tabele.Ambalaze)
+            {
+                if (a.Status != StatusAmbalaze.Spakovana) continue;
+
+                bool nalaziSe = false;
+
+                foreach (var s in skladista)
+                {
+                    if (s.Id != a.SkladisteId) continue;
+
+                    // proveri da li je ID ambalaže upisan u skladiste
+                    for (int i = 0; i < s.AmbalazeId.Count; i++)
+                    {
+                        if (s.AmbalazeId[i] == a.Id)
+                        {
+                            nalaziSe = true;
+                            break;
+                        }
+                    }
+
+                    if (nalaziSe) break;
+                }
+
+                if (!nalaziSe) continue;
+
+                rezultat.Add(a);
+                if (rezultat.Count >= maxBroj) break;
+            }
+
+            return rezultat;
         }
     }
 }

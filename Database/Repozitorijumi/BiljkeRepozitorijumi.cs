@@ -1,7 +1,6 @@
 ﻿using Domain.BazaPodataka;
 using Domain.Modeli;
 using Domain.Repozitorijumi;
-using Domain.Enumeracije;
 
 namespace Database.Repozitorijumi
 {

@@ -135,3 +135,5 @@ INFO | 2026-01-18 18:20:09 | [Pakovanje] Ambalaza obezbedjena u skladistu: ambal
 INFO | 2026-01-18 18:20:09 | [Distribucioni] Slanje ambalaža prodaji: traženo=3 (limit=3, delay=0.5s).
 INFO | 2026-01-18 18:20:10 | [Distribucioni] Poslato ambalaža: 2.
 INFO | 2026-01-18 18:20:10 | [Prodaja] Prodaja uspešna: parfem=Rose Élégante, kolicina=5, iznos=475,0
+INFO | 2026-01-18 21:53:37 | Prijava uspešna: admin
+INFO | 2026-01-18 21:55:30 | Prijava uspešna: admin

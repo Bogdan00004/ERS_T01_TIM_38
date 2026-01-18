@@ -4,13 +4,20 @@ namespace Domain.PomocneMetode.Biljke
 {
     public static class BiljkaRacunanje
     {
-        public static int IzracunajPotrebneBiljke(int brojBocica, int zapreminaMl)
+        public static bool IzracunajPotrebanBrojBiljaka(int brojBocica, int zapreminaBocice, out int potrebanBrojBiljaka)
         {
-            if (brojBocica <= 0) throw new ArgumentOutOfRangeException(nameof(brojBocica));
-            if (zapreminaMl <= 0) throw new ArgumentOutOfRangeException(nameof(zapreminaMl));
+            potrebanBrojBiljaka = 0;
 
-            int ukupnoMl = brojBocica * zapreminaMl;
-            return (int)Math.Ceiling(ukupnoMl / (double)PreradaKonstante.ML_PO_BILJCI);
+            if (brojBocica <= 0) return false;
+            if (zapreminaBocice != 150 && zapreminaBocice != 250) return false;
+
+            int ukupnoMl = brojBocica * zapreminaBocice;
+
+            potrebanBrojBiljaka = ukupnoMl / 50;
+            if (ukupnoMl % 50 != 0)
+                potrebanBrojBiljaka++;
+
+            return true;
         }
     }
 }

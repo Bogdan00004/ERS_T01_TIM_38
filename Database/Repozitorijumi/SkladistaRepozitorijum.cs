@@ -18,7 +18,7 @@ namespace Database.Repozitorijumi
             try
             {
                 _baza.Tabele.Skladista.Add(skladiste);
-                _baza.SacuvajPromene();  
+                _baza.SacuvajPromene();
                 return true;
             }
             catch
@@ -64,6 +64,32 @@ namespace Database.Repozitorijumi
             {
                 return false;
             }
+        }
+        public bool UkloniAmbalazuIzSkladista(Guid skladisteId, Guid ambalazaId)
+        {
+            try
+            {
+                var s = NadjiPoId(skladisteId);
+                if (s.Id == Guid.Empty) return false;
+
+                bool uklonjeno = false;
+                for (int i = 0; i < s.AmbalazeId.Count; i++)
+                {
+                    if (s.AmbalazeId[i] == ambalazaId)
+                    {
+                        s.AmbalazeId.RemoveAt(i);
+                        uklonjeno = true;
+                        break;
+                    }
+                }
+
+                if (!uklonjeno) return false;
+
+                if (s.TrenutniKapacitet > 0) s.TrenutniKapacitet--;
+
+                return Izmeni(s);
+            }
+            catch { return false; }
         }
     }
 }

@@ -7,21 +7,26 @@ namespace Loger_Bloger.Servisi.Skladistenje
     {
         private readonly ISkladistenjeServis _magacinskiServis;
         private readonly ISkladistenjeServis _distribucioniServis;
+        private readonly ILoggerServis _logger;
 
-        public SkladistenjeServisUloge(MagacinskiCentarServis magacinskiServis, DistribucioniCentarServis distribucioniServis)
+        public SkladistenjeServisUloge(MagacinskiCentarServis magacinskiServis, DistribucioniCentarServis distribucioniServis, ILoggerServis logger)
         {
             _magacinskiServis = magacinskiServis;
             _distribucioniServis = distribucioniServis;
+            _logger = logger;
         }
 
         public ISkladistenjeServis KreirajServis(TipKorisnika uloga)
         {
-            return uloga switch
-            {
-                TipKorisnika.Prodavac => _magacinskiServis,
-                TipKorisnika.MenadzerProdaje => _distribucioniServis,
-                _ => throw new ArgumentException("Nepoznata uloga korisnika.")
-            };
+            if (uloga == TipKorisnika.Prodavac)
+                return _magacinskiServis;
+
+            if (uloga == TipKorisnika.MenadzerProdaje)
+                return _distribucioniServis;
+
+            // nema throw
+            _logger.LogError($"[SkladistenjeServisUloge] Nepoznata uloga korisnika: {uloga}. Vracam magacinski servis kao podrazumevani.");
+            return _magacinskiServis;
         }
     }
 }

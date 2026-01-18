@@ -8,9 +8,9 @@ namespace Tests.Domain
     public class BiljkaTests
     {
         [Test]
-        public void Konstruktor_Generise_Id_Ima_Default_Stanje()
+        public void ParametarskiKonstruktor_Generise_Id_I_Postavlja_Stanje()
         {
-            var b = new Biljka();
+            var b = new Biljka("Lavanda", 2.5, "Lavandula", "Francuska", StanjeBiljke.Posadjena);
 
             Assert.That(b.Id, Is.Not.EqualTo(Guid.Empty));
             Assert.That(b.Stanje, Is.EqualTo(StanjeBiljke.Posadjena));

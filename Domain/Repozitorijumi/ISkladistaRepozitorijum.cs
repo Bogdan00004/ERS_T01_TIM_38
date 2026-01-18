@@ -9,6 +9,7 @@ namespace Domain.Repozitorijumi
         bool Izmeni(Skladiste skladiste);
         Skladiste NadjiPoId(Guid id);
         List<Skladiste> VratiSva();
-        
+        bool UkloniAmbalazuIzSkladista(Guid skladisteId, Guid ambalazaId);
+
     }
 }

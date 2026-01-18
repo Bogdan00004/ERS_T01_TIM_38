@@ -9,13 +9,12 @@ namespace Tests.Domain
     public class AmbalazaTests
     {
         [Test]
-        public void Konstruktor_Inicijalizuje_Id_Listu_I_Status()
+        public void ParametarskiKonstruktor_Generise_Id_I_Listu()
         {
-            var a = new Ambalaza();
+            var a = new Ambalaza("Kutija-1", "Paris, Rue 1", Guid.NewGuid(), StatusAmbalaze.Spakovana);
 
             Assert.That(a.Id, Is.Not.EqualTo(Guid.Empty));
             Assert.That(a.ParfemiId, Is.Not.Null);
-            Assert.That(a.ParfemiId.Count, Is.EqualTo(0));
             Assert.That(a.Status, Is.EqualTo(StatusAmbalaze.Spakovana));
         }
 

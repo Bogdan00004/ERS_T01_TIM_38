@@ -28,6 +28,7 @@ namespace Loger_Bloger
             IParfemRepozitorijum parfemRepozitorijum = new ParfemiRepozitorijum(bazaPodataka);
             IFiskalniRacunRepozitorijum fiskalniRacunRepozitorijum = new FiskalniRacuniRepozitorijum(bazaPodataka);
             ILoggerServis logger = new TekstualniLoggerServis("log.txt");
+            IKatalogRepozitorijum katalogRepozitorijum = new KatalogRepozitorijum(parfemRepozitorijum, ambalazaRepozitorijum, skladistaRepozitorijum);
 
             // Servisi
             IProizvodnjaServis proizvodnjaServis = new Services.Implementacije.ProizvodnjaServis(biljkeRepozitorijum, logger);
@@ -37,9 +38,7 @@ namespace Loger_Bloger
 
             var magacinskiServis = new MagacinskiCentarServis(skladistaRepozitorijum, ambalazaRepozitorijum, logger);
             var distribucioniServis = new DistribucioniCentarServis(skladistaRepozitorijum, ambalazaRepozitorijum, logger);
-            ISkladistenjeServisUloge uloga = new SkladistenjeServisUloge(magacinskiServis, distribucioniServis);
-
-
+            ISkladistenjeServisUloge uloga = new SkladistenjeServisUloge(magacinskiServis, distribucioniServis, logger);
 
             // Login
             Func<TipKorisnika, IProdajaServis> prodajaServisFactory = (tipKorisnika) =>
@@ -53,7 +52,8 @@ namespace Loger_Bloger
                     skladistenjeServis,
                     pakovanjeServis,
                     skladistaRepozitorijum,
-                    logger);
+                    logger,
+                    katalogRepozitorijum);
             };
 
             // Koristi autentifikacioni meni iz Presentation/Autentifikacija
