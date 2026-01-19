@@ -1,14 +1,14 @@
 {
   "Korisnici": [
     {
-      "Id": "c6bc5eab-2a31-4d16-8211-9daeaecc96ac",
+      "Id": "0aa96854-b203-4dc0-848b-d9f22721322a",
       "KorisnickoIme": "admin",
       "Lozinka": "admin123",
       "ImePrezime": "Bogdan Pecanac",
       "Uloga": 0
     },
     {
-      "Id": "c6b37faf-1a2b-46c3-9566-2726219dd120",
+      "Id": "793db558-8014-4900-ad80-8def05fb56d3",
       "KorisnickoIme": "prodavac",
       "Lozinka": "1234567",
       "ImePrezime": "Petar Petrovic",
@@ -17,7 +17,7 @@
   ],
   "Biljke": [
     {
-      "Id": "cce22702-6ccc-4d00-8232-773c0ad814d7",
+      "Id": "c4c99a5a-5fac-4690-a908-f3432f3d6290",
       "Naziv": "Lavanda",
       "JacinaAromaticnihUlja": 3.2,
       "LatinskiNaziv": "Lavandula angustifolia",
@@ -25,7 +25,7 @@
       "Stanje": 1
     },
     {
-      "Id": "29a5f41f-26d1-4dfc-9103-1b9e451fb253",
+      "Id": "ff3ec6e6-859a-497b-ad26-58bed415142c",
       "Naziv": "Ruža",
       "JacinaAromaticnihUlja": 4.1,
       "LatinskiNaziv": "Rosa damascena",
@@ -33,7 +33,7 @@
       "Stanje": 1
     },
     {
-      "Id": "8df5eebc-f0c5-47f4-8af7-4cc6b4d662e0",
+      "Id": "9898199a-feda-4e21-a89e-69cfb2487458",
       "Naziv": "Jasmin",
       "JacinaAromaticnihUlja": 2.85,
       "LatinskiNaziv": "Jasminum grandiflorum",
@@ -41,7 +41,7 @@
       "Stanje": 0
     },
     {
-      "Id": "c6f9ec28-4c13-4755-bcc1-3dc99017211e",
+      "Id": "08025fd4-cbb6-406f-9c6b-29cd67106c1f",
       "Naziv": "Bergamot",
       "JacinaAromaticnihUlja": 3.95,
       "LatinskiNaziv": "Citrus bergamia",
@@ -51,122 +51,122 @@
   ],
   "Parfemi": [
     {
-      "Id": "c5129b03-db30-4e3e-83a7-eb43aa7b5088",
+      "Id": "0546b052-93e6-43cc-8572-4d4cb98ce190",
       "Naziv": "Lavande Royale",
       "Tip": "Parfem",
       "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-c5129b03-db30-4e3e-83a7-eb43aa7b5088",
+      "SerijskiBroj": "PP-2025-0546b052-93e6-43cc-8572-4d4cb98ce190",
       "Cena": 120.0,
-      "BiljkaId": "cce22702-6ccc-4d00-8232-773c0ad814d7",
-      "RokTrajanja": "2028-01-19T01:43:35.97539+01:00"
+      "BiljkaId": "c4c99a5a-5fac-4690-a908-f3432f3d6290",
+      "RokTrajanja": "2028-01-19T08:29:34.1946469+01:00"
     },
     {
-      "Id": "b58ec168-4690-47be-83fb-e78bde9390ed",
+      "Id": "f89c61a4-b73a-4d42-999c-9ed2793c3b21",
       "Naziv": "Lavande Royale",
       "Tip": "Parfem",
       "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-b58ec168-4690-47be-83fb-e78bde9390ed",
+      "SerijskiBroj": "PP-2025-f89c61a4-b73a-4d42-999c-9ed2793c3b21",
       "Cena": 120.0,
-      "BiljkaId": "cce22702-6ccc-4d00-8232-773c0ad814d7",
-      "RokTrajanja": "2028-01-19T01:43:35.979195+01:00"
+      "BiljkaId": "c4c99a5a-5fac-4690-a908-f3432f3d6290",
+      "RokTrajanja": "2028-01-19T08:29:34.2001625+01:00"
     },
     {
-      "Id": "c05354fa-21aa-4185-a62a-45b45f29d7a7",
+      "Id": "f3138282-318c-457c-8b0e-82aed36b53f6",
       "Naziv": "Rose Élégante",
       "Tip": "Kolonjska voda",
       "NetoKolicina": 250,
-      "SerijskiBroj": "PP-2025-c05354fa-21aa-4185-a62a-45b45f29d7a7",
+      "SerijskiBroj": "PP-2025-f3138282-318c-457c-8b0e-82aed36b53f6",
       "Cena": 95.0,
-      "BiljkaId": "29a5f41f-26d1-4dfc-9103-1b9e451fb253",
-      "RokTrajanja": "2028-01-19T01:43:35.9791985+01:00"
+      "BiljkaId": "ff3ec6e6-859a-497b-ad26-58bed415142c",
+      "RokTrajanja": "2028-01-19T08:29:34.2001679+01:00"
     },
     {
-      "Id": "5811f793-a2bd-44de-b15b-b9f9f67b0eac",
+      "Id": "f06a9905-8c19-41ed-8593-933596a0f53a",
       "Naziv": "Bergamote Fraîche",
       "Tip": "Kolonjska voda",
       "NetoKolicina": 250,
-      "SerijskiBroj": "PP-2025-5811f793-a2bd-44de-b15b-b9f9f67b0eac",
+      "SerijskiBroj": "PP-2025-f06a9905-8c19-41ed-8593-933596a0f53a",
       "Cena": 85.0,
-      "BiljkaId": "c6f9ec28-4c13-4755-bcc1-3dc99017211e",
-      "RokTrajanja": "2028-01-19T01:43:35.979201+01:00"
+      "BiljkaId": "08025fd4-cbb6-406f-9c6b-29cd67106c1f",
+      "RokTrajanja": "2028-01-19T08:29:34.2001719+01:00"
     },
     {
-      "Id": "5148417e-6e22-4c8a-9678-55e43a96d46e",
+      "Id": "5e90796e-855e-4861-9c84-4c6276e12527",
       "Naziv": "Citrus Impérial",
       "Tip": "Parfem",
       "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-5148417e-6e22-4c8a-9678-55e43a96d46e",
+      "SerijskiBroj": "PP-2025-5e90796e-855e-4861-9c84-4c6276e12527",
       "Cena": 130.0,
-      "BiljkaId": "c6f9ec28-4c13-4755-bcc1-3dc99017211e",
-      "RokTrajanja": "2028-01-19T01:43:35.979202+01:00"
+      "BiljkaId": "08025fd4-cbb6-406f-9c6b-29cd67106c1f",
+      "RokTrajanja": "2028-01-19T08:29:34.2001727+01:00"
     },
     {
-      "Id": "811c6d18-0c43-40d2-b155-48b0de206c51",
+      "Id": "88f093bd-63cf-4a64-a5af-e3fcf64f1867",
       "Naziv": "Citrus Impérial",
       "Tip": "Parfem",
       "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-811c6d18-0c43-40d2-b155-48b0de206c51",
+      "SerijskiBroj": "PP-2025-88f093bd-63cf-4a64-a5af-e3fcf64f1867",
       "Cena": 130.0,
-      "BiljkaId": "c6f9ec28-4c13-4755-bcc1-3dc99017211e",
-      "RokTrajanja": "2028-01-19T01:43:35.9792027+01:00"
+      "BiljkaId": "08025fd4-cbb6-406f-9c6b-29cd67106c1f",
+      "RokTrajanja": "2028-01-19T08:29:34.2001734+01:00"
     },
     {
-      "Id": "b0b9d07f-c063-4ab5-8ce6-9af874e80db0",
+      "Id": "f254ef60-213e-4ef0-b4c0-e64ab016abb4",
       "Naziv": "Jardin de Jasmin",
       "Tip": "Parfem",
       "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-b0b9d07f-c063-4ab5-8ce6-9af874e80db0",
+      "SerijskiBroj": "PP-2025-f254ef60-213e-4ef0-b4c0-e64ab016abb4",
       "Cena": 140.0,
-      "BiljkaId": "8df5eebc-f0c5-47f4-8af7-4cc6b4d662e0",
-      "RokTrajanja": "2028-01-19T01:43:35.9792034+01:00"
+      "BiljkaId": "9898199a-feda-4e21-a89e-69cfb2487458",
+      "RokTrajanja": "2028-01-19T08:29:34.2001751+01:00"
     }
   ],
   "Ambalaze": [
     {
-      "Id": "4ebe0220-7cf0-4569-8f32-ad5a036dbe6b",
+      "Id": "54a8d313-00ae-404a-9485-831f5da53a38",
       "Naziv": "Ambalaza-001",
       "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
-      "SkladisteId": "db348a6b-47a2-4453-8239-33b9f5d65e79",
+      "SkladisteId": "aa07d0ff-7d21-4146-a10f-7eb330d393c5",
       "ParfemiId": [
-        "c5129b03-db30-4e3e-83a7-eb43aa7b5088",
-        "b58ec168-4690-47be-83fb-e78bde9390ed",
-        "5148417e-6e22-4c8a-9678-55e43a96d46e",
-        "811c6d18-0c43-40d2-b155-48b0de206c51"
+        "0546b052-93e6-43cc-8572-4d4cb98ce190",
+        "f89c61a4-b73a-4d42-999c-9ed2793c3b21",
+        "5e90796e-855e-4861-9c84-4c6276e12527",
+        "88f093bd-63cf-4a64-a5af-e3fcf64f1867"
       ],
       "Status": 0
     },
     {
-      "Id": "b7b69898-441c-41c7-b920-4b5485ae7f87",
+      "Id": "d69737ff-0836-4f72-9f8c-1f2282a336a8",
       "Naziv": "Ambalaza-002",
       "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
-      "SkladisteId": "c90f3897-b26d-4fbe-8817-4fb2e0477152",
+      "SkladisteId": "d6fce5da-5585-444f-abb9-b27d9d6cb460",
       "ParfemiId": [
-        "c05354fa-21aa-4185-a62a-45b45f29d7a7",
-        "5811f793-a2bd-44de-b15b-b9f9f67b0eac",
-        "b0b9d07f-c063-4ab5-8ce6-9af874e80db0"
+        "f3138282-318c-457c-8b0e-82aed36b53f6",
+        "f06a9905-8c19-41ed-8593-933596a0f53a",
+        "f254ef60-213e-4ef0-b4c0-e64ab016abb4"
       ],
       "Status": 0
     }
   ],
   "Skladista": [
     {
-      "Id": "db348a6b-47a2-4453-8239-33b9f5d65e79",
+      "Id": "aa07d0ff-7d21-4146-a10f-7eb330d393c5",
       "Naziv": "Skladiste - Centar",
       "Lokacija": "Paris (1er)",
       "MaxKapacitet": 10,
       "TrenutniKapacitet": 1,
       "AmbalazeId": [
-        "4ebe0220-7cf0-4569-8f32-ad5a036dbe6b"
+        "54a8d313-00ae-404a-9485-831f5da53a38"
       ]
     },
     {
-      "Id": "c90f3897-b26d-4fbe-8817-4fb2e0477152",
+      "Id": "d6fce5da-5585-444f-abb9-b27d9d6cb460",
       "Naziv": "Skladiste - Magacin",
       "Lokacija": "Paris (19e)",
       "MaxKapacitet": 6,
       "TrenutniKapacitet": 1,
       "AmbalazeId": [
-        "b7b69898-441c-41c7-b920-4b5485ae7f87"
+        "d69737ff-0836-4f72-9f8c-1f2282a336a8"
       ]
     }
   ],

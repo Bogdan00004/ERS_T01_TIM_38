@@ -40,6 +40,7 @@ namespace Loger_Bloger.Servisi.Prodaja
             return _katalogRepo.VratiRaspolozivo(izabrani.Naziv, izabrani.Tip, izabrani.NetoKolicina);
         }
 
+        
         private async Task<List<Ambalaza>> PreuzmiAmbalaze(int kolicinaBocica, Dictionary<Guid, Parfem> mapaParfema, string trazeniKey, Guid parfemId)
         {
             var preuzete = new List<Ambalaza>();
@@ -63,13 +64,17 @@ namespace Loger_Bloger.Servisi.Prodaja
                 {
                     _logger.LogWarning($"[Prodaja] Skladište nema dostupnih spakovanih ambalaža (parfemId={parfemId}).");
 
-                    return new List<Ambalaza>();
+                    break; ;
                 }
 
                 for (int i = 0; i < nove.Count; i++)
                     preuzete.Add(nove[i]);
 
                 skupljeno = ProdajaPomocneMetode.PrebrojSkupljeno(preuzete, mapaParfema, trazeniKey);
+            }
+            if (skupljeno < kolicinaBocica)
+            {
+                _logger.LogWarning($"[Prodaja] Nije skupljeno dovoljno bočica iz preuzetih ambalaža: skupljeno={skupljeno}, trazeno={kolicinaBocica} (parfemId={parfemId}).");
             }
 
             return preuzete;
@@ -92,16 +97,31 @@ namespace Loger_Bloger.Servisi.Prodaja
 
             //PRE ORDER
             int raspolozivo = RaspolozivoZa(izabrani);
-
             int izLagera = Math.Min(raspolozivo, kolicinaBocica);
             int preOrder = kolicinaBocica - izLagera;
 
             if (preOrder > 0)
             {
-                _logger.LogWarning($"[Prodaja] PRE-ORDER: trazeno={kolicinaBocica}, raspolozivo={raspolozivo}, " + $"isporuceno={izLagera}, preorder={preOrder}");
-                _logger.LogInfo($"[Prodaja] PRE-ORDER se naplaćuje odmah za celu količinu: {kolicinaBocica}.");
+                _logger.LogWarning($"[Prodaja] PRE-ORDER: trazeno={kolicinaBocica}, raspolozivo={raspolozivo}, isporuceno={izLagera}, preorder={preOrder}");
 
+                
+                var ciljnoSkladiste = ProdajaPomocneMetode.NadjiNajboljeSkladiste(_skladistaRepo);
+                if (ciljnoSkladiste.Id == Guid.Empty)
+                    return Fail("[Prodaja] Nema dostupnog skladišta za dopunu (pre-order).");
+
+                bool dopunjeno = _pakovanjeServis.ObezbediAmbalazuUSkladistu(izabrani.Naziv,izabrani.Tip,izabrani.Cena,preOrder,izabrani.NetoKolicina,ciljnoSkladiste.Id);
+
+                if (!dopunjeno)
+                    _logger.LogWarning($"[Prodaja] Dopuna za PRE-ORDER nije uspela (parfemId={parfemId}). Pokušaću sa delimičnom isporukom.");
+
+       
+                raspolozivo = RaspolozivoZa(izabrani);
+                izLagera = Math.Min(raspolozivo, kolicinaBocica);
+                preOrder = kolicinaBocica - izLagera;
+
+                _logger.LogInfo($"[Prodaja] Nakon dopune: raspolozivo={raspolozivo}, isporuceno={izLagera}, preorder={preOrder}.");
             }
+            mapaParfema = ProdajaPomocneMetode.NapraviMapuParfema(_parfemiRepo);
             // Ako imamo nešto na lageru – skidamo taj deo
             if (izLagera > 0)
             {
@@ -109,8 +129,19 @@ namespace Loger_Bloger.Servisi.Prodaja
                 if (preuzete == null || preuzete.Count == 0)
                     return Fail("[Prodaja] Neuspešno preuzimanje ambalaža (delimična isporuka).");
 
-                if (!ProdajaPomocneMetode.SkiniParfeme(preuzete, izLagera, mapaParfema, trazeniKey, _logger))
+                int stvarnoSkupljeno = ProdajaPomocneMetode.PrebrojSkupljeno(preuzete, mapaParfema, trazeniKey);
+
+                if (stvarnoSkupljeno == 0)
+                    return Fail("[Prodaja] Neuspešno preuzimanje ambalaža (nema traženog parfema u preuzetim ambalažama).");
+
+                int isporuci = Math.Min(izLagera, stvarnoSkupljeno);
+                mapaParfema = ProdajaPomocneMetode.NapraviMapuParfema(_parfemiRepo);
+
+                if (!ProdajaPomocneMetode.SkiniParfeme(preuzete, isporuci, mapaParfema, trazeniKey, _logger))
                     return Fail("[Prodaja] Neuspešno skidanje parfema iz ambalaža.");
+
+                izLagera = isporuci;
+                preOrder = kolicinaBocica - izLagera;
 
                 if (!ProdajaPomocneMetode.SacuvajAmbalaze(_ambalazeRepo, preuzete, "[Prodaja] Neuspešno čuvanje promena ambalaža.", _logger))
                     return Fail("[Prodaja] Neuspešno čuvanje ambalaža.");
