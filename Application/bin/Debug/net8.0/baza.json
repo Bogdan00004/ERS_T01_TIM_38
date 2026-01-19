@@ -1,14 +1,14 @@
 {
   "Korisnici": [
     {
-      "Id": "58d50b6a-8784-47ac-8da5-5f74e19b0749",
+      "Id": "c6bc5eab-2a31-4d16-8211-9daeaecc96ac",
       "KorisnickoIme": "admin",
       "Lozinka": "admin123",
       "ImePrezime": "Bogdan Pecanac",
       "Uloga": 0
     },
     {
-      "Id": "5efc28b0-18a3-437a-bc20-b75fa2edfb48",
+      "Id": "c6b37faf-1a2b-46c3-9566-2726219dd120",
       "KorisnickoIme": "prodavac",
       "Lozinka": "1234567",
       "ImePrezime": "Petar Petrovic",
@@ -17,7 +17,7 @@
   ],
   "Biljke": [
     {
-      "Id": "f809a695-d79b-43d2-8ee3-ea278d9cd7ad",
+      "Id": "cce22702-6ccc-4d00-8232-773c0ad814d7",
       "Naziv": "Lavanda",
       "JacinaAromaticnihUlja": 3.2,
       "LatinskiNaziv": "Lavandula angustifolia",
@@ -25,7 +25,7 @@
       "Stanje": 1
     },
     {
-      "Id": "cdb0e914-aef8-4a83-8d01-f646f6bbdc3b",
+      "Id": "29a5f41f-26d1-4dfc-9103-1b9e451fb253",
       "Naziv": "Ruža",
       "JacinaAromaticnihUlja": 4.1,
       "LatinskiNaziv": "Rosa damascena",
@@ -33,7 +33,7 @@
       "Stanje": 1
     },
     {
-      "Id": "086b020c-20d1-41ad-a2c1-42d93633d6e0",
+      "Id": "8df5eebc-f0c5-47f4-8af7-4cc6b4d662e0",
       "Naziv": "Jasmin",
       "JacinaAromaticnihUlja": 2.85,
       "LatinskiNaziv": "Jasminum grandiflorum",
@@ -41,586 +41,134 @@
       "Stanje": 0
     },
     {
-      "Id": "814b881d-4238-46d3-8b94-4c1f4a0bcf8f",
+      "Id": "c6f9ec28-4c13-4755-bcc1-3dc99017211e",
       "Naziv": "Bergamot",
       "JacinaAromaticnihUlja": 3.95,
       "LatinskiNaziv": "Citrus bergamia",
       "ZemljaPorekla": "Italija",
       "Stanje": 1
-    },
-    {
-      "Id": "b6b30bb8-7992-4396-b6ad-b3e484f0ff45",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 1.16,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "4e52045f-dabe-410b-974f-ca1bab53376d",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 4.04,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "85ba88ee-1b17-4100-b0e3-4d5d47e68589",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 3.4,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "70bb9323-dc25-443f-b59e-7e7384c80658",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 4.27,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "27bb7256-9a5d-46cb-86ff-7a1c87adf3f3",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 2.76,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "06bcc9b4-682f-4552-8042-338445fa6780",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 1.96,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "4b4a4623-2354-4a07-a440-8df567047857",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 2.66,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "8488b712-c4bc-4432-928c-3a6cbd9e67d0",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 3.12,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "10f9fa30-7619-4367-b671-94c72210f778",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 1.98,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "2ccd811a-6081-4dc6-b3b8-f6a65c87831f",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 5.27,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "e8b4af1b-882a-4419-ac9b-7b8156f67e76",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 2.34,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "8147406c-9a08-46d4-8fc8-870e11bd512d",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 4.89,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "a03a2d07-81a0-434a-9caf-88839f1e6434",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 4.45,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
-    },
-    {
-      "Id": "8ba2700e-6d3c-4905-99ee-bef5986c3bb2",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 3.4,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
-    },
-    {
-      "Id": "5f456621-4a1f-4239-8237-4a4f45d07fe3",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 2.15,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
-    },
-    {
-      "Id": "7cfddaf6-fb85-456e-baa7-439c61f26852",
-      "Naziv": "Lavande Royale",
-      "JacinaAromaticnihUlja": 3.9,
-      "LatinskiNaziv": "Lavande Royale_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
-    },
-    {
-      "Id": "3d77aa4d-9876-48e0-a8f8-dd5d31ad0ef3",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 3.79,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "7b96e36c-434b-467a-9fac-ceaf4482dd13",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 2.81,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "55711fa4-3099-4b27-a8a0-fde2a1df14dc",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 5.67,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "f41aff7b-498d-4c9c-bbff-8948091b5f8b",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 3.03,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "7fc7f76b-2104-405a-ab47-c15aede80e17",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 2.72,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "a4988006-4026-477e-a8c3-61b265eb7ea8",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 5.84,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "01e6861c-e290-4118-b9dc-0eb60336c172",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 3.89,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "15afd747-bb44-4c15-88a8-3a6e746656a9",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 1.97,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "7f5a7048-fdb4-4456-a19b-2fa595630641",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 1.48,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "0285ae77-a563-4601-8faf-53ba81729da0",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 4.42,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "7bbee532-a9d8-42be-bedb-c8e959cc15ca",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 5.08,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "b127acb8-0ae3-4713-9ac8-1f27e7a53fbc",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 4.85,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "70b4d012-a9d6-4234-85d1-51798f9ef636",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 4.65,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "8ff53b82-8567-49a2-ac18-ef156cc21a91",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 2.16,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "7fc87b71-0f8b-4ead-9a1a-9a66d32def8e",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 5.21,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "1aef471c-f4b8-4863-8eb6-990d8e0b9c16",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 3.22,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "e51d6e93-aa05-4007-96ad-aae31a7dc4b9",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 2.97,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "5558bcde-eb5d-41a0-a102-a913a5d25963",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 5.16,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "07117379-a0a3-420d-8344-26139e1692b9",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 2.41,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "4a83e88f-9e9f-4640-bb2a-e9e586a0fd13",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 4.85,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 2
-    },
-    {
-      "Id": "6517b114-3eb6-4e5f-9628-a3450e5de531",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 2.11,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
-    },
-    {
-      "Id": "2b314bc6-735d-44be-80f2-853782ed07ab",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 3.11,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
-    },
-    {
-      "Id": "2bb3ac2e-36c6-47ce-b5c0-7e89c7df7b5b",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 1.32,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
-    },
-    {
-      "Id": "687338ad-2b8e-4514-a4c6-7a46eb5c5256",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 3.24,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
-    },
-    {
-      "Id": "62f4ee8a-401f-4d52-bdf3-09e43c0b43f3",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 2.37,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
-    },
-    {
-      "Id": "25c4de64-6e42-462b-a207-d32b3f620647",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 4.17,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
-    },
-    {
-      "Id": "9f6f944d-8221-4aa3-97e8-11fc8be1bff0",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 1.62,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
-    },
-    {
-      "Id": "2944adce-fbb0-4e16-af7b-1d7960f0b7af",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 2.3,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
-    },
-    {
-      "Id": "585e1c7f-a10b-4f37-99e3-7470f6be3e92",
-      "Naziv": "Rose Élégante",
-      "JacinaAromaticnihUlja": 1.83,
-      "LatinskiNaziv": "Rose Élégante_LAT",
-      "ZemljaPorekla": "Nepoznato",
-      "Stanje": 0
     }
   ],
   "Parfemi": [
     {
-      "Id": "e18c272a-7e46-4058-a578-0b16a43290e7",
+      "Id": "c5129b03-db30-4e3e-83a7-eb43aa7b5088",
       "Naziv": "Lavande Royale",
       "Tip": "Parfem",
       "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-e18c272a-7e46-4058-a578-0b16a43290e7",
+      "SerijskiBroj": "PP-2025-c5129b03-db30-4e3e-83a7-eb43aa7b5088",
       "Cena": 120.0,
-      "BiljkaId": "f809a695-d79b-43d2-8ee3-ea278d9cd7ad",
-      "RokTrajanja": "2028-01-18T03:14:35.5458519+01:00"
+      "BiljkaId": "cce22702-6ccc-4d00-8232-773c0ad814d7",
+      "RokTrajanja": "2028-01-19T01:43:35.97539+01:00"
     },
     {
-      "Id": "7af3efad-0535-4070-a852-82b80d7158c5",
+      "Id": "b58ec168-4690-47be-83fb-e78bde9390ed",
       "Naziv": "Lavande Royale",
       "Tip": "Parfem",
       "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-7af3efad-0535-4070-a852-82b80d7158c5",
+      "SerijskiBroj": "PP-2025-b58ec168-4690-47be-83fb-e78bde9390ed",
       "Cena": 120.0,
-      "BiljkaId": "f809a695-d79b-43d2-8ee3-ea278d9cd7ad",
-      "RokTrajanja": "2028-01-18T03:14:35.550154+01:00"
+      "BiljkaId": "cce22702-6ccc-4d00-8232-773c0ad814d7",
+      "RokTrajanja": "2028-01-19T01:43:35.979195+01:00"
     },
     {
-      "Id": "27309b71-7fc7-4f2d-bcff-ae0705c2b953",
+      "Id": "c05354fa-21aa-4185-a62a-45b45f29d7a7",
       "Naziv": "Rose Élégante",
       "Tip": "Kolonjska voda",
       "NetoKolicina": 250,
-      "SerijskiBroj": "PP-2025-27309b71-7fc7-4f2d-bcff-ae0705c2b953",
+      "SerijskiBroj": "PP-2025-c05354fa-21aa-4185-a62a-45b45f29d7a7",
       "Cena": 95.0,
-      "BiljkaId": "cdb0e914-aef8-4a83-8d01-f646f6bbdc3b",
-      "RokTrajanja": "2028-01-18T03:14:35.5501574+01:00"
+      "BiljkaId": "29a5f41f-26d1-4dfc-9103-1b9e451fb253",
+      "RokTrajanja": "2028-01-19T01:43:35.9791985+01:00"
     },
     {
-      "Id": "70e7136c-8084-434a-8334-d3f9c91e7b96",
-      "Naziv": "Lavande Royale",
-      "Tip": "Parfem",
-      "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-70e7136c-8084-434a-8334-d3f9c91e7b96",
-      "Cena": 120.0,
-      "BiljkaId": "b6b30bb8-7992-4396-b6ad-b3e484f0ff45",
-      "RokTrajanja": "2028-01-18T14:34:31.4799921+01:00"
-    },
-    {
-      "Id": "c7f35b9e-41c3-4516-a7e4-bff167f5910f",
-      "Naziv": "Lavande Royale",
-      "Tip": "Parfem",
-      "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-c7f35b9e-41c3-4516-a7e4-bff167f5910f",
-      "Cena": 120.0,
-      "BiljkaId": "4e52045f-dabe-410b-974f-ca1bab53376d",
-      "RokTrajanja": "2028-01-18T14:34:31.4800091+01:00"
-    },
-    {
-      "Id": "a14bd702-54e3-4bea-8945-54a6e7c3a3b2",
-      "Naziv": "Lavande Royale",
-      "Tip": "Parfem",
-      "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-a14bd702-54e3-4bea-8945-54a6e7c3a3b2",
-      "Cena": 120.0,
-      "BiljkaId": "85ba88ee-1b17-4100-b0e3-4d5d47e68589",
-      "RokTrajanja": "2028-01-18T14:34:31.4800099+01:00"
-    },
-    {
-      "Id": "bd1d9c16-e48d-4335-b5a8-b410b40d4735",
-      "Naziv": "Lavande Royale",
-      "Tip": "Parfem",
-      "NetoKolicina": 150,
-      "SerijskiBroj": "PP-2025-bd1d9c16-e48d-4335-b5a8-b410b40d4735",
-      "Cena": 120.0,
-      "BiljkaId": "70bb9323-dc25-443f-b59e-7e7384c80658",
-      "RokTrajanja": "2028-01-18T14:34:31.4800117+01:00"
-    },
-    {
-      "Id": "983c6e58-4186-4eeb-b1df-940fc78f00e7",
-      "Naziv": "Rose Élégante",
+      "Id": "5811f793-a2bd-44de-b15b-b9f9f67b0eac",
+      "Naziv": "Bergamote Fraîche",
       "Tip": "Kolonjska voda",
       "NetoKolicina": 250,
-      "SerijskiBroj": "PP-2025-983c6e58-4186-4eeb-b1df-940fc78f00e7",
-      "Cena": 95.0,
-      "BiljkaId": "3d77aa4d-9876-48e0-a8f8-dd5d31ad0ef3",
-      "RokTrajanja": "2028-01-18T18:20:09.1092455+01:00"
+      "SerijskiBroj": "PP-2025-5811f793-a2bd-44de-b15b-b9f9f67b0eac",
+      "Cena": 85.0,
+      "BiljkaId": "c6f9ec28-4c13-4755-bcc1-3dc99017211e",
+      "RokTrajanja": "2028-01-19T01:43:35.979201+01:00"
     },
     {
-      "Id": "1b9c0622-d624-480e-b024-7c848f759bc1",
-      "Naziv": "Rose Élégante",
-      "Tip": "Kolonjska voda",
-      "NetoKolicina": 250,
-      "SerijskiBroj": "PP-2025-1b9c0622-d624-480e-b024-7c848f759bc1",
-      "Cena": 95.0,
-      "BiljkaId": "7b96e36c-434b-467a-9fac-ceaf4482dd13",
-      "RokTrajanja": "2028-01-18T18:20:09.1094298+01:00"
+      "Id": "5148417e-6e22-4c8a-9678-55e43a96d46e",
+      "Naziv": "Citrus Impérial",
+      "Tip": "Parfem",
+      "NetoKolicina": 150,
+      "SerijskiBroj": "PP-2025-5148417e-6e22-4c8a-9678-55e43a96d46e",
+      "Cena": 130.0,
+      "BiljkaId": "c6f9ec28-4c13-4755-bcc1-3dc99017211e",
+      "RokTrajanja": "2028-01-19T01:43:35.979202+01:00"
     },
     {
-      "Id": "e78b960b-c78f-44ff-ba82-8bf4815e76e0",
-      "Naziv": "Rose Élégante",
-      "Tip": "Kolonjska voda",
-      "NetoKolicina": 250,
-      "SerijskiBroj": "PP-2025-e78b960b-c78f-44ff-ba82-8bf4815e76e0",
-      "Cena": 95.0,
-      "BiljkaId": "55711fa4-3099-4b27-a8a0-fde2a1df14dc",
-      "RokTrajanja": "2028-01-18T18:20:09.1094313+01:00"
+      "Id": "811c6d18-0c43-40d2-b155-48b0de206c51",
+      "Naziv": "Citrus Impérial",
+      "Tip": "Parfem",
+      "NetoKolicina": 150,
+      "SerijskiBroj": "PP-2025-811c6d18-0c43-40d2-b155-48b0de206c51",
+      "Cena": 130.0,
+      "BiljkaId": "c6f9ec28-4c13-4755-bcc1-3dc99017211e",
+      "RokTrajanja": "2028-01-19T01:43:35.9792027+01:00"
     },
     {
-      "Id": "f76dca4e-17bd-4f31-80d9-012c9a83a26d",
-      "Naziv": "Rose Élégante",
-      "Tip": "Kolonjska voda",
-      "NetoKolicina": 250,
-      "SerijskiBroj": "PP-2025-f76dca4e-17bd-4f31-80d9-012c9a83a26d",
-      "Cena": 95.0,
-      "BiljkaId": "f41aff7b-498d-4c9c-bbff-8948091b5f8b",
-      "RokTrajanja": "2028-01-18T18:20:09.1094321+01:00"
+      "Id": "b0b9d07f-c063-4ab5-8ce6-9af874e80db0",
+      "Naziv": "Jardin de Jasmin",
+      "Tip": "Parfem",
+      "NetoKolicina": 150,
+      "SerijskiBroj": "PP-2025-b0b9d07f-c063-4ab5-8ce6-9af874e80db0",
+      "Cena": 140.0,
+      "BiljkaId": "8df5eebc-f0c5-47f4-8af7-4cc6b4d662e0",
+      "RokTrajanja": "2028-01-19T01:43:35.9792034+01:00"
     }
   ],
   "Ambalaze": [
     {
-      "Id": "619d0570-1cdd-4591-bab6-89b78b1e037f",
+      "Id": "4ebe0220-7cf0-4569-8f32-ad5a036dbe6b",
       "Naziv": "Ambalaza-001",
       "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
-      "SkladisteId": "e08ffa24-dad8-494d-ab3f-5c249885daa2",
-      "ParfemiId": [],
-      "Status": 1
+      "SkladisteId": "db348a6b-47a2-4453-8239-33b9f5d65e79",
+      "ParfemiId": [
+        "c5129b03-db30-4e3e-83a7-eb43aa7b5088",
+        "b58ec168-4690-47be-83fb-e78bde9390ed",
+        "5148417e-6e22-4c8a-9678-55e43a96d46e",
+        "811c6d18-0c43-40d2-b155-48b0de206c51"
+      ],
+      "Status": 0
     },
     {
-      "Id": "3549b57d-ef6e-4ac3-af26-476bc9c18bc7",
+      "Id": "b7b69898-441c-41c7-b920-4b5485ae7f87",
       "Naziv": "Ambalaza-002",
       "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
-      "SkladisteId": "627839e9-3afd-4ee8-983a-45a25b0e4333",
-      "ParfemiId": [],
-      "Status": 1
-    },
-    {
-      "Id": "9830c1a8-77b4-4210-91a0-99fa6d9b35a6",
-      "Naziv": "Ambalaza-20260118-143431",
-      "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
-      "SkladisteId": "e08ffa24-dad8-494d-ab3f-5c249885daa2",
-      "ParfemiId": [],
-      "Status": 1
-    },
-    {
-      "Id": "60cacd4c-87c2-4201-b2be-38def86ebbe7",
-      "Naziv": "Ambalaza-20260118-182009",
-      "AdresaPosiljaoca": "O'Sinjel De Or, Paris",
-      "SkladisteId": "e08ffa24-dad8-494d-ab3f-5c249885daa2",
-      "ParfemiId": [],
-      "Status": 1
+      "SkladisteId": "c90f3897-b26d-4fbe-8817-4fb2e0477152",
+      "ParfemiId": [
+        "c05354fa-21aa-4185-a62a-45b45f29d7a7",
+        "5811f793-a2bd-44de-b15b-b9f9f67b0eac",
+        "b0b9d07f-c063-4ab5-8ce6-9af874e80db0"
+      ],
+      "Status": 0
     }
   ],
   "Skladista": [
     {
-      "Id": "e08ffa24-dad8-494d-ab3f-5c249885daa2",
+      "Id": "db348a6b-47a2-4453-8239-33b9f5d65e79",
       "Naziv": "Skladiste - Centar",
       "Lokacija": "Paris (1er)",
       "MaxKapacitet": 10,
-      "TrenutniKapacitet": 0,
-      "AmbalazeId": []
+      "TrenutniKapacitet": 1,
+      "AmbalazeId": [
+        "4ebe0220-7cf0-4569-8f32-ad5a036dbe6b"
+      ]
     },
     {
-      "Id": "627839e9-3afd-4ee8-983a-45a25b0e4333",
+      "Id": "c90f3897-b26d-4fbe-8817-4fb2e0477152",
       "Naziv": "Skladiste - Magacin",
       "Lokacija": "Paris (19e)",
       "MaxKapacitet": 6,
-      "TrenutniKapacitet": 0,
-      "AmbalazeId": []
+      "TrenutniKapacitet": 1,
+      "AmbalazeId": [
+        "b7b69898-441c-41c7-b920-4b5485ae7f87"
+      ]
     }
   ],
-  "FiskalniRacuni": [
-    {
-      "Id": "f57a48e1-2b98-40e9-b8ac-ba59f78a47a2",
-      "DatumVreme": "2026-01-18T03:14:48.1839085+01:00",
-      "TipProdaje": 0,
-      "NacinPlacanja": 0,
-      "Stavke": [
-        {
-          "ParfemId": "e18c272a-7e46-4058-a578-0b16a43290e7",
-          "NazivParfema": "Lavande Royale (Parfem, 150ml)",
-          "Kolicina": 1,
-          "CenaPoKomadu": 120.0,
-          "Ukupno": 120.0
-        }
-      ],
-      "IznosZaNaplatu": 120.0
-    },
-    {
-      "Id": "9bb6dcc0-e0b4-4dad-abe9-66cc675bf873",
-      "DatumVreme": "2026-01-18T14:34:33.0443316+01:00",
-      "TipProdaje": 1,
-      "NacinPlacanja": 2,
-      "Stavke": [
-        {
-          "ParfemId": "7af3efad-0535-4070-a852-82b80d7158c5",
-          "NazivParfema": "Lavande Royale (Parfem, 150ml)",
-          "Kolicina": 5,
-          "CenaPoKomadu": 120.0,
-          "Ukupno": 600.0
-        }
-      ],
-      "IznosZaNaplatu": 600.0
-    },
-    {
-      "Id": "70b70dbd-03ba-40c1-8662-74c83dec8345",
-      "DatumVreme": "2026-01-18T18:20:10.1847425+01:00",
-      "TipProdaje": 1,
-      "NacinPlacanja": 1,
-      "Stavke": [
-        {
-          "ParfemId": "27309b71-7fc7-4f2d-bcff-ae0705c2b953",
-          "NazivParfema": "Rose Élégante (Kolonjska voda, 250ml)",
-          "Kolicina": 5,
-          "CenaPoKomadu": 95.0,
-          "Ukupno": 475.0
-        }
-      ],
-      "IznosZaNaplatu": 475.0
-    }
-  ]
+  "FiskalniRacuni": []
 }

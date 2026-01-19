@@ -17,6 +17,7 @@ namespace Domain.Modeli
 
         public Korisnik(string korisnickoIme, string lozinka, string imePrezime, TipKorisnika tipKorisnika)
         {
+            Id = Guid.NewGuid();
             KorisnickoIme = korisnickoIme;
             Lozinka = lozinka;
             ImePrezime = imePrezime;

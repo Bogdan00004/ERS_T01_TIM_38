@@ -39,43 +39,6 @@ namespace Loger_Bloger.Servisi.Prodaja
         {
             return _katalogRepo.VratiRaspolozivo(izabrani.Naziv, izabrani.Tip, izabrani.NetoKolicina);
         }
-        private bool ObezbediDovoljno(Parfem izabrani, int kolicinaBocica)
-        {
-            int raspolozivo = RaspolozivoZa(izabrani);
-            if (raspolozivo >= kolicinaBocica) return true;
-
-            int nedostaje = kolicinaBocica - raspolozivo;
-            _logger.LogWarning($"[Prodaja] Nema dovoljno na stanju. Raspolozivo={raspolozivo}, trazeno={kolicinaBocica}, nedostaje={nedostaje}. Pokrecem pakovanje...");
-
-            var ciljno = ProdajaPomocneMetode.NadjiNajboljeSkladiste(_skladistaRepo);
-            if (ciljno.Id == Guid.Empty)
-            {
-                _logger.LogError("[Prodaja] Nema skladišta sa slobodnim kapacitetom.");
-                return false;
-            }
-
-            bool ok = _pakovanjeServis.ObezbediAmbalazuUSkladistu(
-                nazivParfema: izabrani.Naziv,
-                tip: izabrani.Tip,
-                cena: izabrani.Cena,
-                brojBocica: nedostaje,
-                zapreminaPoBocici: izabrani.NetoKolicina,
-                skladisteId: ciljno.Id);
-
-            if (!ok)
-            {
-                _logger.LogError($"[Prodaja] Pakovanje nije uspelo: parfem={izabrani.Naziv}, nedostaje={nedostaje}, skladisteId={ciljno.Id}");
-                return false;
-            }
-
-            if (RaspolozivoZa(izabrani) < kolicinaBocica)
-            {
-                _logger.LogError("[Prodaja] Ni nakon pakovanja nema dovoljno parfema.");
-                return false;
-            }
-
-            return true;
-        }
 
         private async Task<List<Ambalaza>> PreuzmiAmbalaze(int kolicinaBocica, Dictionary<Guid, Parfem> mapaParfema, string trazeniKey, Guid parfemId)
         {
@@ -99,6 +62,7 @@ namespace Loger_Bloger.Servisi.Prodaja
                 if (nove == null || nove.Count == 0)
                 {
                     _logger.LogWarning($"[Prodaja] Skladište nema dostupnih spakovanih ambalaža (parfemId={parfemId}).");
+
                     return new List<Ambalaza>();
                 }
 
@@ -122,33 +86,51 @@ namespace Loger_Bloger.Servisi.Prodaja
             if (izabrani.Id == Guid.Empty)
                 return Fail($"[Prodaja] Parfem ne postoji: parfemId={parfemId}");
 
-            if (!ObezbediDovoljno(izabrani, kolicinaBocica))
-                return Fail("[Prodaja] Nije moguće obezbediti traženu količinu parfema.");
-
+            // Priprema mape parfema i ključa
             var mapaParfema = ProdajaPomocneMetode.NapraviMapuParfema(_parfemiRepo);
             string trazeniKey = ProdajaKljucHelper.NapraviKljuc(izabrani);
 
-            var preuzete = await PreuzmiAmbalaze(kolicinaBocica, mapaParfema, trazeniKey, parfemId);
-            if (preuzete.Count == 0)
-                return Fail("[Prodaja] Neuspešno preuzimanje ambalaža.");
+            //PRE ORDER
+            int raspolozivo = RaspolozivoZa(izabrani);
 
-            if (!ProdajaPomocneMetode.SkiniParfeme(preuzete, kolicinaBocica, mapaParfema, trazeniKey, _logger))
-                return Fail("[Prodaja] Neuspešno raspakivanje ambalaža.");
+            int izLagera = Math.Min(raspolozivo, kolicinaBocica);
+            int preOrder = kolicinaBocica - izLagera;
 
-            if (!ProdajaPomocneMetode.SacuvajAmbalaze(_ambalazeRepo, preuzete, "[Prodaja] Neuspešno čuvanje promena ambalaža (skidanje parfema).", _logger))
-                return Fail("[Prodaja] Neuspešno čuvanje ambalaža.");
+            if (preOrder > 0)
+            {
+                _logger.LogWarning($"[Prodaja] PRE-ORDER: trazeno={kolicinaBocica}, raspolozivo={raspolozivo}, " + $"isporuceno={izLagera}, preorder={preOrder}");
+                _logger.LogInfo($"[Prodaja] PRE-ORDER se naplaćuje odmah za celu količinu: {kolicinaBocica}.");
 
-            if (!ProdajaPomocneMetode.ObradiStatusIVracanje(_skladistaRepo, _ambalazeRepo, preuzete, _logger))
-                return Fail("[Prodaja] Neuspešno vraćanje/status ambalaža.");
+            }
+            // Ako imamo nešto na lageru – skidamo taj deo
+            if (izLagera > 0)
+            {
+                var preuzete = await PreuzmiAmbalaze(izLagera, mapaParfema, trazeniKey, parfemId);
+                if (preuzete == null || preuzete.Count == 0)
+                    return Fail("[Prodaja] Neuspešno preuzimanje ambalaža (delimična isporuka).");
 
-            var racun = ProdajaPomocneMetode.KreirajRacun(izabrani, kolicinaBocica, tipProdaje, nacinPlacanja);
+                if (!ProdajaPomocneMetode.SkiniParfeme(preuzete, izLagera, mapaParfema, trazeniKey, _logger))
+                    return Fail("[Prodaja] Neuspešno skidanje parfema iz ambalaža.");
+
+                if (!ProdajaPomocneMetode.SacuvajAmbalaze(_ambalazeRepo, preuzete, "[Prodaja] Neuspešno čuvanje promena ambalaža.", _logger))
+                    return Fail("[Prodaja] Neuspešno čuvanje ambalaža.");
+
+                if (!ProdajaPomocneMetode.ObradiStatusIVracanje(_skladistaRepo, _ambalazeRepo, preuzete, _logger))
+                    return Fail("[Prodaja] Neuspešno vraćanje ambalaža u skladište.");
+            }
+
+            // Ako postoji ijedan pre-order komad -> račun je PreOrder
+            TipProdaje finalniTip = (preOrder > 0) ? TipProdaje.PreOrder : tipProdaje;
+
+            var racun = ProdajaPomocneMetode.KreirajRacun(izabrani, kolicinaBocica, finalniTip, nacinPlacanja);
+
             if (!_racuniRepo.Dodaj(racun))
                 return Fail("[Prodaja] Neuspešno čuvanje fiskalnog računa.");
 
-            _logger.LogInfo($"[Prodaja] Prodaja uspešna: parfem={izabrani.Naziv}, kolicina={kolicinaBocica}, iznos={racun.IznosZaNaplatu}");
+            _logger.LogInfo($"[Prodaja] Završena prodaja: parfem={izabrani.Naziv}, " + $"trazeno={kolicinaBocica}, isporuceno={izLagera}, preorder={preOrder}, tip={finalniTip}");
+
             return racun;
         }
-
         public List<FiskalniRacun> VratiSveRacune()
         {
             return _racuniRepo.VratiSve();

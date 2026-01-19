@@ -1,6 +1,4 @@
-﻿using Domain.Konstante;
-
-namespace Domain.PomocneMetode.Biljke
+﻿namespace Domain.PomocneMetode.Biljke
 {
     public static class BiljkaRacunanje
     {

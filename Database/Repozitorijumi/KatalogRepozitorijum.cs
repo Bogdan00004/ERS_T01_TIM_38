@@ -22,16 +22,24 @@ namespace Database.Repozitorijumi
 
         public List<KatalogStavka> VratiKatalogDostupnihParfema()
         {
+            var sviParfemi = _parfemiRepo.SviParfemi();
+
+            // Ucitaj sve spakovane ambalaze u skladistima
             var skladista = _skladistaRepo.VratiSva();
             var ambalazeUSkladistu = _ambalazeRepo.VratiSpakovaneKojeSuUSkladistu(skladista, int.MaxValue);
+
+            // Napravi mapu parfema (id -> parfem)
             var mapaParfema = ProdajaPomocneMetode.NapraviMapuParfema(_parfemiRepo);
 
-            var kolicine = new Dictionary<string, int>();
-            var predstavnik = new Dictionary<string, Parfem>();
+            // Prebroj raspolozivo po "kljucu" (Naziv|Tip|NetoKolicina)
+            // BITNO: ovde racunamo broj BOCA, a ne broj AMBALAZA
+            var kolicinePoKljucu = new Dictionary<string, int>();
 
             for (int a = 0; a < ambalazeUSkladistu.Count; a++)
             {
                 var amb = ambalazeUSkladistu[a];
+                if (amb == null) continue;
+                if (amb.ParfemiId == null) continue;
 
                 for (int j = 0; j < amb.ParfemiId.Count; j++)
                 {
@@ -41,18 +49,37 @@ namespace Database.Repozitorijumi
                     var p = mapaParfema[parfemId];
                     var key = ProdajaKljucHelper.NapraviKljuc(p);
 
-                    if (!kolicine.ContainsKey(key)) kolicine[key] = 0;
-                    kolicine[key]++;
+                    if (!kolicinePoKljucu.ContainsKey(key))
+                        kolicinePoKljucu[key] = 0;
 
-                    if (!predstavnik.ContainsKey(key)) predstavnik[key] = p;
+
+                    kolicinePoKljucu[key] += 1;
                 }
             }
 
+            // Popuni katalog SVIM parfemima (0 ako nema na stanju)
             var katalog = new List<KatalogStavka>();
-            foreach (var kv in kolicine)
+            var dodat = new HashSet<string>();
+
+            for (int i = 0; i < sviParfemi.Count; i++)
             {
-                var p = predstavnik[kv.Key];
-                katalog.Add(new KatalogStavka(p.Id, p.Naziv, p.Tip, p.NetoKolicina, p.Cena, kv.Value));
+                var p = sviParfemi[i];
+                if (p == null) continue;
+                if (p.Id == Guid.Empty) continue;
+
+                var key = ProdajaKljucHelper.NapraviKljuc(p);
+
+                if (dodat.Contains(key))
+                    continue;
+
+                dodat.Add(key);
+
+                int raspolozivo = 0;
+                if (kolicinePoKljucu.ContainsKey(key))
+                    raspolozivo = kolicinePoKljucu[key];
+
+                // U katalog stavljamo ID "predstavnika" prvog 
+                katalog.Add(new KatalogStavka(p.Id, p.Naziv, p.Tip, p.NetoKolicina, p.Cena, raspolozivo));
             }
 
             katalog.Sort((x, y) =>
@@ -80,6 +107,8 @@ namespace Database.Repozitorijumi
             for (int a = 0; a < ambalazeUSkladistu.Count; a++)
             {
                 var amb = ambalazeUSkladistu[a];
+                if (amb == null) continue;
+                if (amb.ParfemiId == null) continue;
 
                 for (int j = 0; j < amb.ParfemiId.Count; j++)
                 {
@@ -87,11 +116,14 @@ namespace Database.Repozitorijumi
                     if (!mapaParfema.ContainsKey(parfemId)) continue;
 
                     var p = mapaParfema[parfemId];
-                    if (p.Naziv == naziv && p.Tip == tip && p.NetoKolicina == netoKolicina)
+                    if (p == null) continue;
+                    // Uporedjujemo po "proizvodu" (naziv, tip, neto)
+                    if ((p.Naziv ?? "").Trim().Equals((naziv ?? "").Trim(), StringComparison.OrdinalIgnoreCase) && (p.Tip ?? "").Trim().Equals((tip ?? "").Trim(), StringComparison.OrdinalIgnoreCase) && p.NetoKolicina == netoKolicina)
+                    {
                         raspolozivo++;
+                    }
                 }
             }
-
             return raspolozivo;
         }
     }

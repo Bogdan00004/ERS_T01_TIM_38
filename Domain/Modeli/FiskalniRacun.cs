@@ -19,6 +19,9 @@ public class FiskalnaStavka
         Kolicina = kolicina;
         CenaPoKomadu = cenaPoKomadu;
     }
+    public bool Isporuceno { get; set; }
+
+    public string Napomena { get; set; } = "";
 
 }
 

@@ -52,18 +52,34 @@ namespace Domain.BazaPodataka
             var p3 = new Parfem("Rose Élégante", "Kolonjska voda", 250, "", 95m, b2.Id, DateTime.Now.AddYears(2));
             p3.SerijskiBroj = $"PP-2025-{p3.Id}";
 
-            Parfemi = new List<Parfem> { p1, p2, p3 };
+            // NOVI (raznolikost)
+            var p4 = new Parfem("Bergamote Fraîche", "Kolonjska voda", 250, "", 85m, b4.Id, DateTime.Now.AddYears(2));
+            p4.SerijskiBroj = $"PP-2025-{p4.Id}";
+
+            var p5 = new Parfem("Citrus Impérial", "Parfem", 150, "", 130m, b4.Id, DateTime.Now.AddYears(2));
+            p5.SerijskiBroj = $"PP-2025-{p5.Id}";
+
+            var p6 = new Parfem("Citrus Impérial", "Parfem", 150, "", 130m, b4.Id, DateTime.Now.AddYears(2));
+            p6.SerijskiBroj = $"PP-2025-{p6.Id}";
+
+            var p7 = new Parfem("Jardin de Jasmin", "Parfem", 150, "", 140m, b3.Id, DateTime.Now.AddYears(2));
+            p7.SerijskiBroj = $"PP-2025-{p7.Id}";
+
+            Parfemi = new List<Parfem> { p1, p2, p3, p4, p5, p6, p7 };
 
             // ===== AMBALAZE =====
             var a1 = new Ambalaza("Ambalaza-001", "O'Sinjel De Or, Paris", s1.Id, StatusAmbalaze.Spakovana);
             a1.ParfemiId.Add(p1.Id);
             a1.ParfemiId.Add(p2.Id);
+            a1.ParfemiId.Add(p5.Id); // Citrus Impérial
+            a1.ParfemiId.Add(p6.Id); // Citrus Impérial (drugi komad)
 
             var a2 = new Ambalaza("Ambalaza-002", "O'Sinjel De Or, Paris", s2.Id, StatusAmbalaze.Spakovana);
             a2.ParfemiId.Add(p3.Id);
+            a2.ParfemiId.Add(p4.Id); // Bergamote Fraîche
+            a2.ParfemiId.Add(p7.Id); // Jardin de Jasmin
 
             Ambalaze = new List<Ambalaza> { a1, a2 };
-
             // ===== POVEZIVANJE AMBALAZA <-> SKLADISTA =====
             s1.AmbalazeId.Add(a1.Id);
             s1.TrenutniKapacitet = 1;

@@ -27,10 +27,17 @@ namespace Database.Repozitorijumi
         {
             try
             {
+                var indeks = _baza.Tabele.FiskalniRacuni.FindIndex(r => r.Id == racun.Id);
+                if (indeks == -1) return false;
+
+                _baza.Tabele.FiskalniRacuni[indeks] = racun;
                 _baza.SacuvajPromene();
                 return true;
             }
-            catch { return false; }
+            catch
+            {
+                return false;
+            }
         }
 
         public List<FiskalniRacun> VratiSve()

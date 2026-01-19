@@ -6,8 +6,11 @@ namespace Domain.PomocneMetode.Prodaja
     {
         public static string NapraviKljuc(Parfem p)
         {
-            var cenaNorm = decimal.Round(p.Cena, 2);
-            return $"{p.Naziv}|{p.Tip}|{p.NetoKolicina}|{cenaNorm:0.##}";
+            string naziv = (p.Naziv ?? "").Trim().ToUpperInvariant();
+            string tip = (p.Tip ?? "").Trim().ToUpperInvariant();
+            int ml = p.NetoKolicina;
+
+            return $"{naziv}|{tip}|{ml}";
         }
     }
 }

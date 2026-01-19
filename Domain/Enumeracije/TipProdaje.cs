@@ -2,7 +2,8 @@
 {
     public enum TipProdaje
     {
-        Maloprodaja,
-        Veleprodaja
+        Maloprodaja = 1,
+        Veleprodaja = 2,
+        PreOrder = 3
     }
 }

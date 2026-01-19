@@ -41,6 +41,10 @@ namespace Database.Repozitorijumi
         {
             try
             {
+                var indeks = _baza.Tabele.Skladista.FindIndex(s => s.Id == skladiste.Id);
+                if (indeks == -1) return false;
+
+                _baza.Tabele.Skladista[indeks] = skladiste;
                 _baza.SacuvajPromene();
                 return true;
             }

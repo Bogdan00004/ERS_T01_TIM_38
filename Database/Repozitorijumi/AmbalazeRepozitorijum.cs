@@ -1,7 +1,6 @@
 ﻿using Domain.BazaPodataka;
 using Domain.Enumeracije;
 using Domain.Modeli;
-using Domain.PomocneMetode.Prodaja;
 using Domain.Repozitorijumi;
 
 namespace Database.Repozitorijumi
